@@ -43,7 +43,7 @@ public class serialRead : MonoBehaviour {
 	{
 		var data = message.Split (new string[]{ "\t" }, System.StringSplitOptions.None);
 
-		if (data.Length < 5) {
+		if (data.Length < 9) {
 			return;
 		}
 
@@ -53,6 +53,10 @@ public class serialRead : MonoBehaviour {
 			sensState[2] = data[2];
 			sensState[3] = data[3];
 			sensState[4] = data[4];
+			sensState[5] = data[5];
+			sensState[6] = data[6];
+			sensState[7] = data[7];
+			sensState[8] = data[8]; //バグ取り用
 		}catch(System.Exception e){
 			Debug.LogWarning (e.Message);
 		}

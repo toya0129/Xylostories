@@ -16,6 +16,8 @@ public class CanvasScript : MonoBehaviour {
 	private float time;
 	private int colorInterval = 0;
 
+	private bool selectTrigger;
+
 	//点滅用
 //	private float speed = 0.05f;
 //	private float boyNoneAlpha;
@@ -28,6 +30,7 @@ public class CanvasScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		trigger = false;
+		selectTrigger = false;
 
 		//点滅用
 //		boyNoneAlpha = boyNone.GetComponent<Image> ().color.a;
@@ -42,44 +45,45 @@ public class CanvasScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		time += Time.deltaTime;
+		if (selectTrigger == false) {
+			time += Time.deltaTime;
 
-		if (time > interval) {
-			time = 0.0f;
-			if (colorInterval == 16) {
-				colorInterval = 1;
-			} else {
-				colorInterval++;
+			if (time > interval) {
+				time = 0.0f;
+				if (colorInterval == 16) {
+					colorInterval = 1;
+				} else {
+					colorInterval++;
+				}
+				trigger = !trigger;
 			}
-			trigger = !trigger;
-			Debug.Log (colorInterval);
+
+
+			if (trigger == true) {
+				none.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+				if (colorInterval < 5) {
+					red.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+				} else if (colorInterval < 9) {
+					yellow.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+				} else if (colorInterval < 13) {
+					green.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+				} else if (colorInterval < 17) {
+					purple.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+				}
+			} else if (trigger == false) {
+				none.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+				if (colorInterval < 5) {
+					red.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+				} else if (colorInterval < 9) {
+					yellow.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+				} else if (colorInterval < 13) {
+					green.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+				} else if (colorInterval < 17) {
+					purple.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+				}
+			}
+
 		}
-
-
-		if (trigger == true) {
-			none.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
-			if (colorInterval < 5) {
-				red.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
-			} else if (colorInterval < 9) {
-				yellow.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
-			} else if (colorInterval < 13) {
-				green.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
-			} else if (colorInterval < 17) {
-				purple.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
-			}
-		} else if (trigger == false) {
-			none.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
-			if (colorInterval < 5) {
-				red.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
-			} else if (colorInterval < 9) {
-				yellow.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
-			} else if (colorInterval < 13) {
-				green.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
-			} else if (colorInterval < 17) {
-				purple.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
-			}
-		}
-
 
 
 		//点滅用プログラム
@@ -119,5 +123,9 @@ public class CanvasScript : MonoBehaviour {
 //			girlChange = true;
 //		}
 //			
+	}
+
+	public void selectCharactor(){
+		selectTrigger = !selectTrigger;
 	}
 }
