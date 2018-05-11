@@ -14,6 +14,7 @@ public class CanvasScript : MonoBehaviour {
 	private bool trigger;
 	private float interval = 0.7f;
 	private float time;
+	private int colorInterval = 0;
 
 	//点滅用
 //	private float speed = 0.05f;
@@ -45,17 +46,40 @@ public class CanvasScript : MonoBehaviour {
 
 		if (time > interval) {
 			time = 0.0f;
+			if (colorInterval == 16) {
+				colorInterval = 1;
+			} else {
+				colorInterval++;
+			}
 			trigger = !trigger;
+			Debug.Log (colorInterval);
 		}
 
 
 		if (trigger == true) {
 			none.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
-			red.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+			if (colorInterval < 5) {
+				red.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+			} else if (colorInterval < 9) {
+				yellow.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+			} else if (colorInterval < 13) {
+				green.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+			} else if (colorInterval < 17) {
+				purple.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
+			}
 		} else if (trigger == false) {
 			none.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
-			red.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+			if (colorInterval < 5) {
+				red.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+			} else if (colorInterval < 9) {
+				yellow.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+			} else if (colorInterval < 13) {
+				green.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+			} else if (colorInterval < 17) {
+				purple.GetComponent<Image> ().color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
+			}
 		}
+
 
 
 		//点滅用プログラム
