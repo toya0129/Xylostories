@@ -51,7 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\SelectScene\CanvasScript.cs" />
+     <Compile Include="Assets\Script\SelectScene\GameControllerScript.cs" />
+     <Compile Include="Assets\Script\SelectScene\XylophoneScript.cs" />
      <Compile Include="Assets\Script\SerialConnecter.cs" />
      <Compile Include="Assets\Script\serialRead.cs" />
  <Reference Include="UnityEngine.UIAutomation">

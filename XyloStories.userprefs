@@ -1,8 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/CanvasScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/serialRead.cs">
     <Files>
-      <File FileName="Assets/Script/CanvasScript.cs" Line="11" Column="30" />
+      <File FileName="Assets/Script/SelectScene/CanvasScript.cs" Line="86" Column="4" />
+      <File FileName="Assets/Script/serialRead.cs" Line="46" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
