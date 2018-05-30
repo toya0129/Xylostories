@@ -45,6 +45,9 @@ public class XylophoneScript : MonoBehaviour {
 		flashTrigger = false;
 
 		redFlashTrigger = false;
+		yellowFlashTrigger = false;
+		greenFlashTrigger = false;
+		purpleFlashTrigger = false;
 
 		//点滅用
 //		boyNoneAlpha = boyNone.GetComponent<Image> ().color.a;
@@ -226,6 +229,8 @@ public class XylophoneScript : MonoBehaviour {
 
 	public void changeFlashTrigger(){
 		flashTrigger = !flashTrigger;
+		colorInterval = 0;
+		trigger = false;
 		none.color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
 		red.color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
 		yellow.color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
