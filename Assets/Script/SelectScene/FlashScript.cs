@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class XylophoneScript : MonoBehaviour {
+public class FlashScript : MonoBehaviour {
 
 	public SpriteRenderer none;
 	public SpriteRenderer red;
@@ -237,6 +237,13 @@ public class XylophoneScript : MonoBehaviour {
 		green.color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
 		purple.color = new Color (255.0f, 255.0f, 255.0f, 0.0f);
 		time = 0.0f;
+	}
+
+	public void allFalseFlashTrigger(){
+		redFlashTrigger = false;
+		yellowFlashTrigger = false;
+		greenFlashTrigger = false;
+		purpleFlashTrigger = false;
 	}
 
 	public void changeRedFlashTrigger(){
