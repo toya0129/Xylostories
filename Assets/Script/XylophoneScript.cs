@@ -5,21 +5,24 @@ using UnityEngine;
 public class XylophoneScript : MonoBehaviour {
 
 	public SerialConnecter serialConnecter;
-	public GameControllerScript gameController;
+	public SelectGameControllerScript gameController;
 	public FlashScript flashScript;
-	public characterController cc;
+	public CharacterControllerScript characterControllerScript;
 	private string[] sensState = new string[5];
 
 	private bool[] xylophone = new bool[8];
 	private int nowXylo;
 	private int oldXylo;
 
-	public MeshRenderer a;
-	public Material[] b;
+	private bool selectTrigger;
+
 
 	// Use this for initialization
 	void Start () {
-		serialConnecter.OnDataReceived += OnDataReceived;
+	//	serialConnecter.OnDataReceived += OnDataReceived;
+		selectTrigger = false;
+		nowXylo = 0;
+		oldXylo = 0;
 
 		for (int i = 0; i < 8; i++) {
 			xylophone [i] = false;
@@ -31,43 +34,59 @@ public class XylophoneScript : MonoBehaviour {
 		//手動
 		if (Input.GetKeyDown (KeyCode.A)) {
 			xylophone [0] = true;
-			if (nowXylo == 0) {
-				nowXylo = 1;
-				xylophoneSerect (nowXylo);
-			} else {
-				nowXylo = 0;
+			nowXylo = 1;
+			if (selectTrigger == false) {
+				if (oldXylo == nowXylo) {
+					selectTrigger = true;
+					gameController.setDecision (true);
+					gameController.setSelectCharactor (nowXylo);
+				}
 				xylophoneSerect (oldXylo);
+				xylophoneSerect (nowXylo);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.S)) {
 			xylophone [1] = true;
-			if (nowXylo == 0) {
-				nowXylo = 2;
-				xylophoneSerect (nowXylo);
-			} else {
-				nowXylo = 0;
+			nowXylo = 2;
+			if (selectTrigger == false) {
+				if (oldXylo == nowXylo) {
+					selectTrigger = true;
+					gameController.setDecision (true);
+					gameController.setSelectCharactor (nowXylo);
+				}
 				xylophoneSerect (oldXylo);
+				xylophoneSerect (nowXylo);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.D)) {
 			xylophone [2] = true;
-			if (nowXylo == 0) {
-				nowXylo = 3;
-				xylophoneSerect (nowXylo);
-			} else {
-				nowXylo = 0;
+			nowXylo = 3;
+			if (selectTrigger == false) {
+				if (oldXylo == nowXylo) {
+					selectTrigger = true;
+					gameController.setDecision (true);
+					gameController.setSelectCharactor (nowXylo);
+				}
 				xylophoneSerect (oldXylo);
+				xylophoneSerect (nowXylo);
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.F)) {
 			xylophone [3] = true;
-			if (nowXylo == 0) {
-				nowXylo = 4;
-				xylophoneSerect (nowXylo);
-			} else {
-				nowXylo = 0;
+			nowXylo = 4;
+			if (selectTrigger == false) {
+				if (oldXylo == nowXylo) {
+					selectTrigger = true;
+					gameController.setDecision (true);
+					gameController.setSelectCharactor (nowXylo);
+				}
 				xylophoneSerect (oldXylo);
+				xylophoneSerect (nowXylo);
 			}
+		}
+		if (selectTrigger == false) {
+			characterControllerScript.setNowCharacter (nowXylo);
+			characterControllerScript.setMoveType (1);
 		}
 	}
 
@@ -95,8 +114,12 @@ public class XylophoneScript : MonoBehaviour {
 	}
 
 	private void xylophoneSerect(int nowXylo){
-		cc.setNowCharacter(nowXylo);
-		flashScript.changeFlashTrigger (); 
+		if (nowXylo != 0) {
+			characterControllerScript.setNowCharacter (nowXylo);
+			flashScript.changeFlashTrigger (); 
+			characterControllerScript.setAnimationChangeTrigger (true);
+		}
+		oldXylo = nowXylo;
 		switch (nowXylo) {
 		case 1:
 			flashScript.changeRedFlashTrigger ();
@@ -113,6 +136,5 @@ public class XylophoneScript : MonoBehaviour {
 		default:
 			break;
 		}
-		oldXylo = nowXylo;
 	}
 }

@@ -229,6 +229,7 @@ public class FlashScript : MonoBehaviour {
 
 	public void changeFlashTrigger(){
 		flashTrigger = !flashTrigger;
+		allFalseFlashTrigger ();
 		colorInterval = 0;
 		trigger = false;
 		none.color = new Color (255.0f, 255.0f, 255.0f, 1.0f);
