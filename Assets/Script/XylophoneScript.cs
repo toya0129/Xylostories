@@ -8,7 +8,9 @@ public class XylophoneScript : MonoBehaviour {
 	public SelectGameControllerScript gameController;
 	public FlashScript flashScript;
 	public CharacterControllerScript characterControllerScript;
-	private string[] sensState = new string[5];
+
+	private string[] sensState = new string[9];
+	private int loop;
 
 	private bool[] xylophone = new bool[8];
 	private int nowXylo;
@@ -16,13 +18,23 @@ public class XylophoneScript : MonoBehaviour {
 
 	private bool selectTrigger;
 
+	private bool xylophoneDelay;
+	private float time;
+	private float interval = 0.2f;
+
 
 	// Use this for initialization
 	void Start () {
-	//	serialConnecter.OnDataReceived += OnDataReceived;
+		serialConnecter.OnDataReceived += OnDataReceived;
+
+		loop = 0;
+
 		selectTrigger = false;
 		nowXylo = 0;
 		oldXylo = 0;
+
+		time = 0.0f;
+		xylophoneDelay = true;
 
 		for (int i = 0; i < 8; i++) {
 			xylophone [i] = false;
@@ -31,6 +43,89 @@ public class XylophoneScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Xylophone
+		if (selectTrigger == false) {
+//			loop = 0;
+//			while (loop < sensState.Length) {
+//				if (sensState [loop] == "1") {
+//					xylophone [loop] = true;
+//					nowXylo = loop;
+//					if (selectTrigger == false) {
+//						if (oldXylo == nowXylo) {
+//							selectTrigger = true;
+//							gameController.setDecision (true);
+//							gameController.SelectCharactor = nowXylo;
+//						}
+//						xylophoneSerect (oldXylo);
+//						xylophoneSerect (nowXylo);
+//						xylophoneDelay = false;
+//						break;
+//					}
+//				}
+//				loop++;
+//			}
+			if (sensState [0] == "1") {
+				xylophone [0] = true;
+				nowXylo = 0;
+				if (selectTrigger == false) {
+					if (oldXylo == nowXylo) {
+						selectTrigger = true;
+						gameController.setDecision (true);
+						gameController.SelectCharactor = nowXylo;
+					}
+					xylophoneSerect (oldXylo);
+					xylophoneSerect (nowXylo);
+					xylophoneDelay = false;
+				}
+			}
+
+			if (sensState [2] == "1") {
+				xylophone [2] = true;
+				nowXylo = 1;
+				if (selectTrigger == false) {
+					if (oldXylo == nowXylo) {
+						selectTrigger = true;
+						gameController.setDecision (true);
+						gameController.SelectCharactor = nowXylo;
+					}
+					xylophoneSerect (oldXylo);
+					xylophoneSerect (nowXylo);
+					xylophoneDelay = false;
+				}
+			}
+
+			if (sensState [4] == "1") {
+				xylophone [4] = true;
+				nowXylo = 2;
+				if (selectTrigger == false) {
+					if (oldXylo == nowXylo) {
+						selectTrigger = true;
+						gameController.setDecision (true);
+						gameController.SelectCharactor = nowXylo;
+					}
+					xylophoneSerect (oldXylo);
+					xylophoneSerect (nowXylo);
+					xylophoneDelay = false;
+				}
+			}
+
+			if (sensState [6] == "1") {
+				xylophone [6] = true;
+				nowXylo = 3;
+				if (selectTrigger == false) {
+					if (oldXylo == nowXylo) {
+						selectTrigger = true;
+						gameController.setDecision (true);
+						gameController.SelectCharactor = nowXylo;
+					}
+					xylophoneSerect (oldXylo);
+					xylophoneSerect (nowXylo);
+					xylophoneDelay = false;
+				}
+
+			}
+		}
+
 		//手動
 		if (Input.GetKeyDown (KeyCode.A)) {
 			xylophone [0] = true;
@@ -39,7 +134,7 @@ public class XylophoneScript : MonoBehaviour {
 				if (oldXylo == nowXylo) {
 					selectTrigger = true;
 					gameController.setDecision (true);
-					gameController.setSelectCharactor (nowXylo);
+					gameController.SelectCharactor = nowXylo;
 				}
 				xylophoneSerect (oldXylo);
 				xylophoneSerect (nowXylo);
@@ -52,7 +147,7 @@ public class XylophoneScript : MonoBehaviour {
 				if (oldXylo == nowXylo) {
 					selectTrigger = true;
 					gameController.setDecision (true);
-					gameController.setSelectCharactor (nowXylo);
+					gameController.SelectCharactor = nowXylo;
 				}
 				xylophoneSerect (oldXylo);
 				xylophoneSerect (nowXylo);
@@ -65,7 +160,7 @@ public class XylophoneScript : MonoBehaviour {
 				if (oldXylo == nowXylo) {
 					selectTrigger = true;
 					gameController.setDecision (true);
-					gameController.setSelectCharactor (nowXylo);
+					gameController.SelectCharactor = nowXylo;
 				}
 				xylophoneSerect (oldXylo);
 				xylophoneSerect (nowXylo);
@@ -78,7 +173,7 @@ public class XylophoneScript : MonoBehaviour {
 				if (oldXylo == nowXylo) {
 					selectTrigger = true;
 					gameController.setDecision (true);
-					gameController.setSelectCharactor (nowXylo);
+					gameController.SelectCharactor = nowXylo;
 				}
 				xylophoneSerect (oldXylo);
 				xylophoneSerect (nowXylo);

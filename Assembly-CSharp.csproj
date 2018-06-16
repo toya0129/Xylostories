@@ -53,8 +53,8 @@
   <ItemGroup>
      <Compile Include="Assets\Script\SelectScene\CharacterControllerScript.cs" />
      <Compile Include="Assets\Script\SelectScene\FlashScript.cs" />
-     <Compile Include="Assets\Script\SelectScene\SelectCameraControllerScript.cs" />
      <Compile Include="Assets\Script\SelectScene\SelectGameControllerScript.cs" />
+     <Compile Include="Assets\Script\SelectScene\SelectMoveControllerScript.cs" />
      <Compile Include="Assets\Script\SerialConnecter.cs" />
      <Compile Include="Assets\Script\serialRead.cs" />
      <Compile Include="Assets\Script\XylophoneScript.cs" />

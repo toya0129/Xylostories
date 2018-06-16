@@ -31,15 +31,19 @@ public class CharacterControllerScript : MonoBehaviour {
 	void Update () {
 		if (animationChangeTrigger == true) {
 			animationChangeTrigger = false;
+			animationAllReset ();
 			animationChange (nowCharacter, moveType);
 		}
 	}
 
-	public void animationChange(int character,int move){
+	public void animationAllReset(){
 		nowFoxAnime.runtimeAnimatorController = FoxAnime [0];
-		nowDeerAnime.runtimeAnimatorController = DeerAnime[0];
+		nowDeerAnime.runtimeAnimatorController = DeerAnime [0];
 		nowRabbitAnime.runtimeAnimatorController = RabbitAnime [0];
 		nowRaccoonAnime.runtimeAnimatorController = RaccoonAnime [0];
+	}
+
+	public void animationChange(int character,int move){
 		switch (character) {
 		case 1:
 			nowFoxAnime.runtimeAnimatorController = FoxAnime [move];
