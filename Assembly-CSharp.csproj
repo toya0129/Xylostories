@@ -51,12 +51,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\GameControllerScript.cs" />
      <Compile Include="Assets\Script\SelectScene\CharacterControllerScript.cs" />
      <Compile Include="Assets\Script\SelectScene\FlashScript.cs" />
      <Compile Include="Assets\Script\SelectScene\SelectGameControllerScript.cs" />
      <Compile Include="Assets\Script\SelectScene\SelectMoveControllerScript.cs" />
      <Compile Include="Assets\Script\SerialConnecter.cs" />
      <Compile Include="Assets\Script\serialRead.cs" />
+     <Compile Include="Assets\Script\StudyScene\CharacterMoveControllerScript.cs" />
      <Compile Include="Assets\Script\XylophoneScript.cs" />
  <Reference Include="UnityEngine.UIAutomation">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
