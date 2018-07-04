@@ -27,7 +27,7 @@ TextureImporter:
     21300044: deer_walk_spritesheet 1_22
     21300046: deer_walk_spritesheet 1_23
   externalObjects: {}
-  serializedVersion: 5
+  serializedVersion: 4
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -75,13 +75,11 @@ TextureImporter:
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
-  singleChannelComponent: 0
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
-    buildTarget: DefaultTexturePlatform
+  - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -91,8 +89,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Standalone
+  - buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -102,8 +99,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: iPhone
+  - buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -113,8 +109,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: tvOS
+  - buildTarget: tvOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -124,8 +119,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Android
+  - buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -142,490 +136,340 @@ TextureImporter:
       name: deer_walk_spritesheet 1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1050
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 8
+        y: 1064
+        width: 282
+        height: 324
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 91cc27d52e4720847bdf4da43f10cdae
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_1
       rect:
         serializedVersion: 2
-        x: 300
-        y: 1050
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 308
+        y: 1064
+        width: 282
+        height: 324
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: d8918b305b8e3b14895b1941ee2013c8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_2
       rect:
         serializedVersion: 2
-        x: 600
-        y: 1050
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 608
+        y: 1064
+        width: 282
+        height: 324
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: fca905c19e4804f4ea165f17741c4bf3
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_3
       rect:
         serializedVersion: 2
-        x: 900
-        y: 1050
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 908
+        y: 1064
+        width: 282
+        height: 324
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 27beef3c11aae1d4cb190e4f1e942714
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_4
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 1050
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 1208
+        y: 1064
+        width: 282
+        height: 324
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 64de7ca295ea3274b8ed091effd8e86d
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_5
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 1050
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 1508
+        y: 1064
+        width: 282
+        height: 324
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 2d6a184157607e14f8b01de53f8eb9bb
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 700
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 10
+        y: 716
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: a5a79c0c9901fe746af2e8da4142685c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_7
       rect:
         serializedVersion: 2
-        x: 300
-        y: 700
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 310
+        y: 716
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 17394a083a9eeea4f8dd97a68127d19b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_8
       rect:
         serializedVersion: 2
-        x: 600
-        y: 700
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 610
+        y: 716
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 2a94d9e1caf946c4aa41c973afd6dbca
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_9
       rect:
         serializedVersion: 2
-        x: 900
-        y: 700
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 910
+        y: 716
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 414f283f7a6efec41ac7f688e307d346
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_10
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 700
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 1210
+        y: 716
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 881cf5b6a27a9b24098cbe949ce27a45
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_11
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 700
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 1510
+        y: 716
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: ea8d5348d530fd94192ef3f47608eb17
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 350
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 8
+        y: 364
+        width: 282
+        height: 324
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 78402c6bbb3a6654da87d73b4c89c0c9
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_13
       rect:
         serializedVersion: 2
-        x: 300
-        y: 350
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 308
+        y: 366
+        width: 282
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 13c10fcbcdfc81949b7c6435c7f241d4
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_14
       rect:
         serializedVersion: 2
-        x: 600
-        y: 350
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 608
+        y: 366
+        width: 282
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 414958344beaa3b4b9ac3002e87f3fde
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_15
       rect:
         serializedVersion: 2
-        x: 900
-        y: 350
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 908
+        y: 366
+        width: 282
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 44d440c3bbb4fb04bba657812305ff90
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_16
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 350
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 1208
+        y: 364
+        width: 282
+        height: 324
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 4209bf1e3b58c1542bfbd36e370b2ab9
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_17
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 350
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 1508
+        y: 364
+        width: 282
+        height: 324
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: fc95ec269bfffad4db427b3c68fd7f51
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_18
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 10
+        y: 16
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 4758b8eaa91167640b9f52fc89673a2b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_19
       rect:
         serializedVersion: 2
-        x: 300
-        y: 0
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 310
+        y: 16
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 0b22a928386faac4e9d6cdce50cf5c15
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_20
       rect:
         serializedVersion: 2
-        x: 600
-        y: 0
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 610
+        y: 16
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: b17bea677be94604790178989054f751
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_21
       rect:
         serializedVersion: 2
-        x: 900
-        y: 0
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 910
+        y: 16
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: 6f052407d8b5a3642b1584f1f6a81326
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_22
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 1210
+        y: 16
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: ee2c54d1491c52a4d8440c13e89d8aa1
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     - serializedVersion: 2
       name: deer_walk_spritesheet 1_23
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 0
-        width: 300
-        height: 350
-      alignment: 1
-      pivot: {x: 0, y: 1}
+        x: 1510
+        y: 16
+        width: 280
+        height: 322
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
-      bones: []
-      spriteID: d93ada7c69bee944a96cb911a92c4182
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
-    bones: []
-    spriteID: 39c9c535dc36fe744a68c659d9d987a6
-    vertices: []
-    indices: 
-    edges: []
-    weights: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class GameControllerScript : MonoBehaviour {
 
-	private string mainCharacter;
-	private bool[] friendsCharacter = new bool[8] ();
+	private int mainCharacter;
+	private bool[] friendsCharacter = new bool[8];
 
-	// Use this for initialization
-	void Start () {
-
+	void Awake(){
 		for (int i = 0; i < 8; i++) {
 			friendsCharacter [i] = false;
 		}
 
+		test ();
+	}
+
+	// Use this for initialization
+	void Start () {
+		
 	}
 	
 	// Update is called once per frame
@@ -21,8 +25,22 @@ public class GameControllerScript : MonoBehaviour {
 		
 	}
 
-	public bool FriendsCharacter{
+	private void test(){
+		mainCharacter = 0;
+
+		friendsCharacter [mainCharacter] = true;
+		friendsCharacter [4] = true;
+		friendsCharacter [7] = true;
+
+	}
+
+	public int MainCharacter {
+		get { return mainCharacter; }
+		set { mainCharacter = value; }
+	}
+
+	public bool[] FriendsCharacter{
 		get { return friendsCharacter; }
-		set { friendsCharacter =value;}
+		set { friendsCharacter = value; }
 	}
 }
