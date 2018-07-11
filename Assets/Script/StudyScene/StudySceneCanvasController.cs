@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StudySceneCanvasController : MonoBehaviour {
 
 	public GameControllerScript gameControllerScript;
-
 
 	[SerializeField] CanvasRenderer[] xylophones;
 	[SerializeField] CanvasRenderer[] characters;
