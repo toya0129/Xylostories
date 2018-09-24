@@ -2,9 +2,12 @@ sceneSetups:
 - path: Assets/scenes/TitleScene.unity
   isLoaded: 0
   isActive: 0
-- path: Assets/scenes/FriendsSelectScene.unity
+- path: Assets/scenes/MainSoundSelect.unity
   isLoaded: 0
   isActive: 0
-- path: Assets/scenes/StudyScene.unity
+- path: Assets/scenes/FriendSelectScene.unity
   isLoaded: 1
   isActive: 1
+- path: Assets/scenes/StudyScene.unity
+  isLoaded: 1
+  isActive: 0
