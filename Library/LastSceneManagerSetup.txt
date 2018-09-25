@@ -6,8 +6,11 @@ sceneSetups:
   isLoaded: 0
   isActive: 0
 - path: Assets/scenes/FriendSelectScene.unity
-  isLoaded: 1
-  isActive: 1
+  isLoaded: 0
+  isActive: 0
+- path: Assets/scenes/AnimationScene.unity
+  isLoaded: 0
+  isActive: 0
 - path: Assets/scenes/StudyScene.unity
   isLoaded: 1
-  isActive: 0
+  isActive: 1
