@@ -60,6 +60,7 @@
      <Compile Include="Assets\Script\serialRead.cs" />
      <Compile Include="Assets\Script\StudyScene\CharacterMoveControllerScript.cs" />
      <Compile Include="Assets\Script\StudyScene\StudySceneCanvasController.cs" />
+     <Compile Include="Assets\Script\XylophoneController.cs" />
      <Compile Include="Assets\Script\XylophoneScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
