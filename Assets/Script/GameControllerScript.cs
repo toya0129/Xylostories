@@ -1,46 +1,89 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameControllerScript : MonoBehaviour {
+public class GameControllerScript : MonoBehaviour
+{
 
-	private int mainCharacter;
-	private bool[] friendsCharacter = new bool[8];
+    private int mainCharacter;
+    private bool[] friendsCharacter = new bool[8];
 
-	void Awake(){
-		for (int i = 0; i < 8; i++) {
-			friendsCharacter [i] = false;
-		}
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
 
-		test ();
-	}
+        for (int i = 0; i < 8; i++)
+        {
+            friendsCharacter[i] = false;
+        }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        test();
+    }
 
-	private void test(){
-		mainCharacter = 0;
+    // Use this for initialization
+    void Start()
+    {
 
-		friendsCharacter [mainCharacter] = true;
-		friendsCharacter [4] = true;
-		friendsCharacter [7] = true;
+    }
 
-	}
+    // Update is called once per frame
+    void Update()
+    {
 
-	public int MainCharacter {
-		get { return mainCharacter; }
-		set { mainCharacter = value; }
-	}
+    }
 
-	public bool[] FriendsCharacter{
-		get { return friendsCharacter; }
-		set { friendsCharacter = value; }
-	}
+    private void test()
+    {
+        mainCharacter = 1;
+
+        friendsCharacter[mainCharacter] = true;
+        friendsCharacter[4] = true;
+        friendsCharacter[7] = true;
+
+    }
+
+
+    #region Scene Load
+    public void OnLoadMainSound()
+    {
+        Debug.Log("Go Main Sound");
+        SceneManager.LoadScene("MainSoundSelect");
+    }
+
+    public void OnLoadFriendSelect()
+    {
+        Debug.Log("Go Friends Select");
+        SceneManager.LoadScene("FriendSelectScene");
+    }
+
+    public void OnLoadAnimation()
+    {
+        Debug.Log("Go Animation");
+        SceneManager.LoadScene("AnimationScene");
+    }
+
+    public void OnLoadStudy()
+    {
+        Debug.Log("Go Study");
+        SceneManager.LoadScene("StudyScene");
+
+    }
+    #endregion
+
+
+    #region Getter and Setter
+    public int MainCharacter
+    {
+        get { return mainCharacter; }
+        set { mainCharacter = value; }
+    }
+
+    public bool[] FriendsCharacter
+    {
+        get { return friendsCharacter; }
+        set { friendsCharacter = value; }
+    }
+    #endregion
+
 }

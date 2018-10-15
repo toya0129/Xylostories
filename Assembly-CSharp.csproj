@@ -63,7 +63,6 @@
   <ItemGroup>
     <Compile Include="Assets\Script\AnimationScene\AnimationController.cs" />
     <Compile Include="Assets\Script\GameControllerScript.cs" />
-    <Compile Include="Assets\Script\SceneLoadScript.cs" />
     <Compile Include="Assets\Script\SelectScene\CharacterControllerScript.cs" />
     <Compile Include="Assets\Script\SelectScene\FlashScript.cs" />
     <Compile Include="Assets\Script\SelectScene\SelectGameControllerScript.cs" />

@@ -361,7 +361,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: a6a2e3c521d6b1f48ba098dfbdaaa735, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f109b0cb2b1b047829ae077d5155a16d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -412,7 +412,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bcc73e57e4144a79b89b49dd944804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterAnimation:
+  - {fileID: 9100000, guid: 1428a6d1045a24cfbbfcd5de66a2eaec, type: 2}
+  - {fileID: 9100000, guid: 8b1da40e270de45929d61b18a3336f86, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  characters:
+  - {fileID: 21300000, guid: 2032327f59db74b86a5ec635c64a6acb, type: 3}
+  - {fileID: 21300000, guid: 5d17a78569dae4c5a951538233779095, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  background:
+  - {fileID: 21300000, guid: f386432bef00f49e4af3d73cc0aafe57, type: 3}
+  - {fileID: 21300000, guid: f2df925e024884556b079aad2948fc40, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 21300000, guid: f386432bef00f49e4af3d73cc0aafe57, type: 3}
   hero: {fileID: 867585986}
+  backgroundField: {fileID: 464270398}
+  gameControllerScript: {fileID: 0}
+  rabbit_back: {fileID: 21300000, guid: 61bea377084bd46f3b2d13a990bf552d, type: 3}
 --- !u!1 &1802903571
 GameObject:
   m_ObjectHideFlags: 0
