@@ -15,7 +15,7 @@ public class AnimationController : MonoBehaviour
 
     [SerializeField]
     Sprite[] background = new Sprite[7]; //0:1.61 1:3.1 
-    private float[] backgroundScal = new float[] { 1.61f, 3.1f };
+    private float[] backgroundScale = new float[] { 1.61f, 3.1f };
 
     [SerializeField]
     GameObject hero;
@@ -27,43 +27,54 @@ public class AnimationController : MonoBehaviour
 
     #region Animation 
     private float roteY;
+    private float roteZ;
     private bool trunFlag = true;
-    private int animationCount = 0;
+    private int moveCount = 0;
+    private int shakeCount = 0;
     #endregion
 
     #region Bear
-    private int bearEnd = 400; //Animation End Flag
+    private int bearMoveEnd = 400; //Animation End Flag
     #endregion
 
     #region Rabbit
-    private int rabbitEnd = 350; //Animation End Flag
+    private int rabbitMoveEnd = 350; //Animation End Flag
     [SerializeField]
     Sprite rabbit_back;
     #endregion
+
+    #region Fox
+    private int foxShakeEnd = 240; // Animation End Flag
+    [SerializeField]
+    GameObject moon;
+    [SerializeField]
+    GameObject rope;
+    #endregion
+
 
     // Use this for initialization
     void Start()
     {
         //        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
 
-        mainCharacter = 1;
+        mainCharacter = 0;
         //mainCharactar = gameControllerScript.MainCharacter;
 
-        CharacterSet();
+        //CharacterSet();
 
         switch (mainCharacter)
         {
-            case 0:
+            case 1:
                 StartCoroutine(BearAnimation());
                 break;
             case 2:
                 StartCoroutine(RabbitAnimation());
                 break;
-            case 1:
+            case 3:
                 StartCoroutine(TigerAnimation());
                 break;
-            case 4:
-
+            case 0:
+                StartCoroutine(FoxAnimation());
                 break;
             case 5:
 
@@ -94,11 +105,11 @@ public class AnimationController : MonoBehaviour
         hero.GetComponent<SpriteRenderer>().sprite = characters[mainCharacter - 1];
         hero.GetComponent<Animator>().runtimeAnimatorController = characterAnimation[mainCharacter - 1];
         backgroundField.GetComponent<SpriteRenderer>().sprite = background[mainCharacter - 1];
-        backgroundField.transform.localScale = new Vector3(backgroundScal[mainCharacter - 1], backgroundScal[mainCharacter - 1], 1);
+        backgroundField.transform.localScale = new Vector3(backgroundScale[mainCharacter - 1], backgroundScale[mainCharacter - 1], 1);
     }
 
     #region Common Character Animation
-    IEnumerator CharacterMove(int endCount)
+    IEnumerator CharacterMove(int endCount) // Move a Characters Left and Right
     {
         if (trunFlag == true)
         {
@@ -126,9 +137,9 @@ public class AnimationController : MonoBehaviour
         }
         yield return new WaitForSeconds(0.005f);
 
-        animationCount++;
+        moveCount++;
 
-        if (endCount < animationCount)
+        if (endCount < moveCount)
         {
             yield break;
         }
@@ -136,7 +147,7 @@ public class AnimationController : MonoBehaviour
         yield return StartCoroutine(CharacterMove(endCount));
     }
 
-    IEnumerator TrunCharactar()
+    IEnumerator TrunCharactar() // Trun a Characters (y)
     {
         if (trunFlag == true)
         {
@@ -166,12 +177,44 @@ public class AnimationController : MonoBehaviour
         yield return StartCoroutine(TrunCharactar());
     }
 
+    IEnumerator ShakeCharacter(int endCount){
+        if (trunFlag == true)
+        {
+            if (roteZ < 13)
+            {
+                hero.transform.localRotation = Quaternion.Euler(0, 0, roteZ);
+                roteZ += 0.5f;
+            }
+            else
+            {
+                trunFlag = false;
+            }
+        }
+        else if (trunFlag == false)
+        {
+            if (roteZ > -13)
+            {
+                hero.transform.localRotation = Quaternion.Euler(0, 0, roteZ);
+                roteZ -= 0.5f;
+            }
+            else
+            {
+                trunFlag = true;
+            }
+        }
+        shakeCount++;
+        if(endCount < shakeCount){
+            yield break;
+        }
+        yield return new WaitForSeconds(0.005f);
+        yield return StartCoroutine(ShakeCharacter(endCount));
+    }
     #endregion
 
     #region Bear Animation (Friend Find)
     IEnumerator BearAnimation()
     {
-        yield return StartCoroutine(CharacterMove(bearEnd));
+        yield return StartCoroutine(CharacterMove(bearMoveEnd));
         Debug.Log("Bear Animation End");
         //gameControllerScript.OnLoadStudy();
     }
@@ -181,7 +224,7 @@ public class AnimationController : MonoBehaviour
     IEnumerator RabbitAnimation()
     {
         hero.transform.localPosition = new Vector3(25.0f, -17.0f, 0);
-        yield return StartCoroutine(CharacterMove(rabbitEnd));
+        yield return StartCoroutine(CharacterMove(rabbitMoveEnd));
         yield return new WaitForSeconds(1.0f); // delay
         yield return StartCoroutine(TrunCharactar());
         hero.GetComponent<Animator>().enabled = false;
@@ -219,7 +262,7 @@ public class AnimationController : MonoBehaviour
 
     IEnumerator RunningAnimation()
     {
-        if (hero.transform.localPosition.y > -40.0f)
+        if (hero.transform.localPosition.y > -35.0f)
         {
             hero.transform.localScale += new Vector3(0.05f, 0.05f, 0);
             hero.transform.localPosition -= new Vector3(0.0f, 0.4f, 0.0f);
@@ -234,8 +277,33 @@ public class AnimationController : MonoBehaviour
     #endregion
 
     #region FoxAnimation (Get Moon)
+    IEnumerator FoxAnimation(){
+        hero.transform.localPosition = new Vector3(25.0f, -17.0f, 0);
+        //moon.SetActive(true);
+        yield return StartCoroutine(ShakeCharacter(foxShakeEnd));
+        rope.SetActive(true);
+        yield return StartCoroutine(ThrowRope());
+        Debug.Log("End Fox Animation");
+        //gameControllerScript.OnLoadStudy();
+        yield break;
+    }
 
+    IEnumerator ThrowRope(){
+        if (rope.transform.localPosition.x > -18.0f)
+        {
+            rope.transform.localPosition -= new Vector3(0.2f, 0.1f, 0);
+        }
+        else
+        {
+            yield break;
+        }
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(ThrowRope());
+    }
 
+    IEnumerator GetMoon(){
+        yield break;
+    }
 
     #endregion
 
