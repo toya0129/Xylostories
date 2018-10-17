@@ -53,14 +53,14 @@ public class AnimationController : MonoBehaviour
 
         switch (mainCharacter)
         {
-            case 1:
+            case 0:
                 StartCoroutine(BearAnimation());
                 break;
             case 2:
                 StartCoroutine(RabbitAnimation());
                 break;
-            case 3:
-
+            case 1:
+                StartCoroutine(TigerAnimation());
                 break;
             case 4:
 
@@ -208,9 +208,29 @@ public class AnimationController : MonoBehaviour
     #endregion
 
     #region TigerAnimation (Running)
+    IEnumerator TigerAnimation(){
+        hero.transform.localPosition = new Vector3(0.0f, 12.0f, 0);
+        hero.transform.localScale= new Vector3(1.0f, 1.0f, 1.0f);
+        yield return StartCoroutine(RunningAnimation());
+        Debug.Log("End Tiger Animation");
+        //gameControllerScript.OnLoadStudy();
+        yield break;
+    }
 
-
-
+    IEnumerator RunningAnimation()
+    {
+        if (hero.transform.localPosition.y > -40.0f)
+        {
+            hero.transform.localScale += new Vector3(0.05f, 0.05f, 0);
+            hero.transform.localPosition -= new Vector3(0.0f, 0.4f, 0.0f);
+        }
+        else
+        {
+            yield break;
+        }
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(RunningAnimation());
+    }
     #endregion
 
     #region FoxAnimation (Get Moon)
