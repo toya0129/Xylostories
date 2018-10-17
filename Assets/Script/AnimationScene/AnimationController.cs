@@ -60,7 +60,7 @@ public class AnimationController : MonoBehaviour
                 StartCoroutine(RabbitAnimation());
                 break;
             case 3:
-                
+
                 break;
             case 4:
 
@@ -89,7 +89,8 @@ public class AnimationController : MonoBehaviour
 
     }
 
-    private void CharacterSet(){
+    private void CharacterSet()
+    {
         hero.GetComponent<SpriteRenderer>().sprite = characters[mainCharacter - 1];
         hero.GetComponent<Animator>().runtimeAnimatorController = characterAnimation[mainCharacter - 1];
         backgroundField.GetComponent<SpriteRenderer>().sprite = background[mainCharacter - 1];
@@ -127,7 +128,8 @@ public class AnimationController : MonoBehaviour
 
         animationCount++;
 
-        if (endCount < animationCount){
+        if (endCount < animationCount)
+        {
             yield break;
         }
 
@@ -166,7 +168,7 @@ public class AnimationController : MonoBehaviour
 
     #endregion
 
-    #region Bear Animation
+    #region Bear Animation (Friend Find)
     IEnumerator BearAnimation()
     {
         yield return StartCoroutine(CharacterMove(bearEnd));
@@ -175,7 +177,7 @@ public class AnimationController : MonoBehaviour
     }
     #endregion
 
-    #region RabbitAnimation
+    #region RabbitAnimation (Go Back Home)
     IEnumerator RabbitAnimation()
     {
         hero.transform.localPosition = new Vector3(25.0f, -17.0f, 0);
@@ -189,7 +191,8 @@ public class AnimationController : MonoBehaviour
         //gameControllerScript.OnLoadStudy();
     }
 
-    IEnumerator GoBackHome(){
+    IEnumerator GoBackHome()
+    {
         if (hero.transform.localScale.x > 0)
         {
             hero.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
@@ -202,5 +205,32 @@ public class AnimationController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         yield return StartCoroutine(GoBackHome());
     }
+    #endregion
+
+    #region TigerAnimation (Running)
+
+
+
+    #endregion
+
+    #region FoxAnimation (Get Moon)
+
+
+
+    #endregion
+
+    #region PigAnimation (Candy House)
+
+
+    #endregion
+
+    #region GiraffeAnimation (Eat Reef)
+
+
+    #endregion
+
+    #region MonkeyAnimation (Train)
+
+
     #endregion
 }
