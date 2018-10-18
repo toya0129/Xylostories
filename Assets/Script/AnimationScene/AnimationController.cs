@@ -26,15 +26,17 @@ public class AnimationController : MonoBehaviour
     GameControllerScript gameControllerScript;
 
     #region Animation 
-    private float roteY;
-    private float roteZ;
-    private bool trunFlag = true;
+    private float roteY = 0.0f;
+    private float roteZ = 0.0f;
+    private bool trunFlagY = true;
+    private bool trunFlagZ = true;
     private int moveCount = 0;
     private int shakeCount = 0;
     #endregion
 
     #region Bear
     private int bearMoveEnd = 400; //Animation End Flag
+    private int bearShakeEnd = 480;
     #endregion
 
     #region Rabbit
@@ -111,7 +113,7 @@ public class AnimationController : MonoBehaviour
     #region Common Character Animation
     IEnumerator CharacterMove(int endCount) // Move a Characters Left and Right
     {
-        if (trunFlag == true)
+        if (trunFlagY == true)
         {
             if (hero.transform.localPosition.x > -20)
             {
@@ -120,10 +122,10 @@ public class AnimationController : MonoBehaviour
             else
             {
                 yield return StartCoroutine(TrunCharactar());
-                trunFlag = false;
+                trunFlagY = false;
             }
         }
-        else if (trunFlag == false)
+        else if (trunFlagY == false)
         {
             if (hero.transform.localPosition.x < 20)
             {
@@ -132,7 +134,7 @@ public class AnimationController : MonoBehaviour
             else
             {
                 yield return StartCoroutine(TrunCharactar());
-                trunFlag = true;
+                trunFlagY = true;
             }
         }
         yield return new WaitForSeconds(0.005f);
@@ -149,11 +151,11 @@ public class AnimationController : MonoBehaviour
 
     IEnumerator TrunCharactar() // Trun a Characters (y)
     {
-        if (trunFlag == true)
+        if (trunFlagY == true)
         {
             if (roteY < 180)
             {
-                hero.transform.localRotation = Quaternion.Euler(0, roteY, 0);
+                hero.transform.localRotation = Quaternion.Euler(0, roteY, roteZ);
                 roteY += 5.0f;
             }
             else
@@ -161,11 +163,11 @@ public class AnimationController : MonoBehaviour
                 yield break;
             }
         }
-        else if (trunFlag == false)
+        else if (trunFlagY == false)
         {
             if (roteY > 0)
             {
-                hero.transform.localRotation = Quaternion.Euler(0, roteY, 0);
+                hero.transform.localRotation = Quaternion.Euler(0, roteY, roteZ);
                 roteY -= 5.0f;
             }
             else
@@ -178,28 +180,28 @@ public class AnimationController : MonoBehaviour
     }
 
     IEnumerator ShakeCharacter(int endCount){
-        if (trunFlag == true)
+        if (trunFlagZ == true)
         {
             if (roteZ < 13)
             {
-                hero.transform.localRotation = Quaternion.Euler(0, 0, roteZ);
+                hero.transform.localRotation = Quaternion.Euler(0, roteY, roteZ);
                 roteZ += 0.5f;
             }
             else
             {
-                trunFlag = false;
+                trunFlagZ = false;
             }
         }
-        else if (trunFlag == false)
+        else if (trunFlagZ == false)
         {
             if (roteZ > -13)
             {
-                hero.transform.localRotation = Quaternion.Euler(0, 0, roteZ);
+                hero.transform.localRotation = Quaternion.Euler(0, roteY, roteZ);
                 roteZ -= 0.5f;
             }
             else
             {
-                trunFlag = true;
+                trunFlagZ = true;
             }
         }
         shakeCount++;
@@ -214,9 +216,11 @@ public class AnimationController : MonoBehaviour
     #region Bear Animation (Friend Find)
     IEnumerator BearAnimation()
     {
-        yield return StartCoroutine(CharacterMove(bearMoveEnd));
+        StartCoroutine(CharacterMove(bearMoveEnd));
+        StartCoroutine(ShakeCharacter(bearShakeEnd));
         Debug.Log("Bear Animation End");
         //gameControllerScript.OnLoadStudy();
+        yield break;
     }
     #endregion
 
@@ -232,17 +236,19 @@ public class AnimationController : MonoBehaviour
         yield return StartCoroutine(GoBackHome());
         Debug.Log("Rabbit Animation End");
         //gameControllerScript.OnLoadStudy();
+        yield break;
     }
 
     IEnumerator GoBackHome()
     {
-        if (hero.transform.localScale.x > 0)
+        if (hero.transform.localScale.x > 1)
         {
             hero.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
             hero.transform.localPosition += new Vector3(0.0f, 0.5f, 0.0f);
         }
         else
         {
+            hero.SetActive(false);
             yield break;
         }
         yield return new WaitForSeconds(0.1f);
