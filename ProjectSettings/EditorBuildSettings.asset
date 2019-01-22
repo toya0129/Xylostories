@@ -4,4 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/scenes/new_version/AnimationScene.unity
+    guid: 8c9120e77c8066c42b98070c6baeeb43
+  - enabled: 1
+    path: Assets/scenes/new_version/FriendSelectScene.unity
+    guid: 04e75ce6fce024bc0991ba5c178d99df
+  - enabled: 1
+    path: Assets/scenes/new_version/MainSoundSelect.unity
+    guid: 552debc4214c543318309b758366f19d
+  - enabled: 1
+    path: Assets/scenes/new_version/StudyScene.unity
+    guid: f69ab9fbddf8e463caee191543ba792e
+  - enabled: 1
+    path: Assets/scenes/new_version/TitleScene.unity
+    guid: 83939ad61feab4ffeb38973203263c80
+  m_configObjects: {}

@@ -62,7 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\AnimationScene\AnimationController.cs" />
+    <Compile Include="Assets\Script\FriendSelectScene\FriendSelectCanvasScript.cs" />
+    <Compile Include="Assets\Script\FriendSelectScene\FriendSelectController.cs" />
     <Compile Include="Assets\Script\GameControllerScript.cs" />
+    <Compile Include="Assets\Script\MainSoundSelect\MainSoundCanvasScript.cs" />
+    <Compile Include="Assets\Script\MainSoundSelect\MainSoundSelectController.cs" />
     <Compile Include="Assets\Script\SelectScene\CharacterControllerScript.cs" />
     <Compile Include="Assets\Script\SelectScene\FlashScript.cs" />
     <Compile Include="Assets\Script\SelectScene\SelectGameControllerScript.cs" />

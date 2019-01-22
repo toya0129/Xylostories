@@ -144,7 +144,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 63, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &195811246
 GameObject:
@@ -980,7 +980,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 2032327f59db74b86a5ec635c64a6acb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1352,7 +1352,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: f420b7265fb454760bfe66a317f3cd98, type: 3}
   m_Color: {r: 0.3911663, g: 1, b: 0.3529412, a: 1}
   m_FlipX: 0
@@ -1492,6 +1492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bcc73e57e4144a79b89b49dd944804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 340176475}
   friendPrefab: {fileID: 1253284989309226, guid: 8f7ee818d4e804f1c880b292351c1632,
     type: 2}
   friendField: {fileID: 10910246}
@@ -1518,9 +1519,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f2df925e024884556b079aad2948fc40, type: 3}
   - {fileID: 21300000, guid: 2316292d1083845419232aed810304b4, type: 3}
   - {fileID: 21300000, guid: f386432bef00f49e4af3d73cc0aafe57, type: 3}
-  - {fileID: 0}
   - {fileID: 21300000, guid: f386432bef00f49e4af3d73cc0aafe57, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: f386432bef00f49e4af3d73cc0aafe57, type: 3}
+  - {fileID: 21300000, guid: f386432bef00f49e4af3d73cc0aafe57, type: 3}
   - {fileID: 21300000, guid: f386432bef00f49e4af3d73cc0aafe57, type: 3}
   hero: {fileID: 867585986}
   backgroundField: {fileID: 464270398}
@@ -1533,6 +1534,16 @@ MonoBehaviour:
   leaf: {fileID: 1455539410}
   leaf_half: {fileID: 21300000, guid: 43620f304cd984305ae4ae8bd1dec887, type: 3}
   trainField: {fileID: 692201556}
+  train:
+  - {fileID: 195811246}
+  - {fileID: 1035149693}
+  - {fileID: 1645423918}
+  - {fileID: 905514502}
+  - {fileID: 240590634}
+  - {fileID: 2130972526}
+  - {fileID: 414838943}
+  - {fileID: 1811553763}
+  - {fileID: 232671323}
 --- !u!1 &1802903571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,7 +1577,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 63, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1811553763
 GameObject:

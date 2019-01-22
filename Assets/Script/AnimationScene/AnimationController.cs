@@ -7,9 +7,14 @@ public class AnimationController : MonoBehaviour
 
     private int mainCharacter;
 
+    [SerializeField]
+    GameObject mainCamera;
+
     #region Friend
-    private List<int> friendCharacter = new List<int>();
-    private List<GameObject> friend = new List<GameObject>();
+    public List<int> friendCharacter = new List<int>();
+    public List<GameObject> friend = new List<GameObject>();
+    private float[] firstPos = new float[] { 45f, -45f };
+    private float[] friendSpeed = new float[] { 2, 1, 3, 1, 1, 1, 1 };
     [SerializeField]
     GameObject friendPrefab;
     [SerializeField]
@@ -24,7 +29,7 @@ public class AnimationController : MonoBehaviour
 
     [SerializeField]
     Sprite[] background = new Sprite[7]; //0:1.61 1:3.1 
-    private float[] backgroundScale = new float[] { 1.61f, 3.1f ,3.1f,0,0, 1.61f, 0, 1.61f};
+    private float[] backgroundScale = new float[] { 1.61f, 3.1f ,3.1f,1.61f,1.61f, 1.61f, 1.61f, 1.61f};
 
     [SerializeField]
     GameObject hero;
@@ -46,6 +51,8 @@ public class AnimationController : MonoBehaviour
     #region Bear 1
     private int bearMoveEnd = 400; //Animation End Flag
     private int bearShakeEnd = 480;
+    
+    private float[] friendEndPos = new float[] {18f,-18f,9f,-9f,27f,-27f,22f};
     #endregion
 
     #region Rabbit 2
@@ -57,6 +64,8 @@ public class AnimationController : MonoBehaviour
     #region Tiger 3
     [SerializeField]
     GameObject tape;
+    private float[] friendRunPosX = new float[] { 2.5f, -5f, 5f, -3.5f };
+    private float friendRunPosY = 30f;
     #endregion
 
     #region Fox 4
@@ -88,7 +97,10 @@ public class AnimationController : MonoBehaviour
     #region Monkey 7
     [SerializeField]
     GameObject trainField;
-    private float[] characterX = new float[]{-17f,-10.5f,-4f,2.3f,8.7f,15f,21.5f,28f};
+    [SerializeField]
+    List<GameObject> train;
+    private bool trainMoveTrigger = true;
+    private float[] characterX = new float[]{-17f,-10f,-4f,2.3f,8.7f,15f,21.5f,28f};
     private float characterY = -8;
     #endregion
 
@@ -101,17 +113,17 @@ public class AnimationController : MonoBehaviour
         leaf.SetActive(false);
         tape.SetActive(false);
         trainField.SetActive(false);
-        //        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
+        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
 
-        mainCharacter = 1;
-        //mainCharactar = gameControllerScript.MainCharacter;
+        //mainCharacter = 0;
+        mainCharacter = gameControllerScript.MainCharacter;
 
-        //CharacterSet();
+        CharacterSet();
         FriendCreate();
 
         switch (mainCharacter)
         {
-            case 0:
+            case 1:
                 Debug.Log("Bear Animation Start");
                 StartCoroutine(BearAnimation());
                 break;
@@ -135,7 +147,7 @@ public class AnimationController : MonoBehaviour
                 Debug.Log("Giraffe Animation Start");
                 StartCoroutine(GiraffeAnimation());
                 break;
-            case 1:
+            case 7:
                 Debug.Log("Monkey Animation Start");
                 StartCoroutine(MonkeyAnimation());
                 break;
@@ -165,11 +177,28 @@ public class AnimationController : MonoBehaviour
     }
 
     private void FriendCreate(){
+        for (int i = 0; i < gameControllerScript.FriendsCharacter.Length; i++)
+        {
+            if (gameControllerScript.FriendsCharacter[i] == true)
+            {
+                friendCharacter.Add(i);
+            }
+        }
+
         for (int i = 0; i < friendCharacter.Count;i++){
             friend.Add(Instantiate(friendPrefab));
             friend[i].GetComponent<SpriteRenderer>().sprite = characters[friendCharacter[i]];
             friend[i].GetComponent<Animator>().runtimeAnimatorController = characterAnimation[friendCharacter[i]];
             friend[i].transform.parent = friendField.transform;
+            if (i % 2 == 0)
+            {
+                friend[i].transform.localPosition = new Vector3(firstPos[0], -17, 0);
+            }
+            else
+            {
+                friend[i].transform.localPosition = new Vector3(firstPos[1], -17, 0);
+            }
+            friend[i].SetActive(false);
         }
     }
 
@@ -282,12 +311,48 @@ public class AnimationController : MonoBehaviour
     #region Bear Animation (Friend Find)
     IEnumerator BearAnimation()
     {
-        StartCoroutine(CharacterMove(bearMoveEnd));
         StartCoroutine(ShakeCharacter(bearShakeEnd));
+        yield return StartCoroutine(CharacterMove(bearMoveEnd));
+        for (int i = 0; i < friend.Count; i++)
+        {
+            friend[i].SetActive(true);
+            yield return StartCoroutine(ComeFriend(i));
+        }
+        StopAllCoroutines();
         Debug.Log("Bear Animation End");
-        //gameControllerScript.OnLoadStudy();
+        gameControllerScript.OnLoadStudy();
         yield break;
     }
+
+    IEnumerator ComeFriend(int number)
+    {
+        if (number % 2 == 0)
+        {
+            if (friend[number].transform.localPosition.x > friendEndPos[number])
+            {
+                friend[number].transform.localPosition -= new Vector3(friendSpeed[number], 0, 0);
+            }
+            else
+            {
+                yield break;
+            }
+        }
+        else
+        {
+            if (friend[number].transform.localPosition.x < friendEndPos[number])
+            {
+                friend[number].transform.localPosition += new Vector3(friendSpeed[number], 0, 0);
+            }
+            else
+            {
+                yield break;
+            }
+        }
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(ComeFriend(number));
+        yield break;
+    }
+
     #endregion
 
     #region RabbitAnimation (Go Back Home)
@@ -300,8 +365,9 @@ public class AnimationController : MonoBehaviour
         hero.GetComponent<Animator>().enabled = false;
         hero.GetComponent<SpriteRenderer>().sprite = rabbit_back;
         yield return StartCoroutine(GoBackHome());
+        StopAllCoroutines();
         Debug.Log("Rabbit Animation End");
-        //gameControllerScript.OnLoadStudy();
+        gameControllerScript.OnLoadStudy();
         yield break;
     }
 
@@ -328,9 +394,17 @@ public class AnimationController : MonoBehaviour
         tape.SetActive(true);
         hero.transform.localPosition = new Vector3(-3.5f, 12.0f, 0);
         hero.transform.localScale= new Vector3(1.0f, 1.0f, 1.0f);
+        for (int i = 0; i < friend.Count; i++)
+        {
+            friend[i].SetActive(true);
+            friend[i].transform.localPosition = new Vector3(friendRunPosX[i % 4], friendRunPosY, 0);
+            friend[i].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            StartCoroutine(RunningFriend(i));
+        }
         yield return StartCoroutine(RunningAnimation());
+        StopAllCoroutines();
         Debug.Log("End Tiger Animation");
-        //gameControllerScript.OnLoadStudy();
+        gameControllerScript.OnLoadStudy();
         yield break;
     }
 
@@ -349,6 +423,32 @@ public class AnimationController : MonoBehaviour
         yield return StartCoroutine(RunningAnimation());
         yield break;
     }
+
+    IEnumerator RunningFriend(int number)
+    {
+        switch (number % 4)
+        {
+            case 0:
+                friend[number].transform.localScale += new Vector3(0.005f, 0.005f, 0);
+                friend[number].transform.localPosition -= new Vector3(0.003f, 0.2f, 0.0f);
+                break;
+            case 1:
+                friend[number].transform.localScale += new Vector3(0.02f, 0.02f, 0);
+                friend[number].transform.localPosition -= new Vector3(0.1f, 0.3f, 0.0f);
+                break;
+            case 2:
+                friend[number].transform.localScale += new Vector3(0.025f, 0.025f, 0);
+                friend[number].transform.localPosition -= new Vector3(-0.1f, 0.4f, 0.0f);
+                break;
+            case 3:
+                friend[number].transform.localScale += new Vector3(0.015f, 0.015f, 0);
+                friend[number].transform.localPosition -= new Vector3(0.003f, 0.25f, 0.0f);
+                break;
+        }
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(RunningFriend(number));
+        yield break;
+    }
     #endregion
 
     #region FoxAnimation (Get Moon)
@@ -362,8 +462,9 @@ public class AnimationController : MonoBehaviour
         yield return StartCoroutine(ThrowRope());
         rope.transform.SetParent(moon.transform);
         yield return StartCoroutine(GetMoon());
+        StopAllCoroutines();
         Debug.Log("End Fox Animation");
-        //gameControllerScript.OnLoadStudy();
+        gameControllerScript.OnLoadStudy();
         yield break;
     }
 
@@ -435,7 +536,9 @@ public class AnimationController : MonoBehaviour
     #region PigAnimation (Candy House)
     IEnumerator PigAnimation(){
 
+        StopAllCoroutines();
         Debug.Log("End Pig Animation");
+        gameControllerScript.OnLoadStudy();
         yield break;
     }
     #endregion
@@ -447,7 +550,9 @@ public class AnimationController : MonoBehaviour
         int count = 0;
         yield return StartCoroutine(FallLeaf());
         yield return StartCoroutine(EatLeaf(count));
+        StopAllCoroutines();
         Debug.Log("End Giraffe Animation");
+        gameControllerScript.OnLoadStudy();
         yield break;
     }
 
@@ -530,25 +635,89 @@ public class AnimationController : MonoBehaviour
         trainField.SetActive(true);
         hero.transform.localScale = new Vector3(2, 2, 1);
         hero.transform.localPosition = new Vector3(characterX[mainCharacter - 1], characterY, 0);
+        hero.transform.parent = train[mainCharacter - 1].transform;
 
         for (int i = 0; i < friend.Count;i++){
+            friend[i].SetActive(true);
             if (friendCharacter[i] == 7)
             {
                 friend[i].transform.localScale = new Vector3(1, 1, 1);
-                friend[i].transform.localPosition = new Vector3(characterX[friendCharacter[i] - 1], characterY + 2, 0);
+                friend[i].transform.localPosition = new Vector3(characterX[friendCharacter[i]], characterY + 2, 0);
             }
             else
             {
                 friend[i].transform.localScale = new Vector3(2, 2, 1);
-                friend[i].transform.localPosition = new Vector3(characterX[friendCharacter[i] - 1], characterY, 0);
+                friend[i].transform.localPosition = new Vector3(characterX[friendCharacter[i]], characterY, 0);
             }
+            friend[i].transform.parent = train[friendCharacter[i]].transform;
         }
-
+        
+        StartCoroutine(TrainMove());
+        yield return new WaitForSeconds(2f);
+        yield return StartCoroutine(CameraMove());
+        StopAllCoroutines();
         Debug.Log("End Monkey Animation");
+        gameControllerScript.OnLoadStudy();
         yield break;
     }
 
-    IEnumerator TrainMove(){
+    IEnumerator TrainMove()
+    {
+        if (trainMoveTrigger == true)
+        {
+            for (int j = 0; j < train.Count; j++)
+            {
+                if (j % 2 == 0)
+                {
+                    train[j].transform.localPosition = new Vector3(0, 1.0f, 0);
+                }
+                else
+                {
+                    train[j].transform.localPosition = new Vector3(0, 0, 0);
+                }
+            }
+            trainMoveTrigger = false;
+        }
+        else
+        {
+            for (int j = 0; j < train.Count; j++)
+            {
+                if (j % 2 == 0)
+                {
+                    train[j].transform.localPosition = new Vector3(0, 0, 0);
+                }
+                else
+                {
+                    train[j].transform.localPosition = new Vector3(0, 1.0f, 0);
+                }
+            }
+            trainMoveTrigger = true;
+        }
+        yield return new WaitForSeconds(0.3f);
+        yield return StartCoroutine(TrainMove());
+        yield break;
+    }
+
+    IEnumerator CameraMove()
+    {
+        if (mainCamera.transform.localPosition.z < -15f)
+        {
+            mainCamera.transform.localPosition += new Vector3(0, 0, 1.0f);
+            mainCamera.transform.localPosition -= new Vector3(1.0f, 0.15f, 0);
+        }
+        else
+        {
+            if (mainCamera.transform.localPosition.x < 15f)
+            {
+                mainCamera.transform.localPosition += new Vector3(0.5f, 0, 0);
+            }
+            else
+            {
+                yield break;
+            }
+        }
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(CameraMove());
         yield break;
     }
     #endregion

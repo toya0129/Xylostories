@@ -5,21 +5,22 @@ using UnityEngine.UI;
 
 public class StudySceneCanvasController : MonoBehaviour {
 
-	public GameControllerScript gameControllerScript;
+	private GameControllerScript gameControllerScript;
 
-	[SerializeField] CanvasRenderer[] xylophones;
-	[SerializeField] CanvasRenderer[] characters;
+    [SerializeField] GameObject[] xylophones;
+    [SerializeField] GameObject[] characters;
 
 
 	void Awake(){
 		for (int i = 0; i < 8; i++) {
-			xylophones [i].gameObject.SetActive (false);
-			characters [i].gameObject.SetActive (false);
+			xylophones [i].SetActive (false);
+			characters [i].SetActive (false);
 		}
 	}
 		
 	// Use this for initialization
 	void Start () {
+        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
 		setCharacter ();
 	}
 	
@@ -29,11 +30,18 @@ public class StudySceneCanvasController : MonoBehaviour {
 	}
 
 	private void setCharacter(){
-		for (int i = 0; i < 8; i++) {
+        xylophones[gameControllerScript.MainCharacter - 1].SetActive(true);
+        characters[gameControllerScript.MainCharacter - 1].SetActive(true);
+        for (int i = 0; i < 8; i++) {
 			if (gameControllerScript.FriendsCharacter [i] == true) {
-				xylophones [i].gameObject.SetActive (true);
-				characters [i].gameObject.SetActive (true);
+				xylophones [i].SetActive (true);
+				characters [i].SetActive (true);
 			}
 		}
 	}
+
+    public void LoadTitle()
+    {
+        gameControllerScript.OnLoadTitle();
+    }
 }

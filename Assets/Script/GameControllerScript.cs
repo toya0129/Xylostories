@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameControllerScript : MonoBehaviour
 {
 
-    private int mainCharacter;
-    private bool[] friendsCharacter = new bool[8];
+    private int mainCharacter = 0;
+    [SerializeField] bool[] friendsCharacter = new bool[8];
 
     void Awake()
     {
@@ -17,8 +17,6 @@ public class GameControllerScript : MonoBehaviour
         {
             friendsCharacter[i] = false;
         }
-
-        test();
     }
 
     // Use this for initialization
@@ -33,18 +31,13 @@ public class GameControllerScript : MonoBehaviour
 
     }
 
-    private void test()
-    {
-        mainCharacter = 1;
-
-        friendsCharacter[mainCharacter] = true;
-        friendsCharacter[4] = true;
-        friendsCharacter[7] = true;
-
-    }
-
-
     #region Scene Load
+    public void OnLoadTitle()
+    {
+        Debug.Log("Go Title");
+        SceneManager.LoadScene("TitleScene");
+        Destroy(this.gameObject);
+    }
     public void OnLoadMainSound()
     {
         Debug.Log("Go Main Sound");
