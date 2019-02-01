@@ -10,8 +10,8 @@ public class SerialConnecter : MonoBehaviour {
 	public delegate void SerialDataReceivedEventHandler(string message);
 	public event SerialDataReceivedEventHandler OnDataReceived;
 
-	public string portName = "/dev/cu.usbmodemFA131";
-	public int bandRate = 57600;
+	private string portName = "/dev/cu.usbmodem14401";
+	private int bandRate = 9600;
 	private Parity parity = Parity.None;
 	private int dataBits = 8;
 	private StopBits stopBits = StopBits.None;
@@ -26,7 +26,6 @@ public class SerialConnecter : MonoBehaviour {
 	public bool close = false;
 
 	void Awake(){
-		DontDestroyOnLoad(this.gameObject);
 		Open ();
 	}
 
