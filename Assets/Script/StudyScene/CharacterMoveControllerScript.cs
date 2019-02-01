@@ -17,7 +17,7 @@ public class CharacterMoveControllerScript : MonoBehaviour {
 
 
     private bool[] trigger = new bool[8];
-    private KeyCode[] key = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8 };
+    private KeyCode[] key = new KeyCode[] { KeyCode.PageUp, KeyCode.PageDown, KeyCode.B, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6, KeyCode.Alpha7, KeyCode.Alpha8 };
 
 	// Use this for initialization
 	void Start () {
