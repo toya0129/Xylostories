@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameControllerScript : MonoBehaviour
 {
 
+    private int mainStory = 0;
+    [SerializeField] bool[] characters = new bool[8];
+    
     private int mainCharacter = 0;
     [SerializeField] bool[] friendsCharacter = new bool[8];
 
@@ -15,7 +18,7 @@ public class GameControllerScript : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-            friendsCharacter[i] = false;
+            characters[i] = false;
         }
     }
 
@@ -38,22 +41,23 @@ public class GameControllerScript : MonoBehaviour
         SceneManager.LoadScene("TitleScene");
         Destroy(this.gameObject);
     }
-    public void OnLoadMainSound()
+
+    public void OnLoadStartScene()
     {
-        Debug.Log("Go Main Sound");
-        SceneManager.LoadScene("MainSoundSelect");
+        Debug.Log("Go Start Scene");
+        SceneManager.LoadScene("StartScene");
+    }
+
+    public void OnLoadMenuScene()
+    {
+        Debug.Log("Go Menu Scene");
+        SceneManager.LoadScene("MenuScene");
     }
 
     public void OnLoadFriendSelect()
     {
         Debug.Log("Go Friends Select");
         SceneManager.LoadScene("FriendSelectScene");
-    }
-
-    public void OnLoadAnimation()
-    {
-        Debug.Log("Go Animation");
-        SceneManager.LoadScene("AnimationScene");
     }
 
     public void OnLoadStudy()
@@ -65,6 +69,20 @@ public class GameControllerScript : MonoBehaviour
     #endregion
 
 
+    #region Getter and Setter
+    public int MainStory
+    {
+        get { return mainStory; }
+        set { mainStory = value; }
+    }
+
+    public bool[] Characters
+    {
+        get { return characters; }
+        set { characters = value; }
+    }
+    #endregion
+    
     #region Getter and Setter
     public int MainCharacter
     {

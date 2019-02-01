@@ -456,6 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8a63f9b5e8148569b8c1325180f0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characters: 0000000000000000
   friendsCharacter: 0000000000000000
 --- !u!4 &1245479471
 Transform:
@@ -547,7 +548,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1245479470}
-        m_MethodName: OnLoadMainSound
+        m_MethodName: OnLoadStartScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

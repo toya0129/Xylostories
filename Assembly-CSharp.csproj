@@ -73,6 +73,7 @@
     <Compile Include="Assets\Script\SelectScene\SelectMoveControllerScript.cs" />
     <Compile Include="Assets\Script\SerialConnecter.cs" />
     <Compile Include="Assets\Script\serialRead.cs" />
+    <Compile Include="Assets\Script\StartScene\AnimationScript.cs" />
     <Compile Include="Assets\Script\StudyScene\CharacterMoveControllerScript.cs" />
     <Compile Include="Assets\Script\StudyScene\StudySceneCanvasController.cs" />
     <Compile Include="Assets\Script\XylophoneController.cs" />

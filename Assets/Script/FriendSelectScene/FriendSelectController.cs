@@ -28,7 +28,7 @@ public class FriendSelectController : MonoBehaviour {
                 for (int j = 0; j < friend.Count;j++){
                     gameController.GetComponent<GameControllerScript>().FriendsCharacter[friend[j] - 1] = true;
                 }
-                gameController.GetComponent<GameControllerScript>().OnLoadAnimation();
+//                gameController.GetComponent<GameControllerScript>().OnLoadAnimation();
             }
         }
 
