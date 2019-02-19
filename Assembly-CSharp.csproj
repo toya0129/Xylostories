@@ -74,7 +74,8 @@
     <Compile Include="Assets\Script\SerialConnecter.cs" />
     <Compile Include="Assets\Script\serialRead.cs" />
     <Compile Include="Assets\Script\StartScene\AnimationScript.cs" />
-    <Compile Include="Assets\Script\StudyScene\CharacterMoveControllerScript.cs" />
+    <Compile Include="Assets\Script\StudyScene\old\CharacterMoveControllerScript.cs" />
+    <Compile Include="Assets\Script\StudyScene\StudyControllerScript.cs" />
     <Compile Include="Assets\Script\StudyScene\StudySceneCanvasController.cs" />
     <Compile Include="Assets\Script\XylophoneController.cs" />
     <Compile Include="Assets\Script\XylophoneScript.cs" />

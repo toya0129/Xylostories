@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour
 {
-
-    private int mainStory = 0;
+    //mainStory 0:none 1:find friends 2:run 3:eat food 4:make candy house 5:train
+    [SerializeField] int mainStory = 0; 
     [SerializeField] bool[] characters = new bool[8];
     
     private int mainCharacter = 0;
@@ -18,7 +18,7 @@ public class GameControllerScript : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-            characters[i] = false;
+            //characters[i] = false;
         }
     }
 
