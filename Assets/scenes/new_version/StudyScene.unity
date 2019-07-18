@@ -1142,7 +1142,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 62dc3c03374674656ac6e52302bff417, type: 3}
   tape: {fileID: 2017924800}
   trainField: {fileID: 390080594}
-  train: []
+  train:
+  - {fileID: 398353385}
+  - {fileID: 15153936}
+  - {fileID: 587059179}
+  - {fileID: 1159372551}
+  - {fileID: 1605967587}
+  - {fileID: 1543448812}
+  - {fileID: 1686138887}
+  - {fileID: 530621232}
   mountains: {fileID: 1768601833}
 --- !u!1 &390080594
 GameObject:
@@ -1158,7 +1166,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &390080595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1611,7 +1619,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 62dc3c03374674656ac6e52302bff417, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f386432bef00f49e4af3d73cc0aafe57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1630,7 +1638,7 @@ Transform:
   m_GameObject: {fileID: 597283203}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.1, y: 3.1, z: 1}
+  m_LocalScale: {x: 1.61, y: 1.61, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1676,8 +1684,6 @@ MonoBehaviour:
   endflag: {fileID: 1651157066}
   moon: {fileID: 0}
   rope: {fileID: 0}
-  candyHouse: {fileID: 0}
-  candy_prefub: {fileID: 0}
   candy: []
 --- !u!4 &721387585
 Transform:
@@ -2783,8 +2789,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serialReadScript: {fileID: 0}
-  mainStory: 6
-  characters: 0101010101010101
+  mainStory: 2
+  characters: 0101010000010101
   friendsCharacter: 0000000000000000
 --- !u!4 &1411029351
 Transform:
@@ -3111,7 +3117,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Goal !!!
+  m_Text: Finish!!
 --- !u!222 &1651157069
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3456,7 +3462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1768601834
 RectTransform:
   m_ObjectHideFlags: 0

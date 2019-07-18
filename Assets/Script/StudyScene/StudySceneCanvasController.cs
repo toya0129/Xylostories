@@ -36,6 +36,10 @@ public class StudySceneCanvasController : MonoBehaviour {
     List<GameObject> train;
     [SerializeField]
     GameObject mountains;
+
+    private int mountainAnimationEnd = 2;
+    private float[] train_characterX = new float[] { -17f, -10f, -4f, 2.3f, 8.7f, 15f, 21.5f, 28f };
+    private float train_characterY = -8;
     #endregion
 
 
@@ -60,7 +64,7 @@ public class StudySceneCanvasController : MonoBehaviour {
     {
         for (int i = 0; i < 8; i++)
         {
-            if (gameControllerScript.Characters[i] == true)
+            if (gameControllerScript.Characters[i])
             {
                 characters[i].SetActive(true);
             }
@@ -93,7 +97,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                 tape.SetActive(true);
                 for (int i = 0; i < 8; i++)
                 {
-                    if (gameControllerScript.Characters[i] == true)
+                    if (gameControllerScript.Characters[i])
                     {
                         int num = j % 4;
                         trackNum[i] = num;
@@ -112,6 +116,22 @@ public class StudySceneCanvasController : MonoBehaviour {
             case 6:
                 trainField.SetActive(true);
                 mountains.SetActive(true);
+                for (int i = 0; i < 8; i++)
+                {
+                    if (gameControllerScript.Characters[i])
+                    {
+                        if(i == 7)
+                        {
+                            characters[i].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                        }
+                        else
+                        {
+                            characters[i].transform.localScale = new Vector3(2, 2, 2);
+                        }
+                        characters[i].transform.localPosition = new Vector3(train_characterX[i], train_characterY, 0);
+                        characters[i].transform.parent = train[i].transform;
+                    }
+                }
                 StartCoroutine(MoveMountains());
                 break;
             default:
@@ -125,10 +145,17 @@ public class StudySceneCanvasController : MonoBehaviour {
         if(mountains.transform.localPosition.x > 150)
         {
             mountains.transform.localPosition = new Vector3(-120, 0, 0);
+            mountainAnimationEnd--;
         }
         else
         {
             mountains.transform.localPosition += new Vector3(2, 0, 0);
+        }
+
+        if(mountainAnimationEnd == 0)
+        {
+            studyControllerScript.AnimationEndFlag = true;
+            yield break;
         }
 
         yield return new WaitForSeconds(0.1f);
