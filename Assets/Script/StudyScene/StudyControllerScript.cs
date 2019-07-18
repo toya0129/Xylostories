@@ -8,16 +8,17 @@ public class StudyControllerScript : MonoBehaviour {
     private StudySceneCanvasController studySceneCanvasController;
     private SerialReadScript serialReadScript;
 
-    //
     private int mainStory;
     public int moveCharacter = 0;
     public GameObject[] characters;
+
+    private bool animationEndFlag = false;
 
     private string serialData = "";
 
     #region Run (2) many character
     public int[] track = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int animationEnd = 10;
+    private int runAnimationEnd = 10;
     [SerializeField]
     GameObject endflag;
     #endregion
@@ -39,6 +40,7 @@ public class StudyControllerScript : MonoBehaviour {
     #endregion
 
     #region jump train (6)
+    private int trainAnimationEnd = 1;
 
     #endregion
 
@@ -132,7 +134,7 @@ public class StudyControllerScript : MonoBehaviour {
 
                         break;
                     case 2:
-                        StartCoroutine(RunningAnimation(moveCharacter - 1, track[moveCharacter - 1], animationEnd));
+                        StartCoroutine(RunningAnimation(moveCharacter - 1, track[moveCharacter - 1], runAnimationEnd));
                         break;
                     case 3:
                         break;
@@ -141,6 +143,7 @@ public class StudyControllerScript : MonoBehaviour {
                     case 5:
                         break;
                     case 6:
+                        StartCoroutine(JumpCharacter_OnTrain(moveCharacter - 1));
                         break;
                     default:
                         break;
@@ -148,6 +151,11 @@ public class StudyControllerScript : MonoBehaviour {
             }
             //serialReadScript.OutData = "";
             moveCharacter = 0;
+        }
+
+        if (animationEndFlag)
+        {
+            AnimationFinish();
         }
     }
 
@@ -179,7 +187,7 @@ public class StudyControllerScript : MonoBehaviour {
         }
         else
         {
-            AnimationFinish();
+            animationEndFlag = true;
             yield break;
         }
 
@@ -193,7 +201,7 @@ public class StudyControllerScript : MonoBehaviour {
 
         if ((serialData != "") && (serialData == serialReadScript.OutData))
         {
-            yield return StartCoroutine(RunningAnimation(number, trackNum,animationEnd));
+            yield return StartCoroutine(RunningAnimation(number, trackNum, runAnimationEnd));
         }
 
         yield break;
@@ -258,8 +266,13 @@ public class StudyControllerScript : MonoBehaviour {
 
 
     #region jump train (6)
-
-
+    IEnumerator JumpCharacter_OnTrain(int number)
+    {
+        characters[number].transform.parent.localPosition = new Vector3(0, 5, 0);
+        yield return new WaitForSeconds(0.1f);
+        characters[number].transform.parent.localPosition = new Vector3(0, 0, 0);
+        yield break;
+    }
 
     #endregion
 
@@ -273,4 +286,11 @@ public class StudyControllerScript : MonoBehaviour {
     {
         gameControllerScript.OnLoadTitle();
     }
+
+    #region getter and setter
+    public bool AnimationEndFlag
+    {
+        set { animationEndFlag = value; }
+    }
+    #endregion
 }
