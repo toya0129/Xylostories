@@ -20,6 +20,7 @@ public class AnimationScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
         StartCoroutine(RabbitAnimation());
 	}
 	
@@ -109,7 +110,8 @@ public class AnimationScript : MonoBehaviour {
         yield return StartCoroutine(GoBackHome());
         StopAllCoroutines();
         Debug.Log("Rabbit Animation End");
-        gameControllerScript.OnLoadMenuScene();
+        //gameControllerScript.OnLoadMenuScene();
+        gameControllerScript.OnLoadStudy();
         yield break;
     }
 

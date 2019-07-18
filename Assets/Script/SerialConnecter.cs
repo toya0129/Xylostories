@@ -26,6 +26,7 @@ public class SerialConnecter : MonoBehaviour {
 	public bool close = false;
 
 	void Awake(){
+        Debug.Log("Serial Communication Start");
 		Open ();
 	}
 
@@ -38,6 +39,7 @@ public class SerialConnecter : MonoBehaviour {
 	void Update () {
 		if (isNewMessageReceived) {
 			OnDataReceived (message);
+            isNewMessageReceived = false;
 		}
 
 		if (close == true) {

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour
 {
+    [SerializeField]
+    SerialReadScript serialReadScript;
+
     //mainStory 0:none 1:find friends 2:run 3:eat food 4:make candy house 5:train
     [SerializeField] int mainStory = 0; 
     [SerializeField] bool[] characters = new bool[8];
@@ -39,6 +42,8 @@ public class GameControllerScript : MonoBehaviour
     {
         Debug.Log("Go Title");
         SceneManager.LoadScene("TitleScene");
+        serialReadScript.gameObject.GetComponent<SerialConnecter>().close = true;
+        Destroy(serialReadScript.gameObject);
         Destroy(this.gameObject);
     }
 

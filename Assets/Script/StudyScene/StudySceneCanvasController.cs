@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class StudySceneCanvasController : MonoBehaviour {
 
-	
-     [SerializeField] GameControllerScript gameControllerScript;
+	[SerializeField] 
+    GameControllerScript gameControllerScript;
+
+    [SerializeField]
+    StudyControllerScript studyControllerScript;
 
     [SerializeField]
     GameObject backgroundArea;
@@ -23,6 +26,7 @@ public class StudySceneCanvasController : MonoBehaviour {
     GameObject tape;
     private float[] startPosX = new float[] { 2.5f, -5f, 5f, -3.5f };
     private float startPosY = 30f;
+    private int[] trackNum = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
     #endregion
 
     #region Train (5)
@@ -41,7 +45,7 @@ public class StudySceneCanvasController : MonoBehaviour {
 		
 	// Use this for initialization
 	void Start () {
-        //gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
+        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
         setCharacter();
         setUI(gameControllerScript.MainStory);
 		
@@ -78,10 +82,13 @@ public class StudySceneCanvasController : MonoBehaviour {
                 {
                     if (gameControllerScript.Characters[i] == true)
                     {
-                        characters[i].transform.localPosition = new Vector3(startPosX[j], startPosY, 0.0f);
+                        int num = j % 4;
+                        trackNum[i] = num;
+                        characters[i].transform.localPosition = new Vector3(startPosX[num], startPosY, 0.0f);
                         j++;
                     }
                 }
+                studyControllerScript.Track = trackNum;
                 break;
             case 3:
                 break;
@@ -93,5 +100,4 @@ public class StudySceneCanvasController : MonoBehaviour {
                 break;
         }
     }
-
 }
