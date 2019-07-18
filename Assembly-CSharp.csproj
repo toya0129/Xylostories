@@ -61,19 +61,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\AnimationScene\AnimationController.cs" />
     <Compile Include="Assets\Script\FriendSelectScene\FriendSelectCanvasScript.cs" />
     <Compile Include="Assets\Script\FriendSelectScene\FriendSelectController.cs" />
     <Compile Include="Assets\Script\GameControllerScript.cs" />
     <Compile Include="Assets\Script\MainSoundSelect\MainSoundCanvasScript.cs" />
     <Compile Include="Assets\Script\MainSoundSelect\MainSoundSelectController.cs" />
-    <Compile Include="Assets\Script\old\serialRead.cs" />
-    <Compile Include="Assets\Script\old\XylophoneController.cs" />
-    <Compile Include="Assets\Script\old\XylophoneScript.cs" />
-    <Compile Include="Assets\Script\SelectScene\CharacterControllerScript.cs" />
-    <Compile Include="Assets\Script\SelectScene\FlashScript.cs" />
-    <Compile Include="Assets\Script\SelectScene\SelectGameControllerScript.cs" />
-    <Compile Include="Assets\Script\SelectScene\SelectMoveControllerScript.cs" />
+    <Compile Include="Assets\Script\not_use\AnimationScene\AnimationController.cs" />
+    <Compile Include="Assets\Script\not_use\old\serialRead.cs" />
+    <Compile Include="Assets\Script\not_use\old\XylophoneController.cs" />
+    <Compile Include="Assets\Script\not_use\old\XylophoneScript.cs" />
+    <Compile Include="Assets\Script\not_use\SelectScene\CharacterControllerScript.cs" />
+    <Compile Include="Assets\Script\not_use\SelectScene\FlashScript.cs" />
+    <Compile Include="Assets\Script\not_use\SelectScene\SelectGameControllerScript.cs" />
+    <Compile Include="Assets\Script\not_use\SelectScene\SelectMoveControllerScript.cs" />
     <Compile Include="Assets\Script\SerialConnecter.cs" />
     <Compile Include="Assets\Script\SerialReadScript.cs" />
     <Compile Include="Assets\Script\StartScene\AnimationScript.cs" />

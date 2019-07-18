@@ -13,7 +13,7 @@ public class StudySceneCanvasController : MonoBehaviour {
 
     [SerializeField]
     GameObject backgroundArea;
-    private float[] backgroundSize = new float[] { 1.61f, 3.1f ,1.61f,1.61f,1.61f, 1.61f};
+    private float[] backgroundSize = new float[] { 1.61f, 3.1f ,1.61f,1.61f,1.61f, 3.1f};
 
     [SerializeField] 
     GameObject[] characters;
@@ -32,15 +32,15 @@ public class StudySceneCanvasController : MonoBehaviour {
     #region Train (5)
     [SerializeField]
     GameObject trainField;
+    [SerializeField]
+    List<GameObject> train;
+    [SerializeField]
+    GameObject mountains;
     #endregion
 
 
     void Awake(){
-		for (int i = 0; i < 8; i++) {
-			characters [i].SetActive (false);
-		}
-
-        tape.SetActive(false);
+        InitObject();
 	}
 		
 	// Use this for initialization
@@ -65,6 +65,19 @@ public class StudySceneCanvasController : MonoBehaviour {
                 characters[i].SetActive(true);
             }
         }
+    }
+
+    private void InitObject()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            characters[i].SetActive(false);
+        }
+
+        tape.SetActive(false);
+
+        mountains.SetActive(false);
+        trainField.SetActive(false);
     }
 
     private void setUI(int story)
@@ -96,8 +109,30 @@ public class StudySceneCanvasController : MonoBehaviour {
                 break;
             case 5:
                 break;
+            case 6:
+                trainField.SetActive(true);
+                mountains.SetActive(true);
+                StartCoroutine(MoveMountains());
+                break;
             default:
+                Debug.Log("Error");
                 break;
         }
+    }
+
+    IEnumerator MoveMountains()
+    {
+        if(mountains.transform.localPosition.x > 150)
+        {
+            mountains.transform.localPosition = new Vector3(-120, 0, 0);
+        }
+        else
+        {
+            mountains.transform.localPosition += new Vector3(2, 0, 0);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+        yield return StartCoroutine(MoveMountains());
+        yield break;
     }
 }

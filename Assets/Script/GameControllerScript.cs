@@ -8,7 +8,7 @@ public class GameControllerScript : MonoBehaviour
     [SerializeField]
     SerialReadScript serialReadScript;
 
-    //mainStory 0:none 1:find friends 2:run 3:eat food 4:make candy house 5:train
+    //mainStory 0:none 1:find friends 2:run 3:eat food 4: get moon 5:make candy house 6:train
     [SerializeField] int mainStory = 0; 
     [SerializeField] bool[] characters = new bool[8];
     
