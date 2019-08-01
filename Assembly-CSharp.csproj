@@ -64,9 +64,10 @@
     <Compile Include="Assets\Script\FriendSelectScene\FriendSelectCanvasScript.cs" />
     <Compile Include="Assets\Script\FriendSelectScene\FriendSelectController.cs" />
     <Compile Include="Assets\Script\GameControllerScript.cs" />
-    <Compile Include="Assets\Script\MainSoundSelect\MainSoundCanvasScript.cs" />
-    <Compile Include="Assets\Script\MainSoundSelect\MainSoundSelectController.cs" />
+    <Compile Include="Assets\Script\MenuScene\MenuController.cs" />
     <Compile Include="Assets\Script\not_use\AnimationScene\AnimationController.cs" />
+    <Compile Include="Assets\Script\not_use\MainSoundSelect\MainSoundCanvasScript.cs" />
+    <Compile Include="Assets\Script\not_use\MainSoundSelect\MainSoundSelectController.cs" />
     <Compile Include="Assets\Script\not_use\old\serialRead.cs" />
     <Compile Include="Assets\Script\not_use\old\XylophoneController.cs" />
     <Compile Include="Assets\Script\not_use\old\XylophoneScript.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Assets\Script\SerialConnecter.cs" />
     <Compile Include="Assets\Script\SerialReadScript.cs" />
     <Compile Include="Assets\Script\StartScene\AnimationScript.cs" />
+    <Compile Include="Assets\Script\StudyScene\MoveCandyScript.cs" />
     <Compile Include="Assets\Script\StudyScene\old\CharacterMoveControllerScript.cs" />
     <Compile Include="Assets\Script\StudyScene\StudyControllerScript.cs" />
     <Compile Include="Assets\Script\StudyScene\StudySceneCanvasController.cs" />
