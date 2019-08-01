@@ -13,7 +13,7 @@ public class StudySceneCanvasController : MonoBehaviour {
 
     [SerializeField]
     GameObject backgroundArea;
-    private float[] backgroundSize = new float[] { 1.61f, 3.1f ,1.61f,1.61f,1.61f, 3.1f};
+    private float[] backgroundSize = { 1.61f, 3.1f ,1.61f,1.61f,1.61f, 3.1f};
 
     [SerializeField] 
     GameObject[] characters;
@@ -24,12 +24,25 @@ public class StudySceneCanvasController : MonoBehaviour {
     #region Run on Track (2)
     [SerializeField]
     GameObject tape;
-    private float[] startPosX = new float[] { 2.5f, -5f, 5f, -3.5f };
+    private float[] startPosX = { 2.5f, -5f, 5f, -3.5f };
     private float startPosY = 30f;
-    private int[] trackNum = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int[] trackNum = { 0, 0, 0, 0, 0, 0, 0, 0 };
     #endregion
 
-    #region Train (5)
+    #region Get Moon
+    private Color back_color_moon = new Color(5f, 5f, 70f);
+    [SerializeField]
+    GameObject moon;
+    #endregion
+
+    #region Make Candy House (5) scale 2
+    private float[] startPosX_candy = { -4f, 4f, -12f, 12f, -20f, 20f, -28f, 28f };
+    private float startPosY_candy = -22f;
+    [SerializeField]
+    GameObject house;
+    #endregion
+
+    #region Train (6)
     [SerializeField]
     GameObject trainField;
     [SerializeField]
@@ -38,7 +51,7 @@ public class StudySceneCanvasController : MonoBehaviour {
     GameObject mountains;
 
     private int mountainAnimationEnd = 2;
-    private float[] train_characterX = new float[] { -17f, -10f, -4f, 2.3f, 8.7f, 15f, 21.5f, 28f };
+    private float[] train_characterX = { -17f, -10f, -4f, 2.3f, 8.7f, 15f, 21.5f, 28f };
     private float train_characterY = -8;
     #endregion
 
@@ -80,6 +93,10 @@ public class StudySceneCanvasController : MonoBehaviour {
 
         tape.SetActive(false);
 
+        moon.SetActive(false);
+
+        house.SetActive(false);
+
         mountains.SetActive(false);
         trainField.SetActive(false);
     }
@@ -110,8 +127,37 @@ public class StudySceneCanvasController : MonoBehaviour {
             case 3:
                 break;
             case 4:
+                moon.SetActive(true);
+                backgroundArea.GetComponent<SpriteRenderer>().color = back_color_moon;
                 break;
             case 5:
+                int k = 0;
+                house.SetActive(true);
+                for(int i = 0; i < 8; i++)
+                {
+                    if (gameControllerScript.Characters[i])
+                    {
+                        if (i == 7)
+                        {
+                            characters[i].transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                        }
+                        else
+                        {
+                            characters[i].transform.localScale = new Vector3(2f, 2f, 2f);
+                        }
+
+                        if (i == 1 || i == 7)
+                        {
+                            characters[i].transform.localPosition = new Vector3(startPosX_candy[k], -20f, 1);
+                        }
+                        else
+                        {
+                            characters[i].transform.localPosition = new Vector3(startPosX_candy[k], startPosY_candy, 1);
+                        }
+                        studyControllerScript.CreateCandy(i);
+                        k++;
+                    }
+                }
                 break;
             case 6:
                 trainField.SetActive(true);
@@ -126,7 +172,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                         }
                         else
                         {
-                            characters[i].transform.localScale = new Vector3(2, 2, 2);
+                            characters[i].transform.localScale = new Vector3(2f, 2f, 2f);
                         }
                         characters[i].transform.localPosition = new Vector3(train_characterX[i], train_characterY, 0);
                         characters[i].transform.parent = train[i].transform;

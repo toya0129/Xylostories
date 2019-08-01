@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/* number : Character Number
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,38 +18,46 @@ public class StudyControllerScript : MonoBehaviour {
 
     private int mainStory;
     public int moveCharacter = 0;
-    public GameObject[] characters;
+    [SerializeField]
+    GameObject[] characters;
 
     private bool animationEndFlag = false;
 
     private string serialData = "";
 
     #region Run (2) many character
-    public int[] track = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] track = { 0, 0, 0, 0, 0, 0, 0, 0 };
     private int runAnimationEnd = 10;
     [SerializeField]
     GameObject endflag;
     #endregion
 
     #region eat food (3) many character
-
+    [SerializeField]
+    GameObject[] food;
     #endregion
 
     #region get moon (4) one character
     [SerializeField]
     GameObject moon;
     [SerializeField]
-    GameObject rope;
+    GameObject[] rope;
     #endregion
 
     #region make candy house (5)
     [SerializeField]
-    Sprite[] candy;
+    GameObject candy_area;
+    [SerializeField]
+    List<GameObject> candy = new List<GameObject>(); 
+    [SerializeField]
+    Sprite[] candy_sprite;
+    [SerializeField]
+    GameObject candy_prefub;
+    private int max_candy = 20;
     #endregion
 
     #region jump train (6)
     private int trainAnimationEnd = 1;
-
     #endregion
 
     // Use this for initialization
@@ -49,16 +65,17 @@ public class StudyControllerScript : MonoBehaviour {
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
         //serialReadScript = GameObject.Find("SerialConecter").GetComponent<SerialReadScript>();
         mainStory = gameControllerScript.MainStory;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown) { 
-        //serialData = serialReadScript.OutData;
-        //Debug.Log(serialReadScript.OutData);
-        //if (serialReadScript.OutData != "")
-        //{
+        if (Input.anyKeyDown) {
+            //serialData = serialReadScript.OutData;
+            //Debug.Log(serialReadScript.OutData);
+            //if (serialReadScript.OutData != "")
+            //{
             //switch (serialReadScript.OutData)
             //{
             //    case "CC":
@@ -93,7 +110,8 @@ public class StudyControllerScript : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.A))
             {
                 moveCharacter = 1;
-            }else if (Input.GetKeyDown(KeyCode.S))
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
             {
                 moveCharacter = 2;
             }
@@ -141,6 +159,7 @@ public class StudyControllerScript : MonoBehaviour {
                     case 4:
                         break;
                     case 5:
+                        ShootStartCandy(moveCharacter - 1);
                         break;
                     case 6:
                         StartCoroutine(JumpCharacter_OnTrain(moveCharacter - 1));
@@ -158,6 +177,18 @@ public class StudyControllerScript : MonoBehaviour {
             AnimationFinish();
         }
     }
+
+    #region Find Friends (1)
+    IEnumerator CharacterJump_Grass()
+    {
+        yield break;
+    }
+
+    IEnumerator FindFriends()
+    {
+        yield break;
+    }
+    #endregion
 
 
     #region Animation Run (2)
@@ -213,6 +244,11 @@ public class StudyControllerScript : MonoBehaviour {
     }
     #endregion
 
+    #region Eat Food (3)
+
+
+    #endregion
+
     #region Get Moon (4)
     //IEnumerator GetMoon()
     //{
@@ -264,6 +300,48 @@ public class StudyControllerScript : MonoBehaviour {
     //}
     #endregion
 
+    #region Make Candy House (5)
+    private void ShootStartCandy(int number)
+    {
+        characters[number].transform.GetChild(0).GetComponent<MoveCandyScript>().enabled = true;
+        characters[number].transform.GetChild(0).parent = candy_area.transform;
+        CreateCandy(number);
+    }
+
+    public void CreateCandy(int number)
+    {
+        if (candy.Count > max_candy)
+        {
+            animationEndFlag = true;
+        }
+        else
+        {
+            int rand = Random.Range(0, 4);
+
+            GameObject obj = Instantiate(candy_prefub);
+            obj.GetComponent<MoveCandyScript>().enabled = false;
+            candy.Add(obj);
+
+            obj.GetComponent<SpriteRenderer>().sprite = candy_sprite[rand];
+            obj.transform.parent = characters[number].transform;
+
+            if (rand == 2 || rand == 3)
+            {
+                obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            }
+
+            if (number == 1)
+            {
+                obj.transform.localPosition = new Vector3(0, 2f, 0);
+            }
+            else
+            {
+                obj.transform.localPosition = new Vector3(0, 3f, 0);
+            }
+        }
+        
+    }
+    #endregion
 
     #region jump train (6)
     IEnumerator JumpCharacter_OnTrain(int number)
@@ -273,13 +351,11 @@ public class StudyControllerScript : MonoBehaviour {
         characters[number].transform.parent.localPosition = new Vector3(0, 0, 0);
         yield break;
     }
-
     #endregion
 
     private void AnimationFinish()
     {
         endflag.SetActive(true);
-        LoadTitle();
     }
 
     public void LoadTitle()
