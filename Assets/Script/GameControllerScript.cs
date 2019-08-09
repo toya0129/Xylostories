@@ -12,8 +12,6 @@ public class GameControllerScript : MonoBehaviour
     [SerializeField] int mainStory = 0; 
     [SerializeField] bool[] characters = new bool[8];
     
-    private int mainCharacter = 0;
-    [SerializeField] bool[] friendsCharacter = new bool[8];
 
     void Awake()
     {
@@ -28,7 +26,7 @@ public class GameControllerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+		mainStory = 0;
     }
 
     // Update is called once per frame
@@ -42,8 +40,8 @@ public class GameControllerScript : MonoBehaviour
     {
         Debug.Log("Go Title");
         SceneManager.LoadScene("TitleScene");
-        serialReadScript.gameObject.GetComponent<SerialConnecter>().close = true;
-        Destroy(serialReadScript.gameObject);
+//        serialReadScript.gameObject.GetComponent<SerialConnecter>().close = true;
+//        Destroy(serialReadScript.gameObject);
         Destroy(this.gameObject);
     }
 
@@ -61,16 +59,17 @@ public class GameControllerScript : MonoBehaviour
 
     public void OnLoadFriendSelect()
     {
-        Debug.Log("Go Friends Select");
-        SceneManager.LoadScene("FriendSelectScene");
+        Debug.Log("Go Characters Select");
+        SceneManager.LoadScene("CharacterSelectScene");
     }
 
     public void OnLoadStudy()
     {
         Debug.Log("Go Study");
         SceneManager.LoadScene("StudyScene");
+		serialReadScript = GameObject.Find("SerialConnecter").GetComponent<SerialReadScript>();
 
-    }
+	}
     #endregion
 
 
@@ -87,19 +86,4 @@ public class GameControllerScript : MonoBehaviour
         set { characters = value; }
     }
     #endregion
-    
-    #region Getter and Setter
-    public int MainCharacter
-    {
-        get { return mainCharacter; }
-        set { mainCharacter = value; }
-    }
-
-    public bool[] FriendsCharacter
-    {
-        get { return friendsCharacter; }
-        set { friendsCharacter = value; }
-    }
-    #endregion
-
 }

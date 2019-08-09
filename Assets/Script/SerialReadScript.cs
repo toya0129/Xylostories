@@ -10,11 +10,11 @@ public class SerialReadScript : MonoBehaviour {
     public int now = 0;
 
     //public int[] serialDataIndex = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 ,0};
-    private string[] search = new string[] { "NN","CC", "DD", "EE", "FF", "GG", "AA", "BB", "C2" };
+    private string[] search = { "NN","CC", "DD", "EE", "FF", "GG", "AA", "BB", "C2" };
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+ //       DontDestroyOnLoad(this.gameObject);
     }
 
     // Use this for initialization
@@ -30,8 +30,8 @@ public class SerialReadScript : MonoBehaviour {
     private void OnDataReceived(string message)
     {
         string data = message.Replace("\r", "").Replace("\n", "");
-
-        if(data.Length < 2)
+        
+        if (data.Length < 2)
         {
             return;
         }

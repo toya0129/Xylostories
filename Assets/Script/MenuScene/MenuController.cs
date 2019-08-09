@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
 
@@ -13,7 +14,7 @@ public class MenuController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
+        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
 	}
 	
 	// Update is called once per frame
@@ -22,8 +23,11 @@ public class MenuController : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                gameControllerScript.MainStory = now_story;
-                gameControllerScript.OnLoadFriendSelect();
+				if (now_story == 2 || now_story == 5 || now_story == 6)
+				{
+					gameControllerScript.MainStory = now_story;
+					gameControllerScript.OnLoadFriendSelect();
+				}
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
@@ -49,8 +53,8 @@ public class MenuController : MonoBehaviour {
     {
         for (int i = 1; i <= waku.Length; i++)
         {
-            waku[i - 1].GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
+            waku[i - 1].GetComponent<Image>().color = new Color(0, 0, 0);
         }
-        waku[now_story - 1].GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+        waku[now_story - 1].GetComponent<Image>().color = new Color(255, 0, 0);
     }
 }

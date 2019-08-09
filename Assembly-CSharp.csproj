@@ -61,8 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\FriendSelectScene\FriendSelectCanvasScript.cs" />
-    <Compile Include="Assets\Script\FriendSelectScene\FriendSelectController.cs" />
+    <Compile Include="Assets\Script\FriendSelectScene\CharacterSelectCanvasScript.cs" />
+    <Compile Include="Assets\Script\FriendSelectScene\CharacterSelectController.cs" />
     <Compile Include="Assets\Script\GameControllerScript.cs" />
     <Compile Include="Assets\Script\MenuScene\MenuController.cs" />
     <Compile Include="Assets\Script\not_use\AnimationScene\AnimationController.cs" />
