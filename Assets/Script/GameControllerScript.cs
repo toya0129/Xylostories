@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameControllerScript : MonoBehaviour
 {
     [SerializeField]
-    SerialReadScript serialReadScript;
+    private SerialReadScript serialReadScript;
 
     //mainStory 0:none 1:find friends 2:run 3:eat food 4: get moon 5:make candy house 6:train
-    [SerializeField] int mainStory = 0; 
-    [SerializeField] bool[] characters = new bool[8];
+    [SerializeField]
+    private int mainStory = 0; 
+    [SerializeField]
+    private bool[] characters = new bool[8];
     
 
     void Awake()

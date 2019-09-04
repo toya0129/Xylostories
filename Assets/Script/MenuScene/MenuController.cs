@@ -8,7 +8,7 @@ public class MenuController : MonoBehaviour {
     private GameControllerScript gameControllerScript;
 
     [SerializeField]
-    GameObject[] waku;
+    private GameObject[] waku;
 
     private int now_story = 1;
 
