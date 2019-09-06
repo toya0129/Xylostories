@@ -85,7 +85,7 @@ public class StudyControllerScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
-       // serialReadScript = GameObject.Find("SerialConecter").GetComponent<SerialReadScript>();
+        serialReadScript = GameObject.Find("SerialConecter").GetComponent<SerialReadScript>();
         mainStory = gameControllerScript.MainStory;
         
     }
@@ -95,41 +95,41 @@ public class StudyControllerScript : MonoBehaviour {
 	{
         if (animationStartFlag)
         {
-            //serialData = serialReadScript.OutData;
-            //Debug.Log(serialReadScript.OutData);
-            //if (serialReadScript.OutData != "")
-            //{
-            //	switch (serialReadScript.OutData)
-            //	{
-            //		case "CC":
-            //			moveCharacter = 1;
-            //			break;
-            //		case "DD":
-            //			moveCharacter = 2;
-            //			break;
-            //		case "EE":
-            //			moveCharacter = 3;
-            //			break;
-            //		case "FF":
-            //			moveCharacter = 4;
-            //			break;
-            //		case "GG":
-            //			moveCharacter = 5;
-            //			break;
-            //		case "AA":
-            //			moveCharacter = 6;
-            //			break;
-            //		case "BB":
-            //			moveCharacter = 7;
-            //			break;
-            //		case "C2":
-            //			moveCharacter = 8;
-            //			break;
-            //		default:
-            //			moveCharacter = 0;
-            //			break;
-            //	}
-            //}
+            serialData = serialReadScript.OutData;
+            Debug.Log(serialReadScript.OutData);
+            if (serialReadScript.OutData != "")
+            {
+                switch (serialReadScript.OutData)
+                {
+                    case "CC":
+                        moveCharacter = 1;
+                        break;
+                    case "DD":
+                        moveCharacter = 2;
+                        break;
+                    case "EE":
+                        moveCharacter = 3;
+                        break;
+                    case "FF":
+                        moveCharacter = 4;
+                        break;
+                    case "GG":
+                        moveCharacter = 5;
+                        break;
+                    case "AA":
+                        moveCharacter = 6;
+                        break;
+                    case "BB":
+                        moveCharacter = 7;
+                        break;
+                    case "C2":
+                        moveCharacter = 8;
+                        break;
+                    default:
+                        moveCharacter = 0;
+                        break;
+                }
+            }
             if (Input.anyKeyDown)
             {
                 if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -194,7 +194,7 @@ public class StudyControllerScript : MonoBehaviour {
                     default:
                         break;
                 }
-                //			serialReadScript.OutData = "";
+                serialReadScript.OutData = "";
                 moveCharacter = 0;
             }
         }
@@ -382,6 +382,10 @@ public class StudyControllerScript : MonoBehaviour {
         //LoadTitle();
     }
 
+    public void LoadMenu()
+    {
+        gameControllerScript.OnLoadMenuScene();
+    }
     public void LoadTitle()
     {
         gameControllerScript.OnLoadTitle();

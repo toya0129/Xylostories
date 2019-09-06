@@ -79,7 +79,7 @@ public class SerialReadScript : MonoBehaviour {
                     break;
             }
 
-            //jDebug.Log(outData);
+            //Debug.Log(outData);
             now = 0;
 
         }

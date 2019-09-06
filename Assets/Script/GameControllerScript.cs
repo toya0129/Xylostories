@@ -18,23 +18,29 @@ public class GameControllerScript : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-
-        for (int i = 0; i < 8; i++)
-        {
-            //characters[i] = false;
-        }
+        Initialized();
     }
 
     // Use this for initialization
     void Start()
     {
-		mainStory = 0;
+		
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    private void Initialized()
+    {
+        mainStory = 0;
+
+        for (int i = 0; i < 8; i++)
+        {
+            characters[i] = false;
+        }
     }
 
     #region Scene Load
@@ -56,6 +62,7 @@ public class GameControllerScript : MonoBehaviour
     public void OnLoadMenuScene()
     {
         Debug.Log("Go Menu Scene");
+        Initialized();
         SceneManager.LoadScene("MenuScene");
     }
 

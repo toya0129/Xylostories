@@ -23,7 +23,7 @@ public class MenuController : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-				if (now_story == 2 || now_story == 5 || now_story == 6)
+				if (now_story == 2 || now_story == 5 || now_story == 5 || now_story == 6)
 				{
 					gameControllerScript.MainStory = now_story;
 					gameControllerScript.OnLoadFriendSelect();
