@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using XyloStoriesSocket;
 
 public class GameControllerScript : MonoBehaviour
 {
@@ -13,12 +15,15 @@ public class GameControllerScript : MonoBehaviour
     private int mainStory = 0; 
     [SerializeField]
     private bool[] characters = new bool[8];
+
+    public bool server_Close = false;
     
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
         Initialized();
+        Socket_Server.ServerStart_local();
     }
 
     // Use this for initialization
@@ -30,7 +35,11 @@ public class GameControllerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (server_Close)
+        {
+            server_Close = false;
+            Socket_Server.ServerClose();
+        }
     }
 
     private void Initialized()
@@ -48,8 +57,9 @@ public class GameControllerScript : MonoBehaviour
     {
         Debug.Log("Go Title");
         SceneManager.LoadScene("TitleScene");
-//        serialReadScript.gameObject.GetComponent<SerialConnecter>().close = true;
-//        Destroy(serialReadScript.gameObject);
+        Socket_Server.ServerClose();
+        //        serialReadScript.gameObject.GetComponent<SerialConnecter>().close = true;
+        //        Destroy(serialReadScript.gameObject);
         Destroy(this.gameObject);
     }
 
@@ -76,7 +86,7 @@ public class GameControllerScript : MonoBehaviour
     {
         Debug.Log("Go Study");
         SceneManager.LoadScene("StudyScene");
-		serialReadScript = GameObject.Find("SerialConnecter").GetComponent<SerialReadScript>();
+		//serialReadScript = GameObject.Find("SerialConnecter").GetComponent<SerialReadScript>();
 
 	}
     #endregion
