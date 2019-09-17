@@ -33,7 +33,7 @@ public class AnimationScript : MonoBehaviour {
     {
         while (moveCount < rabbitMoveEnd)
         {
-            if (trunFlagY == true)
+            if (trunFlagY)
             {
                 if (character.transform.localPosition.x > -20)
                 {
@@ -45,7 +45,7 @@ public class AnimationScript : MonoBehaviour {
                     trunFlagY = false;
                 }
             }
-            else if (trunFlagY == false)
+            else if (!trunFlagY)
             {
                 if (character.transform.localPosition.x < 20)
                 {
@@ -69,7 +69,7 @@ public class AnimationScript : MonoBehaviour {
     {
         while (true)
         {
-            if (trunFlagY == true)
+            if (trunFlagY)
             {
                 if (roteY < 180)
                 {
@@ -81,7 +81,7 @@ public class AnimationScript : MonoBehaviour {
                     break;
                 }
             }
-            else if (trunFlagY == false)
+            else if (!trunFlagY)
             {
                 if (roteY > 0)
                 {
@@ -110,7 +110,6 @@ public class AnimationScript : MonoBehaviour {
         StopAllCoroutines();
         Debug.Log("Rabbit Animation End");
         gameControllerScript.OnLoadMenuScene();
-        //gameControllerScript.OnLoadStudy();
         yield break;
     }
 

@@ -19,6 +19,7 @@ public class MenuController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
         if (Input.anyKeyDown)
         {
             if (Input.GetKeyDown(KeyCode.Return))
@@ -47,7 +48,19 @@ public class MenuController : MonoBehaviour {
             }
             setWaku_UI();
         }
-	}
+#endif
+    }
+
+    public void SelectStory(int num)
+    {
+        if (now_story == num)
+        {
+            gameControllerScript.OnLoadFriendSelect();
+            return;
+        }
+        now_story = num;
+        setWaku_UI();
+    }
 
     private void setWaku_UI()
     {

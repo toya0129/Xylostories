@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
+using XyloStoriesSocket;
 
 public class StudyControllerScript : MonoBehaviour {
 
@@ -37,7 +38,7 @@ public class StudyControllerScript : MonoBehaviour {
     private bool animationStartFlag = false;
 	private bool animationEndFlag = false;
 
-    private string serialData = "";
+    private string read_data = "";
 
 	#region Find Friend (1)
 
@@ -85,7 +86,6 @@ public class StudyControllerScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
-        serialReadScript = GameObject.Find("SerialConecter").GetComponent<SerialReadScript>();
         mainStory = gameControllerScript.MainStory;
         
     }
@@ -95,108 +95,9 @@ public class StudyControllerScript : MonoBehaviour {
 	{
         if (animationStartFlag)
         {
-            serialData = serialReadScript.OutData;
-            Debug.Log(serialReadScript.OutData);
-            if (serialReadScript.OutData != "")
-            {
-                switch (serialReadScript.OutData)
-                {
-                    case "CC":
-                        moveCharacter = 1;
-                        break;
-                    case "DD":
-                        moveCharacter = 2;
-                        break;
-                    case "EE":
-                        moveCharacter = 3;
-                        break;
-                    case "FF":
-                        moveCharacter = 4;
-                        break;
-                    case "GG":
-                        moveCharacter = 5;
-                        break;
-                    case "AA":
-                        moveCharacter = 6;
-                        break;
-                    case "BB":
-                        moveCharacter = 7;
-                        break;
-                    case "C2":
-                        moveCharacter = 8;
-                        break;
-                    default:
-                        moveCharacter = 0;
-                        break;
-                }
-            }
-            if (Input.anyKeyDown)
-            {
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    moveCharacter = 1;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    moveCharacter = 2;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha3))
-                {
-                    moveCharacter = 3;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha4))
-                {
-                    moveCharacter = 4;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha5))
-                {
-                    moveCharacter = 5;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha6))
-                {
-                    moveCharacter = 6;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha7))
-                {
-                    moveCharacter = 7;
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha8))
-                {
-                    moveCharacter = 8;
-                }
-                else
-                {
-                    moveCharacter = 0;
-                }
-            }
-
-            if (moveCharacter != 0)
-            {
-                switch (mainStory)
-                {
-                    case 1:
-
-                        break;
-                    case 2:
-                        StartCoroutine(RunningAnimation(moveCharacter - 1, track[moveCharacter - 1]));
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        StartCoroutine(PullRope(moveCharacter - 1));
-                        break;
-                    case 5:
-                        StartCoroutine(ShootStartCandy(moveCharacter - 1));
-                        break;
-                    case 6:
-                        StartCoroutine(JumpCharacter_OnTrain(moveCharacter - 1));
-                        break;
-                    default:
-                        break;
-                }
-                serialReadScript.OutData = "";
-                moveCharacter = 0;
-            }
+            InputData_Sensor();
+            InputData_Key();
+            AnimationStart();
         }
 
 		if (animationEndFlag)
@@ -206,6 +107,124 @@ public class StudyControllerScript : MonoBehaviour {
 			AnimationFinish();
 		}
 	}
+
+    private void InputData_Sensor()
+    {
+        read_data = Socket_Server.Read_Data;
+        if (read_data != "")
+        {
+            switch (read_data)
+            {
+                case "1":
+                    moveCharacter = 1;
+                    break;
+                case "2":
+                    moveCharacter = 2;
+                    break;
+                case "3":
+                    moveCharacter = 3;
+                    break;
+                case "4":
+                    moveCharacter = 4;
+                    break;
+                case "5":
+                    moveCharacter = 5;
+                    break;
+                case "6":
+                    moveCharacter = 6;
+                    break;
+                case "7":
+                    moveCharacter = 7;
+                    break;
+                case "8":
+                    moveCharacter = 8;
+                    break;
+                default:
+                    moveCharacter = 0;
+                    break;
+            }
+        }
+    }
+
+    private void InputData_Key()
+    {
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                moveCharacter = 1;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                moveCharacter = 2;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                moveCharacter = 3;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                moveCharacter = 4;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                moveCharacter = 5;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                moveCharacter = 6;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                moveCharacter = 7;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                moveCharacter = 8;
+            }
+            else
+            {
+                moveCharacter = 0;
+            }
+        }
+    }
+
+    private void InputData_Toutch()
+    {
+
+    }
+
+    private void AnimationStart()
+    {
+        if (moveCharacter != 0)
+        {
+            switch (mainStory)
+            {
+                case 1:
+
+                    break;
+                case 2:
+                    StartCoroutine(RunningAnimation(moveCharacter - 1, track[moveCharacter - 1]));
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    StartCoroutine(PullRope(moveCharacter - 1));
+                    break;
+                case 5:
+                    StartCoroutine(ShootStartCandy(moveCharacter - 1));
+                    break;
+                case 6:
+                    StartCoroutine(JumpCharacter_OnTrain(moveCharacter - 1));
+                    break;
+                default:
+                    break;
+            }
+            //serialReadScript.OutData = "";
+            moveCharacter = 0;
+        }
+    }
 
     #region Find Friends (1)
     IEnumerator CharacterJump_Grass()
@@ -231,19 +250,19 @@ public class StudyControllerScript : MonoBehaviour {
                 switch (trackNum)
                 {
                     case 0:
-                        characters[number].transform.localPosition -= new Vector3(0.006f, 0.2f, 0.0f);
+                        characters[number].transform.localPosition -= new Vector3(0.001f, 0.1f, 0.0f);
                         break;
                     case 1:
-                        characters[number].transform.localPosition -= new Vector3(0.05f, 0.2f, 0.0f);
+                        characters[number].transform.localPosition -= new Vector3(0.02f, 0.1f, 0.0f);
                         break;
                     case 2:
-                        characters[number].transform.localPosition -= new Vector3(-0.05f, 0.2f, 0.0f);
+                        characters[number].transform.localPosition -= new Vector3(-0.02f, 0.1f, 0.0f);
                         break;
                     case 3:
-                        characters[number].transform.localPosition -= new Vector3(0.001f, 0.2f, 0.0f);
+                        characters[number].transform.localPosition -= new Vector3(0.001f, 0.1f, 0.0f);
                         break;
                 }
-                characters[number].transform.localScale += new Vector3(0.01f, 0.01f, 0);
+                characters[number].transform.localScale += new Vector3(0.005f, 0.005f, 0);
             }
             else
             {
@@ -254,12 +273,6 @@ public class StudyControllerScript : MonoBehaviour {
             yield return new WaitForSeconds(0.01f);
             animationCount--;
         }
-
-        //if ((serialData != "") && (serialData == serialReadScript.OutData))
-        //{
-        //    yield return StartCoroutine(RunningAnimation(number, trackNum));
-        //}
-
         yield break;
     }
 
@@ -330,36 +343,32 @@ public class StudyControllerScript : MonoBehaviour {
         //if (candy.Count > max_candy)
         //{
         //    animationEndFlag = true;
+        //    return;
         //}
-        //else
-        //{
-            int rand = Random.Range(0, 4);
+        int rand = Random.Range(0, 4);
 
-            GameObject obj = Instantiate(candy_prefub);
-            obj.GetComponent<MoveCandyScript>().enabled = false;
-            candy.Add(obj);
+        GameObject obj = Instantiate(candy_prefub);
+        obj.GetComponent<MoveCandyScript>().enabled = false;
+        candy.Add(obj);
 
-            obj.GetComponent<SpriteRenderer>().sprite = candy_sprite[rand];
-            obj.transform.parent = characters[number].transform;
+        obj.GetComponent<SpriteRenderer>().sprite = candy_sprite[rand];
+        obj.transform.parent = characters[number].transform;
 
-            if (rand == 2 || rand == 3)
-            {
-                obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-            }
+        if (rand == 2 || rand == 3)
+        {
+            obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        }
 
-            if (number == 1)
-            {
-                obj.transform.localPosition = new Vector3(0, 2f, 0);
-            }
-            else
-            {
-                obj.transform.localPosition = new Vector3(0, 3f, 0);
-            }
+        if (number == 1)
+        {
+            obj.transform.localPosition = new Vector3(0, 2f, 0);
+        }
+        else
+        {
+            obj.transform.localPosition = new Vector3(0, 3f, 0);
+        }
 
-		obj.GetComponent<SpriteRenderer>().color = xylophone_color[number];
-
-        //}
-        
+        obj.GetComponent<SpriteRenderer>().color = xylophone_color[number];
     }
     #endregion
 

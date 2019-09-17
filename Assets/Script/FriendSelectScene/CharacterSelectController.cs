@@ -3,31 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class CharacterSelectController : MonoBehaviour {
+public class CharacterSelectController : MonoBehaviour
+{
 
     [SerializeField]
-    GameObject canvasScript;
+    private GameObject canvasScript;
     private GameObject gameController;
     private int character_num = 0;
     private List<int> character = new List<int>();
     private bool fTrigger = false;
 
+    [SerializeField]
+    private GameObject comment;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         gameController = GameObject.Find("GameController");
+        comment.SetActive(false);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
+#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (character.Count != 0)
-            {
-                for (int j = 0; j < character.Count;j++){
-                    gameController.GetComponent<GameControllerScript>().Characters[character[j] - 1] = true;
-                }
-                gameController.GetComponent<GameControllerScript>().OnLoadStudy();
-            }
+            NextSceneButton();
         }
 
         if (Input.anyKeyDown)
@@ -66,29 +68,48 @@ public class CharacterSelectController : MonoBehaviour {
                             character_num = 0;
                             break;
                     }
-
-                    if ((character_num != 0))
+                    if (character_num != 0)
                     {
-                        canvasScript.GetComponent<CharacterSelectCanvasScript>().SetCharacter(character_num);
-
-                        for (int i = 0; i < character.Count; i++)
-                        {
-                            if (character[i] == character_num)
-                            {
-                                character.RemoveAt(i);
-                                fTrigger = true;
-                            }
-                        }
-
-                        if (fTrigger != true)
-                        {
-                            character.Add(character_num);
-                        }
+                        CharacterSelect(character_num);
                     }
-                    character_num = 0;
-                    fTrigger = false;
                 }
             }
+        }
+#endif
+    }
+
+    public void CharacterSelect(int number)
+    {
+        canvasScript.GetComponent<CharacterSelectCanvasScript>().SetCharacter(number);
+
+        for (int i = 0; i < character.Count; i++)
+        {
+            if (character[i] == number)
+            {
+                character.RemoveAt(i);
+                fTrigger = true;
+            }
+        }
+
+        if (fTrigger != true)
+        {
+            character.Add(number);
+        }
+    }
+
+    public void NextSceneButton()
+    {
+        if (character.Count != 0)
+        {
+            for (int j = 0; j < character.Count; j++)
+            {
+                gameController.GetComponent<GameControllerScript>().Characters[character[j] - 1] = true;
+            }
+            gameController.GetComponent<GameControllerScript>().OnLoadStudy();
+        }
+        else
+        {
+            comment.SetActive(true);
         }
     }
 }

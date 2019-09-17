@@ -75,13 +75,15 @@
     <Compile Include="Assets\Script\not_use\SelectScene\FlashScript.cs" />
     <Compile Include="Assets\Script\not_use\SelectScene\SelectGameControllerScript.cs" />
     <Compile Include="Assets\Script\not_use\SelectScene\SelectMoveControllerScript.cs" />
-    <Compile Include="Assets\Script\SerialConnecter.cs" />
-    <Compile Include="Assets\Script\SerialReadScript.cs" />
+    <Compile Include="Assets\Script\Serial_communication\SerialConnecter.cs" />
+    <Compile Include="Assets\Script\Serial_communication\SerialReadScript.cs" />
+    <Compile Include="Assets\Script\Serial_communication\Socket_Server.cs" />
     <Compile Include="Assets\Script\StartScene\AnimationScript.cs" />
     <Compile Include="Assets\Script\StudyScene\MoveCandyScript.cs" />
     <Compile Include="Assets\Script\StudyScene\old\CharacterMoveControllerScript.cs" />
     <Compile Include="Assets\Script\StudyScene\StudyControllerScript.cs" />
     <Compile Include="Assets\Script\StudyScene\StudySceneCanvasController.cs" />
+    <Compile Include="Assets\Script\TitleScene\TitleController.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/toya/Project/XyloStories/Xylostories/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
