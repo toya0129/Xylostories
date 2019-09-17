@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,6 @@ namespace XyloStoriesSocket
 {
     class Socket_Server
     {
-
         private static string localhost_ip = "127.0.0.1";
         private static int local_port = 9999;
 
@@ -121,3 +121,5 @@ namespace XyloStoriesSocket
         #endregion
     }
 }
+
+#endif

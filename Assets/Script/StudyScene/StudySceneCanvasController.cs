@@ -150,6 +150,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                     {
                         int num = j % 4;
                         trackNum[i] = num;
+                        characters[i].GetComponent<SpriteRenderer>().sortingOrder = 5;
                         characters[i].transform.localPosition = new Vector3(startPosX[num], startPosY, 0.0f);
                         j++;
                     }
@@ -313,22 +314,15 @@ public class StudySceneCanvasController : MonoBehaviour {
             if (mountains.transform.localPosition.x > 150)
             {
                 mountains.transform.localPosition = new Vector3(-120, 0, 0);
-                mountainAnimationEnd--;
+                //mountainAnimationEnd--;
             }
             else
             {
                 mountains.transform.localPosition += new Vector3(2, 0, 0);
             }
-
-
-            //if(mountainAnimationEnd == 0)
-            //{
-            //    studyControllerScript.AnimationEndFlag = true;
-            //    yield break;
-            //}
-
             yield return new WaitForSeconds(0.1f);
         }
+        //studyControllerScript.AnimationEndFlag = true;
         yield break;
     }
 	#endregion

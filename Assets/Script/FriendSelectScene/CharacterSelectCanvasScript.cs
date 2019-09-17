@@ -5,17 +5,16 @@ using UnityEngine;
 public class CharacterSelectCanvasScript : MonoBehaviour {
 
     [SerializeField]
-    List<GameObject> xylophone = new List<GameObject>();
+    private List<GameObject> xylophone = new List<GameObject>();
     [SerializeField]
-    List<GameObject> character = new List<GameObject>();
+    private List<GameObject> character = new List<GameObject>();
+    [SerializeField]
+    private GameObject click_area;
+
 
     // Use this for initialization
     void Start () {
-        for (int i = 0; i < xylophone.Count; i++)
-        {
-            xylophone[i].SetActive(false);
-            character[i].SetActive(false);
-        }
+        Initialized();
     }
 	
 	// Update is called once per frame
@@ -23,9 +22,30 @@ public class CharacterSelectCanvasScript : MonoBehaviour {
 		
 	}
 
+    private void Initialized()
+    {
+        click_area.SetActive(true);
+        for (int i = 0; i < xylophone.Count; i++)
+        {
+            xylophone[i].SetActive(true);
+            xylophone[i].GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 100);
+            character[i].SetActive(true);
+            character[i].GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 100);
+        }
+    }
+
     public void SetCharacter(int number)
     {
-        xylophone[number - 1].SetActive(!xylophone[number - 1].activeSelf);
-        character[number - 1].SetActive(!character[number - 1].activeSelf);
+        byte alpha = 0;
+        if (xylophone[number - 1].GetComponent<SpriteRenderer>().color.a == 1)
+        {
+            alpha = 100;
+        }
+        else
+        {
+            alpha = 255;
+        }
+        xylophone[number - 1].GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, alpha);
+        character[number - 1].GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, alpha);
     }
 }
