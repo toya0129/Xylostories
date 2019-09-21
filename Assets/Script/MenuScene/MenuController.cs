@@ -10,7 +10,7 @@ public class MenuController : MonoBehaviour {
     [SerializeField]
     private GameObject[] waku;
 
-    private int now_story = 1;
+    private int now_story = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -24,11 +24,11 @@ public class MenuController : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-				if (now_story == 2 || now_story == 5 || now_story == 5 || now_story == 6)
-				{
-					gameControllerScript.MainStory = now_story;
-					gameControllerScript.OnLoadFriendSelect();
-				}
+                if (now_story != 1)
+                {
+                    gameControllerScript.MainStory = now_story;
+                    gameControllerScript.OnLoadFriendSelect();
+                }
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
@@ -55,8 +55,12 @@ public class MenuController : MonoBehaviour {
     {
         if (now_story == num)
         {
-            gameControllerScript.OnLoadFriendSelect();
-            return;
+            if (now_story != 1)
+            {
+                gameControllerScript.MainStory = now_story;
+                gameControllerScript.OnLoadFriendSelect();
+                return;
+            }
         }
         now_story = num;
         setWaku_UI();

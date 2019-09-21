@@ -20,6 +20,7 @@ public class MoveCandyScript : MonoBehaviour {
 
         if (this.gameObject.transform.localPosition == goal_pos)
         {
+            this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 4;
             this.gameObject.GetComponent<MoveCandyScript>().enabled = false;
         }
     }

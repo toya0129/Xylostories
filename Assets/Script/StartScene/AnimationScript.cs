@@ -16,7 +16,7 @@ public class AnimationScript : MonoBehaviour {
     private float roteZ = 0.0f;
     private int moveCount = 0;
 
-    private int rabbitMoveEnd = 540; // 50:-15移動
+    private int rabbitMoveEnd = 270; // 50:-15移動
 
     // Use this for initialization
     void Start () {

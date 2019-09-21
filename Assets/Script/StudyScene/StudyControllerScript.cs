@@ -9,14 +9,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading;
+
+#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
 using XyloStoriesSocket;
+#endif
 
 public class StudyControllerScript : MonoBehaviour {
 
     private GameControllerScript gameControllerScript;
-    private StudySceneCanvasController studySceneCanvasController;
-    private SerialReadScript serialReadScript;
+    [SerializeField]
+    StudySceneCanvasController studySceneCanvasController;
 
     private int mainStory;
     public int moveCharacter = 0;
@@ -52,10 +54,9 @@ public class StudyControllerScript : MonoBehaviour {
     #endregion
 
     #region eat food (3) many character
-    [SerializeField]
-    GameObject food_prefub;
-	[SerializeField]
-	Sprite[] food_sprite;
+    private int[] eat_count = { 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int eat_end_flag = 10;
+    private bool allow = true;
     #endregion
 
     #region get moon (4) one character
@@ -95,8 +96,10 @@ public class StudyControllerScript : MonoBehaviour {
 	{
         if (animationStartFlag)
         {
+#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
             InputData_Sensor();
             InputData_Key();
+#endif
             AnimationStart();
         }
 
@@ -104,10 +107,11 @@ public class StudyControllerScript : MonoBehaviour {
 		{
             animationStartFlag = false;
             animationEndFlag = false;
-			AnimationFinish();
+            StartCoroutine(AnimationFinish());
 		}
 	}
 
+#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
     private void InputData_Sensor()
     {
         read_data = Socket_Server.Read_Data;
@@ -188,41 +192,46 @@ public class StudyControllerScript : MonoBehaviour {
             }
         }
     }
+#endif
 
-    private void InputData_Toutch()
+    public void InputData_Toutch(int num)
     {
-
+        moveCharacter = num;
+        AnimationStart();
     }
 
     private void AnimationStart()
     {
         if (moveCharacter != 0)
         {
-            switch (mainStory)
+            if (gameControllerScript.Characters[moveCharacter - 1])
             {
-                case 1:
+                StartCoroutine(studySceneCanvasController.Xylophone_OnColor(moveCharacter - 1));
+                switch (mainStory)
+                {
+                    case 1:
 
-                    break;
-                case 2:
-                    StartCoroutine(RunningAnimation(moveCharacter - 1, track[moveCharacter - 1]));
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-                    StartCoroutine(PullRope(moveCharacter - 1));
-                    break;
-                case 5:
-                    StartCoroutine(ShootStartCandy(moveCharacter - 1));
-                    break;
-                case 6:
-                    StartCoroutine(JumpCharacter_OnTrain(moveCharacter - 1));
-                    break;
-                default:
-                    break;
+                        break;
+                    case 2:
+                        StartCoroutine(RunningAnimation(moveCharacter - 1, track[moveCharacter - 1]));
+                        break;
+                    case 3:
+                        StartCoroutine(EatFood(moveCharacter - 1));
+                        break;
+                    case 4:
+                        StartCoroutine(PullRope(moveCharacter - 1));
+                        break;
+                    case 5:
+                        StartCoroutine(ShootStartCandy(moveCharacter - 1));
+                        break;
+                    case 6:
+                        StartCoroutine(JumpCharacter_OnTrain(moveCharacter - 1));
+                        break;
+                    default:
+                        break;
+                }
+                moveCharacter = 0;
             }
-            //serialReadScript.OutData = "";
-            moveCharacter = 0;
         }
     }
 
@@ -280,25 +289,35 @@ public class StudyControllerScript : MonoBehaviour {
     {
         set { track = value; }
     }
-	#endregion
+    #endregion
 
-	#region Eat Food (3)
-	public void CreateFood(int number)
-	{
-		int rand = Random.Range(0, 3);
-		GameObject obj = Instantiate(food_prefub);
-		obj.GetComponent<SpriteRenderer>().sprite = food_sprite[rand];
-		obj.transform.parent = characters[number].transform;
+    #region Eat Food (3)
+    IEnumerator EatFood(int number)
+    {
+        while (characters[number].transform.localScale.x <= 3)
+        {
+            characters[number].transform.localScale += new Vector3(0.1f, 0.01f, 0.1f);
+        }
 
-		if (number == 1 || number == 7)
-		{
-			obj.transform.localPosition = new Vector3(0, 1.5f, 0);
-		}
-		else
-		{
-			obj.transform.localPosition = new Vector3(0, 3f, 0);
-		}
-	}
+        yield return new WaitForSeconds(0.2f);
+
+        while (characters[number].transform.localScale.x >= 2)
+        {
+            characters[number].transform.localScale -= new Vector3(0.1f, 0.01f, 0.1f);
+        }
+        eat_count[number]++;
+
+        if(eat_count[number] == eat_end_flag)
+        {
+            eat_count[number] = 0;
+            characters[number].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            Destroy(characters[number].transform.GetChild(0).gameObject);
+            StartCoroutine(studySceneCanvasController.FallFood(number, allow));
+        }
+        allow = !allow;
+        yield break;
+    }
 	#endregion
 
 	#region Get Moon (4)
@@ -383,12 +402,13 @@ public class StudyControllerScript : MonoBehaviour {
     #endregion
 
     #region Animation End
-    private void AnimationFinish()
+    private IEnumerator AnimationFinish()
     {
         animationStartFlag = false;
         endflag.SetActive(true);
-        //Thread.Sleep(5000); // 5s delay
-        //LoadTitle();
+        yield return new WaitForSeconds(1f);
+        LoadTitle();
+        yield break;
     }
 
     public void LoadMenu()
