@@ -49,8 +49,8 @@ namespace XyloStoriesSocket
             NetworkStream stream = client.GetStream();
             server_Reader = new StreamReader(stream, Encoding.UTF8);
 
-            GameObject obj = GameObject.Find("GameController");
-            obj.GetComponent<GameControllerScript>().InfoStart(true);
+            //GameObject obj = GameObject.Find("GameController");
+            //obj.GetComponent<GameControllerScript>().InfoStart(true);
 
             while (client.Connected)
             {
@@ -67,7 +67,7 @@ namespace XyloStoriesSocket
                     break;
                 }
             }
-            obj.GetComponent<GameControllerScript>().InfoStart(false);
+            //obj.GetComponent<GameControllerScript>().InfoStart(false);
         }
 
         public static void ServerClose()

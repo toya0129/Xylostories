@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 3509561}
   - component: {fileID: 3509560}
   - component: {fileID: 3509562}
+  - component: {fileID: 3509563}
   m_Layer: 5
   m_Name: Rabbit
   m_TagString: Untagged
@@ -220,6 +221,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3509563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 3509558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1774430bc984ffa8cc07d7d3c281b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  this_character_number: 1
 --- !u!1 &9695317
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,6 +584,7 @@ GameObject:
   - component: {fileID: 67806664}
   - component: {fileID: 67806663}
   - component: {fileID: 67806665}
+  - component: {fileID: 67806666}
   m_Layer: 5
   m_Name: Tiger
   m_TagString: Untagged
@@ -667,6 +681,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &67806666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 67806661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1774430bc984ffa8cc07d7d3c281b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  this_character_number: 2
 --- !u!1 &69696767
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +746,7 @@ GameObject:
   - component: {fileID: 81795940}
   - component: {fileID: 81795939}
   - component: {fileID: 81795941}
+  - component: {fileID: 81795942}
   m_Layer: 5
   m_Name: Girafte
   m_TagString: Untagged
@@ -816,6 +843,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &81795942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 81795937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1774430bc984ffa8cc07d7d3c281b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  this_character_number: 5
 --- !u!1 &94313596
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,6 +866,7 @@ GameObject:
   - component: {fileID: 94313599}
   - component: {fileID: 94313598}
   - component: {fileID: 94313600}
+  - component: {fileID: 94313601}
   m_Layer: 5
   m_Name: Fox
   m_TagString: Untagged
@@ -923,6 +963,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &94313601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 94313596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1774430bc984ffa8cc07d7d3c281b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  this_character_number: 3
 --- !u!1 &103301395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,6 +1293,12 @@ MonoBehaviour:
   rope_sprite_middle: {fileID: 21300000, guid: 149c8efb43ad64a0594538c4e63fd95a, type: 3}
   get_moon_background: {fileID: 208394303}
   house: {fileID: 9695317}
+  candy_prefub: {fileID: 1736458829454630, guid: 8966cc58a36104b7fb9fe0104ee21963,
+    type: 2}
+  candy_sprite:
+  - {fileID: 21300000, guid: 034b417ed8d514818b07099e51f73b71, type: 3}
+  - {fileID: 21300000, guid: 1d9de3b47397f40bb95d1cbbc9b4fac1, type: 3}
+  candy: []
   trainField: {fileID: 390080594}
   train:
   - {fileID: 398353385}
@@ -2895,20 +2953,8 @@ MonoBehaviour:
   - {fileID: 81795937}
   - {fileID: 1765610791}
   - {fileID: 1371598984}
-  track: 0000000000000000000000000000000000000000000000000000000000000000
   endflag: {fileID: 1651157066}
-  moon: {fileID: 1965236357}
   rope: {fileID: 2123859763}
-  rope_sprite_last: {fileID: 21300000, guid: aac3cdc0651c2481cace487a5473829a, type: 3}
-  candy_area: {fileID: 201249620}
-  candy: []
-  candy_sprite:
-  - {fileID: 21300000, guid: 3b681be29452940fd8989a38737b2b8e, type: 3}
-  - {fileID: 21300000, guid: 104dd39c353df4ca9b5fbe8c7b396ef5, type: 3}
-  - {fileID: 21300000, guid: 15286d572392149c8afa8f00ad6e24c9, type: 3}
-  - {fileID: 21300000, guid: 98f87a70e466e4e12bd79ce265682bc3, type: 3}
-  candy_prefub: {fileID: 1736458829454630, guid: 8966cc58a36104b7fb9fe0104ee21963,
-    type: 2}
 --- !u!4 &721387585
 Transform:
   m_ObjectHideFlags: 0
@@ -3245,6 +3291,7 @@ GameObject:
   - component: {fileID: 1008061394}
   - component: {fileID: 1008061393}
   - component: {fileID: 1008061395}
+  - component: {fileID: 1008061396}
   m_Layer: 5
   m_Name: Bear
   m_TagString: Untagged
@@ -3341,6 +3388,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1008061396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1008061391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1774430bc984ffa8cc07d7d3c281b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  this_character_number: 0
 --- !u!1 &1013307651
 GameObject:
   m_ObjectHideFlags: 0
@@ -4467,6 +4526,7 @@ GameObject:
   - component: {fileID: 1371598987}
   - component: {fileID: 1371598986}
   - component: {fileID: 1371598988}
+  - component: {fileID: 1371598989}
   m_Layer: 5
   m_Name: BearSmall
   m_TagString: Untagged
@@ -4563,6 +4623,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1371598989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1371598984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1774430bc984ffa8cc07d7d3c281b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  this_character_number: 7
 --- !u!1 &1393422885
 GameObject:
   m_ObjectHideFlags: 0
@@ -4574,6 +4646,7 @@ GameObject:
   - component: {fileID: 1393422888}
   - component: {fileID: 1393422887}
   - component: {fileID: 1393422889}
+  - component: {fileID: 1393422890}
   m_Layer: 5
   m_Name: Pig
   m_TagString: Untagged
@@ -4670,6 +4743,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1393422890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1393422885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1774430bc984ffa8cc07d7d3c281b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  this_character_number: 4
 --- !u!1 &1403458076
 GameObject:
   m_ObjectHideFlags: 0
@@ -4777,7 +4862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8a63f9b5e8148569b8c1325180f0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainStory: 3
+  mainStory: 6
   characters: 0101010101010101
   xylophone_sound:
   - {fileID: 8300000, guid: ecc15e16e85b1479ebc3f60a2f0b6229, type: 3}
@@ -5858,6 +5943,7 @@ GameObject:
   - component: {fileID: 1765610794}
   - component: {fileID: 1765610793}
   - component: {fileID: 1765610795}
+  - component: {fileID: 1765610796}
   m_Layer: 5
   m_Name: Monkey
   m_TagString: Untagged
@@ -5954,6 +6040,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1765610796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765610791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d1774430bc984ffa8cc07d7d3c281b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  this_character_number: 6
 --- !u!1 &1768601833
 GameObject:
   m_ObjectHideFlags: 0
@@ -7089,61 +7187,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2070212771
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2070212774}
-  - component: {fileID: 2070212773}
-  - component: {fileID: 2070212772}
-  m_Layer: 0
-  m_Name: SerialConecter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2070212772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2070212771}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f032cd20712884181abf8ca66814a3ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serialConnecter: {fileID: 2070212773}
-  now: -1
---- !u!114 &2070212773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2070212771}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91cbaeed93be0478d813af31398aa24c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  close: 0
---- !u!4 &2070212774
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2070212771}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.5, y: 2.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2076197408
 GameObject:
   m_ObjectHideFlags: 0

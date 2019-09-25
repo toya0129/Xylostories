@@ -25,18 +25,6 @@ public class StudyControllerScript : MonoBehaviour {
     [SerializeField]
     private GameObject[] characters;
 
-    private Color32[] xylophone_color =
-    {
-        new Color32 (255,0,0,255),
-        new Color32 (255,155,0,255),
-        new Color32 (255,255,0,255),
-        new Color32 (0,255,0,255),
-        new Color32 (0,255,255,255),
-        new Color32 (0,0,255,255),
-        new Color32 (128,0,128,255),
-        new Color32 (255,0,0,255)
-    };
-
     private bool animationStartFlag = false;
 	private bool animationEndFlag = false;
 
@@ -47,48 +35,31 @@ public class StudyControllerScript : MonoBehaviour {
 	#endregion
 
 	#region Run (2) many character
-	public int[] track = { 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int runAnimationEnd = 10;
     [SerializeField]
     GameObject endflag;
     #endregion
 
     #region eat food (3) many character
-    private int[] eat_count = { 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int eat_end_flag = 10;
-    private bool allow = true;
+
     #endregion
 
     #region get moon (4) one character
     [SerializeField]
-    GameObject moon;
-    [SerializeField]
     GameObject rope;
-    [SerializeField]
-    Sprite rope_sprite_last;
     #endregion
 
     #region make candy house (5)
-    [SerializeField]
-    GameObject candy_area;
-    [SerializeField]
-    List<GameObject> candy = new List<GameObject>(); 
-    [SerializeField]
-    Sprite[] candy_sprite;
-    [SerializeField]
-    GameObject candy_prefub;
-    private int max_candy = 20;
+    
     #endregion
 
     #region jump train (6)
-    private int trainAnimationEnd = 1;
+
     #endregion
 
     // Use this for initialization
     void Start () {
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
-        mainStory = gameControllerScript.MainStory;
-        
+        mainStory = gameControllerScript.MainStory;       
     }
 
 	// Update is called once per frame
@@ -213,19 +184,19 @@ public class StudyControllerScript : MonoBehaviour {
 
                         break;
                     case 2:
-                        StartCoroutine(RunningAnimation(moveCharacter - 1, track[moveCharacter - 1]));
+                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().RunningAnimation());
                         break;
                     case 3:
-                        StartCoroutine(EatFood(moveCharacter - 1));
+                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().EatFood());
                         break;
                     case 4:
-                        StartCoroutine(PullRope(moveCharacter - 1));
+                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().PullRope(rope));
                         break;
                     case 5:
-                        StartCoroutine(ShootStartCandy(moveCharacter - 1));
+                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().ShootStartCandy());
                         break;
                     case 6:
-                        StartCoroutine(JumpCharacter_OnTrain(moveCharacter - 1));
+                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().JumpCharacter_OnTrain());
                         break;
                     default:
                         break;
@@ -235,171 +206,18 @@ public class StudyControllerScript : MonoBehaviour {
         }
     }
 
-    #region Find Friends (1)
-    IEnumerator CharacterJump_Grass()
-    {
-        yield break;
-    }
+ //   #region Find Friends (1)
+ //   IEnumerator CharacterJump_Grass()
+ //   {
+ //       yield break;
+ //   }
 
-    IEnumerator FindFriends()
-    {
-        yield break;
-    }
-    #endregion
+ //   IEnumerator FindFriends()
+ //   {
+ //       yield break;
+ //   }
+ //   #endregion
 
-
-    #region Animation Run (2)
-    IEnumerator RunningAnimation(int number,int trackNum)
-    {
-        int animationCount = runAnimationEnd;
-        while (animationCount != 0)
-        {
-            if (characters[number].transform.localPosition.y > -25.0f)
-            {
-                switch (trackNum)
-                {
-                    case 0:
-                        characters[number].transform.localPosition -= new Vector3(0.001f, 0.1f, 0.0f);
-                        break;
-                    case 1:
-                        characters[number].transform.localPosition -= new Vector3(0.02f, 0.1f, 0.0f);
-                        break;
-                    case 2:
-                        characters[number].transform.localPosition -= new Vector3(-0.02f, 0.1f, 0.0f);
-                        break;
-                    case 3:
-                        characters[number].transform.localPosition -= new Vector3(0.001f, 0.1f, 0.0f);
-                        break;
-                }
-                characters[number].transform.localScale += new Vector3(0.005f, 0.005f, 0);
-            }
-            else
-            {
-                animationEndFlag = true;
-                yield break;
-            }
-
-            yield return new WaitForSeconds(0.01f);
-            animationCount--;
-        }
-        yield break;
-    }
-
-    public int[] Track
-    {
-        set { track = value; }
-    }
-    #endregion
-
-    #region Eat Food (3)
-    IEnumerator EatFood(int number)
-    {
-        while (characters[number].transform.localScale.x <= 3)
-        {
-            characters[number].transform.localScale += new Vector3(0.1f, 0.01f, 0.1f);
-        }
-
-        yield return new WaitForSeconds(0.2f);
-
-        while (characters[number].transform.localScale.x >= 2)
-        {
-            characters[number].transform.localScale -= new Vector3(0.1f, 0.01f, 0.1f);
-        }
-        eat_count[number]++;
-
-        if(eat_count[number] == eat_end_flag)
-        {
-            eat_count[number] = 0;
-            characters[number].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
-            Destroy(characters[number].transform.GetChild(0).gameObject);
-            StartCoroutine(studySceneCanvasController.FallFood(number, allow));
-        }
-        allow = !allow;
-        yield break;
-    }
-	#endregion
-
-	#region Get Moon (4)
-    IEnumerator PullRope(int number)
-    {
-        Transform now_character_pos_moon = characters[number].transform;
-        characters[number].transform.localPosition = new Vector3(now_character_pos_moon.localPosition.x, -3f, 0);
-        yield return new WaitForSeconds(0.2f);
-        characters[number].transform.localPosition = new Vector3(now_character_pos_moon.localPosition.x, -8f, 0);
-
-        if(rope.transform.localPosition.x < 20)
-        {
-            rope.transform.localPosition += new Vector3(1f, -0.02f, 0f);
-            yield return new WaitForSeconds(0.1f);
-            rope.transform.GetChild(0).transform.position -= new Vector3(1f, -0.02f, 0f);
-        }
-        else
-        {
-            animationEndFlag = true;
-        }
-        yield break;
-    }
-	#endregion
-
-	#region Make Candy House (5)
-	IEnumerator ShootStartCandy(int number)
-	{
-		Transform now_character_pos_candy = characters[number].transform;
-		characters[number].transform.localPosition = new Vector3(now_character_pos_candy.localPosition.x, -3f, 0);
-		yield return new WaitForSeconds(0.2f);
-		characters[number].transform.localPosition = new Vector3(now_character_pos_candy.localPosition.x, -8f, 0);
-		yield return new WaitForSeconds(0.2f);
-
-		characters[number].transform.GetChild(0).GetComponent<MoveCandyScript>().enabled = true;
-		characters[number].transform.GetChild(0).parent = candy_area.transform;
-		CreateCandy(number);
-		yield break;
-	}
-
-    public void CreateCandy(int number)
-    {
-        //if (candy.Count > max_candy)
-        //{
-        //    animationEndFlag = true;
-        //    return;
-        //}
-        int rand = Random.Range(0, 4);
-
-        GameObject obj = Instantiate(candy_prefub);
-        obj.GetComponent<MoveCandyScript>().enabled = false;
-        candy.Add(obj);
-
-        obj.GetComponent<SpriteRenderer>().sprite = candy_sprite[rand];
-        obj.transform.parent = characters[number].transform;
-
-        if (rand == 2 || rand == 3)
-        {
-            obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        }
-
-        if (number == 1)
-        {
-            obj.transform.localPosition = new Vector3(0, 2f, 0);
-        }
-        else
-        {
-            obj.transform.localPosition = new Vector3(0, 3f, 0);
-        }
-
-        obj.GetComponent<SpriteRenderer>().color = xylophone_color[number];
-    }
-    #endregion
-
-    #region jump train (6)
-    IEnumerator JumpCharacter_OnTrain(int number)
-    {
-        characters[number].transform.parent.localPosition = new Vector3(0, 5, 0);
-        yield return new WaitForSeconds(0.5f);
-        characters[number].transform.parent.localPosition = new Vector3(0, 0, 0);
-        yield break;
-    }
-    #endregion
 
     #region Animation End
     private IEnumerator AnimationFinish()

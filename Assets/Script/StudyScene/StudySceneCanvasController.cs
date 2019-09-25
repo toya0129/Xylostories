@@ -14,8 +14,21 @@ public class StudySceneCanvasController : MonoBehaviour {
 
     [SerializeField]
     private GameObject main_camera;
+
     [SerializeField]
     private GameObject xylophone_area;
+    private Color32[] xylophone_color =
+    {
+        new Color32 (255,0,0,255),
+        new Color32 (255,155,0,255),
+        new Color32 (255,255,0,255),
+        new Color32 (0,255,0,255),
+        new Color32 (0,255,255,255),
+        new Color32 (0,0,255,255),
+        new Color32 (128,0,128,255),
+        new Color32 (255,0,0,255)
+    };
+
     [SerializeField]
     private GameObject canvas_front;
 
@@ -44,14 +57,14 @@ public class StudySceneCanvasController : MonoBehaviour {
     private GameObject run_track_background;
     private float[] startPosX = { 2.5f, -5f, 5f, -3.5f };
     private float startPosY = 30f;
-    private int[] trackNum = { 0, 0, 0, 0, 0, 0, 0, 0 };
     #endregion
 
     #region eat food (3)
     [SerializeField]
-    GameObject food_prefub;
+    private GameObject food_prefub;
     [SerializeField]
-    Sprite[] food_sprite;
+    private Sprite[] food_sprite;
+    private bool allow = true; 
     #endregion
 
 
@@ -75,6 +88,14 @@ public class StudySceneCanvasController : MonoBehaviour {
 	private float startPosY_candy = -22f;
     [SerializeField]
     private GameObject house;
+    [SerializeField]
+    private GameObject candy_prefub;
+    [SerializeField]
+    private Sprite[] candy_sprite;
+    [SerializeField]
+    private List<GameObject> candy = new List<GameObject>();
+
+    private int max_candy = 20;
     #endregion
 
     #region Train (6)
@@ -177,17 +198,15 @@ public class StudySceneCanvasController : MonoBehaviour {
                     if (gameControllerScript.Characters[i])
                     {
                         int num = j % 4;
-                        trackNum[i] = num;
-                        characters[i].transform.localPosition = new Vector3(startPosX[trackNum[i]], startPosY, 0.0f);
+                        characters[i].transform.localPosition = new Vector3(startPosX[num], startPosY, 0.0f);
                         characters[i].GetComponent<SpriteRenderer>().sortingOrder = 5;
+                        characters[i].GetComponent<CharacterMoveScript>().Track = num;
                         j++;
                     }
                 }
-                studyControllerScript.Track = trackNum;
                 character_area.transform.localPosition = new Vector3(0, 0, 0);
                 break;
             case 3:
-                bool switch_allow = true;
                 yield return StartCoroutine(SetStartPos());
                 character_area.GetComponent<HorizontalLayoutGroup>().enabled = true;
                 for (int i = 0; i < 8; i++)
@@ -202,8 +221,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                         {
                             characters[i].transform.localScale = new Vector3(2f, 2f, 1f);
                         }
-                        StartCoroutine(FallFood(i,switch_allow));
-                        switch_allow = !switch_allow;
+                        StartCoroutine(FallFood(characters[i]));
                     }
                 }
                 break;
@@ -254,7 +272,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                         {
                             characters[i].transform.localScale = new Vector3(2f, 2f, 2f);
                         }
-                        studyControllerScript.CreateCandy(i);
+                        CreateCandy(i);
                         k++;
                     }
                 }
@@ -350,31 +368,24 @@ public class StudySceneCanvasController : MonoBehaviour {
     }
 
     #region Eat Food(3)
-    public IEnumerator FallFood(int number, bool allow)
+    public IEnumerator FallFood(GameObject parent_obj)
     {
         int rand = UnityEngine.Random.Range(0, 3);
         bool fall_trigger = true;
 
         GameObject obj = Instantiate(food_prefub);
-        Transform parent = characters[number].transform;
+        Transform parent_transform = parent_obj.transform;
 
         obj.GetComponent<SpriteRenderer>().sprite = food_sprite[rand];
-        obj.transform.parent = parent;
+        obj.transform.parent = parent_transform;
         obj.transform.localPosition = new Vector3(0, 20f, 0);
 
         while (fall_trigger)
         {
-            if (allow)
-            {
-                obj.transform.localPosition -= new Vector3(0.1f, 0.5f, 0);
-            }
-            else
-            {
-                obj.transform.localPosition -= new Vector3(-0.1f, 0.5f, 0);
-            }
-            allow = !allow;
 
-            if (number == 1)
+            obj.transform.localPosition -= new Vector3(0, 0.5f, 0);
+
+            if (parent_obj.name == "rabbit")
             {
                 if (obj.transform.localPosition.y <= 1.5f)
                 {
@@ -440,7 +451,42 @@ public class StudySceneCanvasController : MonoBehaviour {
     }
     #endregion
 
-    #region train jump(5)
+    #region Create Candy (5)
+    public void CreateCandy(int number)
+    {
+        //if (candy.Count > max_candy)
+        //{
+        //    studyControllerScript.AnimationEndFlag = true;
+        //    return;
+        //}
+        int rand = UnityEngine.Random.Range(0, 2);
+
+        GameObject obj = Instantiate(candy_prefub);
+        obj.GetComponent<MoveCandyScript>().enabled = false;
+        candy.Add(obj);
+
+        obj.GetComponent<SpriteRenderer>().sprite = candy_sprite[rand];
+        obj.transform.parent = characters[number].transform;
+
+        if (rand == 2 || rand == 3)
+        {
+            obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        }
+
+        if (number == 1)
+        {
+            obj.transform.localPosition = new Vector3(0, 2f, 0);
+        }
+        else
+        {
+            obj.transform.localPosition = new Vector3(0, 3f, 0);
+        }
+
+        obj.GetComponent<SpriteRenderer>().color = xylophone_color[number];
+    }
+    #endregion
+
+    #region train jump(6)
     private IEnumerator StartOfTrain()
     {
         GameObject train_all = trainField.transform.GetChild(0).gameObject;
