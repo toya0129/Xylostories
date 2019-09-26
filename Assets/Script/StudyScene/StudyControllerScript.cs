@@ -30,8 +30,8 @@ public class StudyControllerScript : MonoBehaviour {
 
     private string read_data = "";
 
-	#region Find Friend (1)
-
+    #region Find Friend (1)
+    private int find_move_count = 0;
 	#endregion
 
 	#region Run (2) many character
@@ -76,8 +76,6 @@ public class StudyControllerScript : MonoBehaviour {
 
 		if (animationEndFlag)
 		{
-            animationStartFlag = false;
-            animationEndFlag = false;
             StartCoroutine(AnimationFinish());
 		}
 	}
@@ -181,7 +179,7 @@ public class StudyControllerScript : MonoBehaviour {
                 switch (mainStory)
                 {
                     case 1:
-
+                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().CharacterJump_Cloud());
                         break;
                     case 2:
                         StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().RunningAnimation());
@@ -206,25 +204,13 @@ public class StudyControllerScript : MonoBehaviour {
         }
     }
 
- //   #region Find Friends (1)
- //   IEnumerator CharacterJump_Grass()
- //   {
- //       yield break;
- //   }
-
- //   IEnumerator FindFriends()
- //   {
- //       yield break;
- //   }
- //   #endregion
-
-
     #region Animation End
     private IEnumerator AnimationFinish()
     {
         animationStartFlag = false;
+        animationEndFlag = false;
         endflag.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         LoadTitle();
         yield break;
     }

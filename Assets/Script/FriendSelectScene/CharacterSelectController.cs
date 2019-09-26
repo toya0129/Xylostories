@@ -9,9 +9,21 @@ public class CharacterSelectController : MonoBehaviour
     [SerializeField]
     private GameObject canvasScript;
     private GameObject gameController;
+
     private int character_num = 0;
     private List<int> character = new List<int>();
+
+    [SerializeField]
+    private List<GameObject> characters = new List<GameObject>();
+    [SerializeField]
+    private GameObject xylophone_area;
+    [SerializeField]
+    private GameObject button;
+
     private bool fTrigger = false;
+
+    private bool end_flag = true;
+    private float[] end_pos = { -50f, 50f };
 
     [SerializeField]
     private GameObject comment;
@@ -105,11 +117,51 @@ public class CharacterSelectController : MonoBehaviour
             {
                 gameController.GetComponent<GameControllerScript>().Characters[character[j] - 1] = true;
             }
-            gameController.GetComponent<GameControllerScript>().OnLoadStudy();
+            StartCoroutine(NextAnimation());
         }
         else
         {
             comment.SetActive(true);
         }
+    }
+
+    private IEnumerator NextAnimation()
+    {
+        button.SetActive(false);
+        xylophone_area.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        while (end_flag)
+        {
+            for (int i = 4; i < 8; i++)
+            {
+                if (characters[i].transform.localPosition.x < end_pos[1])
+                {
+                    characters[i].transform.localPosition += new Vector3(0.5f, 0f, 0);
+                    end_flag = true;
+                }
+                else
+                {
+                    end_flag = false;
+                }
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (characters[i].transform.localPosition.x > end_pos[0])
+                {
+                    characters[i].transform.localPosition -= new Vector3(0.5f, 0, 0);
+                    end_flag = true;
+                }
+                else
+                {
+                    end_flag = false;
+                }
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
+        gameController.GetComponent<GameControllerScript>().OnLoadStudy();
+        yield break;
     }
 }

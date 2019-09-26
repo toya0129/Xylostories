@@ -27,17 +27,25 @@ public class CharacterMoveScript : MonoBehaviour {
 
     private void AnimationFinish()
     {
-
+        GameObject.Find("StudyController").GetComponent<StudyControllerScript>().AnimationEndFlag = true;
+        this.gameObject.GetComponent<CharacterMoveScript>().enabled = false;
     }
 
     #region Find Friends (1)
-    IEnumerator CharacterJump_Grass()
+    public IEnumerator CharacterJump_Cloud()
     {
-        yield break;
-    }
+        this.gameObject.transform.localPosition = new Vector3(0, 1f, 0);
+        yield return new WaitForSeconds(0.5f);
+        this.gameObject.transform.localPosition = new Vector3(0, -1f, 0);
+        this.gameObject.transform.parent.transform.localPosition += new Vector3(0f, 1f, 0f);
+        Camera.main.transform.localPosition += new Vector3(0f, 0.1f, 0f);
 
-    IEnumerator FindFriends()
-    {
+        if(this.gameObject.transform.parent.transform.localPosition.y > 35f)
+        {
+            Camera.main.transform.localPosition = new Vector3(0f, 42f, -30f);
+            AnimationFinish();
+        }
+
         yield break;
     }
     #endregion
@@ -152,9 +160,9 @@ public class CharacterMoveScript : MonoBehaviour {
     #region jump train (6)
     public IEnumerator JumpCharacter_OnTrain()
     {
-        this.gameObject.transform.parent.localPosition = new Vector3(0, 5, 0);
+        this.gameObject.transform.parent.localPosition = new Vector3(0, 5f, 0);
         yield return new WaitForSeconds(0.5f);
-        this.gameObject.transform.parent.localPosition = new Vector3(0, 0, 0);
+        this.gameObject.transform.parent.localPosition = new Vector3(0, 0f, 0);
         yield break;
     }
     #endregion

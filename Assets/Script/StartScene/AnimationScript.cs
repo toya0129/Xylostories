@@ -109,7 +109,7 @@ public class AnimationScript : MonoBehaviour {
         yield return StartCoroutine(GoBackHome());
         StopAllCoroutines();
         Debug.Log("Rabbit Animation End");
-        gameControllerScript.OnLoadMenuScene();
+        LoadToMenuScene();
         yield break;
     }
 
@@ -125,4 +125,11 @@ public class AnimationScript : MonoBehaviour {
         yield break;
     }
     #endregion
+
+    public void LoadToMenuScene()
+    {
+        Debug.Log("aa");
+        StopAllCoroutines();
+        gameControllerScript.OnLoadMenuScene();
+    }
 }

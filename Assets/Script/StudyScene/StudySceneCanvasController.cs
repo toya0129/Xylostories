@@ -50,6 +50,19 @@ public class StudySceneCanvasController : MonoBehaviour {
 
     private float[] start_posx = { -70f, -60f, -50f, -40f, 40f, 50f, 60f, 70f };
 
+    #region Find Friends (1)
+    [SerializeField]
+    private GameObject cloud_area;
+    [SerializeField]
+    private GameObject friend_parts_area;
+    [SerializeField]
+    private GameObject friend_area;
+    [SerializeField]
+    private GameObject friend;
+    [SerializeField]
+    private GameObject stream;
+    #endregion
+
     #region Run on Track (2)
     [SerializeField]
     private GameObject tape;
@@ -64,14 +77,12 @@ public class StudySceneCanvasController : MonoBehaviour {
     private GameObject food_prefub;
     [SerializeField]
     private Sprite[] food_sprite;
-    private bool allow = true; 
+    private bool allow = true;
+    private int food_end_flag = 50;
     #endregion
 
 
     #region Get Moon (4)
-    [SerializeField]
-    private GameObject moon_camera;
-    private Vector3 camera_pos_get_moon = new Vector3(-62, 0 - 30);
     private Color32 back_color_moon = new Color32(5, 5, 70, 255);
     [SerializeField]
     private GameObject moon;
@@ -84,7 +95,6 @@ public class StudySceneCanvasController : MonoBehaviour {
 	#endregion
 
 	#region Make Candy House (5) scale 2
-	private float[] startPosX_candy = { -28f,-20f, -12f,-4f, 4f, 12f, 20f,28f };
 	private float startPosY_candy = -22f;
     [SerializeField]
     private GameObject house;
@@ -159,14 +169,20 @@ public class StudySceneCanvasController : MonoBehaviour {
         character_area.transform.localPosition = new Vector3(0, 0, 0);
 		character_area.GetComponent<HorizontalLayoutGroup>().enabled = false;
 
-		for (int i = 0; i < 8; i++)
+        xylophone_area.SetActive(false);
+
+        for (int i = 0; i < 8; i++)
         {
             characters[i].SetActive(false);
+            xylophone_area.transform.GetChild(i).gameObject.SetActive(false);
         }
+
+        cloud_area.SetActive(false);
+        friend_parts_area.SetActive(false);
+        friend_area.SetActive(false);
 
         tape.SetActive(false);
 
-        moon_camera.SetActive(false);
         rope.SetActive(false);
         get_moon_background.SetActive(false);
         moon.SetActive(false);
@@ -184,6 +200,20 @@ public class StudySceneCanvasController : MonoBehaviour {
         switch (story)
         {
             case 1:
+                character_area.SetActive(false);
+                character_area.transform.localPosition = new Vector3(0f, -9f, 0f);
+                yield return StartCoroutine(FriendWalk_OnFlower());
+                yield return StartCoroutine(UpToFriends());
+                character_area.SetActive(true);
+                yield return StartCoroutine(SetStartPos());
+                yield return StartCoroutine(DownClouds());
+                character_area.GetComponent<HorizontalLayoutGroup>().enabled = true;
+
+                for(int i = 0; i < 8; i++)
+                {
+                    characters[i].transform.parent = cloud_area.transform.GetChild(i).gameObject.transform;
+                    characters[i].transform.localPosition = new Vector3(0f, -1f, 0f);
+                }
                 break;
             case 2:
                 int j = 0;
@@ -207,6 +237,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                 character_area.transform.localPosition = new Vector3(0, 0, 0);
                 break;
             case 3:
+                character_area.transform.localPosition = new Vector3(0f, -9f, 0f);
                 yield return StartCoroutine(SetStartPos());
                 character_area.GetComponent<HorizontalLayoutGroup>().enabled = true;
                 for (int i = 0; i < 8; i++)
@@ -224,9 +255,10 @@ public class StudySceneCanvasController : MonoBehaviour {
                         StartCoroutine(FallFood(characters[i]));
                     }
                 }
+                character_area.transform.localPosition = new Vector3(0f, -2f, 0f);
+                character_area.GetComponent<HorizontalLayoutGroup>().enabled = true;
                 break;
             case 4:
-                moon_camera.SetActive(true);
                 moon.SetActive(true);
                 get_moon_background.SetActive(true);
                 backgroundArea.GetComponent<SpriteRenderer>().color = back_color_moon;
@@ -253,10 +285,11 @@ public class StudySceneCanvasController : MonoBehaviour {
                         characters[i].SetActive(true);
                     }
                 }
+                character_area.GetComponent<HorizontalLayoutGroup>().enabled = true;
                 break;
             case 5:
                 character_area.GetComponent<HorizontalLayoutGroup>().enabled = true;
-                character_area.transform.localPosition = new Vector3(0f, -5f, 0f);
+                character_area.transform.localPosition = new Vector3(0f, -9f, 0f);
                 int k = 0;
                 house.SetActive(true);
                 yield return StartCoroutine(SetStartPos());
@@ -276,6 +309,8 @@ public class StudySceneCanvasController : MonoBehaviour {
                         k++;
                     }
                 }
+                character_area.GetComponent<HorizontalLayoutGroup>().enabled = true;
+                character_area.transform.localPosition = new Vector3(0f, -5f, 0f);
                 break;
             case 6:
                 trainField.SetActive(true);
@@ -367,6 +402,69 @@ public class StudySceneCanvasController : MonoBehaviour {
         yield break;
     }
 
+    #region Find Friends (1)
+    private IEnumerator FriendWalk_OnFlower()
+    {
+        friend_parts_area.SetActive(true);
+        friend_area.SetActive(true);
+
+        friend.transform.localPosition = new Vector3(40f, -17f, 0);
+
+        // walk
+        while(friend.transform.localPosition.x > 10f)
+        {
+            friend.transform.localPosition -= new Vector3(0.1f, 0, 0);
+            yield return new WaitForSeconds(0.000001f);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        // on flower
+        while(friend.transform.localPosition.x > 0f)
+        {
+            friend.transform.localPosition -= new Vector3(0.1f, -0.08f, 0);
+            yield return new WaitForSeconds(0.0000005f);
+        }
+        yield break;
+    }
+
+    private IEnumerator UpToFriends()
+    {
+        while (friend_area.transform.localPosition.y < 45f)
+        {
+            stream.transform.localScale += new Vector3(0, 0.1f, 0);
+            friend_area.transform.localPosition += new Vector3(0, 1f, 0);
+            stream.transform.localPosition -= new Vector3(0, 1f, 0);
+            main_camera.transform.localPosition += new Vector3(0, 1f, 0);
+            yield return new WaitForSeconds(0.05f);
+        }
+        main_camera.transform.localPosition = new Vector3(0f, 0f, -30f);
+        yield break;
+    }
+    private IEnumerator DownClouds()
+    {
+        cloud_area.SetActive(true);
+        while (cloud_area.transform.localPosition.y > -8f)
+        {
+            cloud_area.transform.localPosition -= new Vector3(0, 1f, 0);
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        cloud_area.transform.localPosition = new Vector3(0f, 0f, 0f);
+
+        for (int i = 0; i < 8; i++)
+        {
+            if (!characters[i].activeSelf)
+            {
+                cloud_area.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+        yield break;
+    }
+    #endregion
+
     #region Eat Food(3)
     public IEnumerator FallFood(GameObject parent_obj)
     {
@@ -401,6 +499,13 @@ public class StudySceneCanvasController : MonoBehaviour {
             }
             yield return new WaitForSeconds(0.005f);
         }
+
+ //       food_end_flag--;
+        if(food_end_flag < 0)
+        {
+            studyControllerScript.AnimationEndFlag = true;
+        }
+
         yield break;
     }
     #endregion
@@ -411,16 +516,15 @@ public class StudySceneCanvasController : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         canvas_front.SetActive(false);
-        main_camera.SetActive(false);
-        while (moon_camera.transform.localPosition.x > -62f)
+        while (main_camera.transform.localPosition.x > -62f)
         {
-            moon_camera.transform.localPosition -= new Vector3(1f, 0f, 0f);
+            main_camera.transform.localPosition -= new Vector3(1f, 0f, 0f);
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(1f);
-        while (moon_camera.transform.localPosition.x < 0)
+        while (main_camera.transform.localPosition.x < 0)
         {
-            moon_camera.transform.localPosition += new Vector3(1f, 0f, 0f);
+            main_camera.transform.localPosition += new Vector3(1f, 0f, 0f);
             yield return new WaitForSeconds(0.05f);
         }
 
@@ -432,15 +536,14 @@ public class StudySceneCanvasController : MonoBehaviour {
 
         while(rope.transform.localPosition.x > -62f)
         {
-            moon_camera.transform.localPosition -= new Vector3(1f, 0f, 0f);
+            main_camera.transform.localPosition -= new Vector3(1f, 0f, 0f);
             rope.transform.localPosition -= new Vector3(1f, -0.03f, 0f);
             yield return new WaitForSeconds(0.02f);
         }
 
+        main_camera.transform.localPosition = new Vector3(0f, 0f, -30f);
         rope.transform.localPosition = new Vector3(-62f, 2f, 0);
         rope.transform.localScale = new Vector3(2f, 1f, 1f);
-        moon_camera.GetComponent<Camera>().rect = new Rect(0.7f, 0.7f, 0.3f, 0.3f);
-        main_camera.SetActive(true);
         canvas_front.SetActive(true);
 
         character_area.transform.localPosition = new Vector3(0f, -2f, 0f);

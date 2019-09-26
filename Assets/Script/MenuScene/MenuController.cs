@@ -24,7 +24,7 @@ public class MenuController : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                if (now_story != 1)
+                if (now_story != 0)
                 {
                     gameControllerScript.MainStory = now_story;
                     gameControllerScript.OnLoadFriendSelect();
@@ -55,7 +55,7 @@ public class MenuController : MonoBehaviour {
     {
         if (now_story == num)
         {
-            if (now_story != 1)
+            if (now_story != 0)
             {
                 gameControllerScript.MainStory = now_story;
                 gameControllerScript.OnLoadFriendSelect();
