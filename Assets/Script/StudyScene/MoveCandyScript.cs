@@ -11,6 +11,7 @@ public class MoveCandyScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         goal_pos = new Vector3(Random.Range(-14, 15), Random.Range(-9, 15), 1);
+        this.gameObject.transform.parent = GameObject.Find("candy_area").transform;
     }
 	
 	// Update is called once per frame
@@ -20,6 +21,7 @@ public class MoveCandyScript : MonoBehaviour {
 
         if (this.gameObject.transform.localPosition == goal_pos)
         {
+            this.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 4;
             this.gameObject.GetComponent<MoveCandyScript>().enabled = false;
         }
     }

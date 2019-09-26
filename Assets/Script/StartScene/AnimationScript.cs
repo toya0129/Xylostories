@@ -16,7 +16,7 @@ public class AnimationScript : MonoBehaviour {
     private float roteZ = 0.0f;
     private int moveCount = 0;
 
-    private int rabbitMoveEnd = 540; // 50:-15移動
+    private int rabbitMoveEnd = 270; // 50:-15移動
 
     // Use this for initialization
     void Start () {
@@ -109,7 +109,7 @@ public class AnimationScript : MonoBehaviour {
         yield return StartCoroutine(GoBackHome());
         StopAllCoroutines();
         Debug.Log("Rabbit Animation End");
-        gameControllerScript.OnLoadMenuScene();
+        LoadToMenuScene();
         yield break;
     }
 
@@ -125,4 +125,11 @@ public class AnimationScript : MonoBehaviour {
         yield break;
     }
     #endregion
+
+    public void LoadToMenuScene()
+    {
+        Debug.Log("aa");
+        StopAllCoroutines();
+        gameControllerScript.OnLoadMenuScene();
+    }
 }
