@@ -32,7 +32,7 @@ public class GameControllerScript : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        //Initialized();
+        Initialized();
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
         Socket_Server.ServerStart_local();
 #endif
