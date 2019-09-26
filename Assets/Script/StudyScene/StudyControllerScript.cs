@@ -21,7 +21,7 @@ public class StudyControllerScript : MonoBehaviour {
     StudySceneCanvasController studySceneCanvasController;
 
     private int mainStory;
-    public int moveCharacter = 0;
+    private int moveCharacter = 0;
     [SerializeField]
     private GameObject[] characters;
 
@@ -29,6 +29,20 @@ public class StudyControllerScript : MonoBehaviour {
 	private bool animationEndFlag = false;
 
     private string read_data = "";
+
+    private bool hidden_trigger = false;
+    public List<int> input_hidden_command = new List<int>();
+    public int[] hidden_command =
+    {
+        1,1,2,3,8,7,6,5,1,1
+    };
+    private int[] score =
+    {
+        1,2,3,4,3,2,1,3,4,5,6,5,4,3,1,1,1,1,1,1,2,2,3,3,4,4,3,2,1
+    };
+
+    [SerializeField]
+    private GameObject blank_panel;
 
     #region Find Friend (1)
     private int find_move_count = 0;
@@ -58,6 +72,7 @@ public class StudyControllerScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        blank_panel.SetActive(false);
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
         mainStory = gameControllerScript.MainStory;       
     }
@@ -71,6 +86,23 @@ public class StudyControllerScript : MonoBehaviour {
             InputData_Sensor();
             InputData_Key();
 #endif
+            if (hidden_trigger)
+            {
+                if(moveCharacter != 0)
+                {
+                    input_hidden_command.Add(moveCharacter);
+                }
+            }
+
+            if(input_hidden_command.Count == 10)
+            {
+                if (CheckCommand())
+                {
+                    StartCoroutine(HiddenCommandStart());
+                }
+                input_hidden_command = new List<int>();
+            }
+
             AnimationStart();
         }
 
@@ -90,6 +122,10 @@ public class StudyControllerScript : MonoBehaviour {
             {
                 case "1":
                     moveCharacter = 1;
+                    if (!hidden_trigger)
+                    {
+                        hidden_trigger = true;
+                    }
                     break;
                 case "2":
                     moveCharacter = 2;
@@ -126,6 +162,10 @@ public class StudyControllerScript : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 moveCharacter = 1;
+                if (!hidden_trigger)
+                {
+                    hidden_trigger = true;
+                }
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -166,6 +206,32 @@ public class StudyControllerScript : MonoBehaviour {
     public void InputData_Toutch(int num)
     {
         moveCharacter = num;
+
+        if(moveCharacter == 1)
+        {
+            if (!hidden_trigger)
+            {
+                hidden_trigger = true;
+            }
+        }
+
+        if (hidden_trigger)
+        {
+            if (moveCharacter != 0)
+            {
+                input_hidden_command.Add(moveCharacter);
+            }
+        }
+
+        if (input_hidden_command.Count == 10)
+        {
+            if (CheckCommand())
+            {
+                StartCoroutine(HiddenCommandStart());
+            }
+            input_hidden_command = new List<int>();
+        }
+
         AnimationStart();
     }
 
@@ -224,6 +290,71 @@ public class StudyControllerScript : MonoBehaviour {
         gameControllerScript.OnLoadTitle();
     }
     #endregion
+
+    private bool CheckCommand()
+    {
+        hidden_trigger = false;
+        animationStartFlag = false;
+
+        for(int i = 0; i < input_hidden_command.Count; i++)
+        {
+            if(hidden_command[i] != input_hidden_command[i])
+            {
+                animationStartFlag = true;
+                return false;
+            }
+        }
+        blank_panel.SetActive(true);
+        return true;
+    }
+
+    private IEnumerator HiddenCommandStart()
+    {
+        yield return new WaitForSeconds(1f);
+
+        int count = 0;
+
+        while (count < score.Length)
+        {
+            StartCoroutine(studySceneCanvasController.Xylophone_OnColor(score[count] - 1));
+            switch (mainStory)
+            {
+                case 1:
+                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().CharacterJump_Cloud());
+                    break;
+                case 2:
+                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().RunningAnimation());
+                    break;
+                case 3:
+                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().EatFood());
+                    break;
+                case 4:
+                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().PullRope(rope));
+                    break;
+                case 5:
+                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().ShootStartCandy());
+                    break;
+                case 6:
+                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().JumpCharacter_OnTrain());
+                    break;
+                default:
+                    break;
+            }
+            count++;
+
+            yield return new WaitForSeconds(0.5f);
+
+            if (count == 7 || count == 14 || count == 15 || count == 16 || count == 17 || count == 18 || count == 27 || count == 28 || count == 29)
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        animationStartFlag = true;
+        blank_panel.SetActive(false);
+
+        yield break;
+    }
 
     #region getter and setter
     public bool AnimationStartFlag
