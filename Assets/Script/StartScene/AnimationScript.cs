@@ -128,7 +128,6 @@ public class AnimationScript : MonoBehaviour {
 
     public void LoadToMenuScene()
     {
-        Debug.Log("aa");
         StopAllCoroutines();
         gameControllerScript.OnLoadMenuScene();
     }

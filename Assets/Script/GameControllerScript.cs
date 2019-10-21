@@ -41,7 +41,8 @@ public class GameControllerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
@@ -129,12 +130,12 @@ public class GameControllerScript : MonoBehaviour
     public void OnLoadMenuScene()
     {
         Debug.Log("Go Menu Scene");
-        Initialized();
         SceneManager.LoadScene("MenuScene");
     }
 
     public void OnLoadFriendSelect()
     {
+        MemoryFree();
         Debug.Log("Go Characters Select");
         SceneManager.LoadScene("CharacterSelectScene");
     }
@@ -145,6 +146,12 @@ public class GameControllerScript : MonoBehaviour
         SceneManager.LoadScene("StudyScene");
     }
     #endregion
+
+    private void MemoryFree()
+    {
+        System.GC.Collect();
+        Resources.UnloadUnusedAssets();
+    }
 
 
     #region Getter and Setter

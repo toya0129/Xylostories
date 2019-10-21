@@ -31,18 +31,23 @@ public class StudyControllerScript : MonoBehaviour {
     private string read_data = "";
 
     private bool hidden_trigger = false;
-    public List<int> input_hidden_command = new List<int>();
+    private List<int> input_hidden_command = new List<int>();
     public int[] hidden_command =
     {
         1,1,2,3,8,7,6,5,1,1
     };
-    private int[] score =
+
+    private List<List<int>> score = new List<List<int>>()
     {
-        1,2,3,4,3,2,1,3,4,5,6,5,4,3,1,1,1,1,1,1,2,2,3,3,4,4,3,2,1
+        new List<int>() { 1,2,3,4,3,2,1,3,4,5,6,5,4,3,1,1,1,1,1,1,2,2,3,3,4,4,3,2,1 },
+        new List<int>() { 1,2,3,1,2,3,5,3,2,1,2,3,2,1,2,3,1,2,3,5,3,2,1,2,3,1,5,5,3,5,6,6,5,3,3,2,2,1}
     };
 
     [SerializeField]
     private GameObject blank_panel;
+
+    [SerializeField]
+    private GameObject go_menu;
 
     #region Find Friend (1)
     private int find_move_count = 0;
@@ -50,7 +55,7 @@ public class StudyControllerScript : MonoBehaviour {
 
 	#region Run (2) many character
     [SerializeField]
-    GameObject endflag;
+    private GameObject endflag;
     #endregion
 
     #region eat food (3) many character
@@ -59,7 +64,7 @@ public class StudyControllerScript : MonoBehaviour {
 
     #region get moon (4) one character
     [SerializeField]
-    GameObject rope;
+    private GameObject rope;
     #endregion
 
     #region make candy house (5)
@@ -73,6 +78,7 @@ public class StudyControllerScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         blank_panel.SetActive(false);
+        go_menu.SetActive(false);
         gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
         mainStory = gameControllerScript.MainStory;       
     }
@@ -276,8 +282,10 @@ public class StudyControllerScript : MonoBehaviour {
         animationStartFlag = false;
         animationEndFlag = false;
         endflag.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        LoadTitle();
+        go_menu.SetActive(true);
+
+        //yield return new WaitForSeconds(3f);
+        //LoadTitle();
         yield break;
     }
 
@@ -291,6 +299,7 @@ public class StudyControllerScript : MonoBehaviour {
     }
     #endregion
 
+    #region hidden command
     private bool CheckCommand()
     {
         hidden_trigger = false;
@@ -313,41 +322,48 @@ public class StudyControllerScript : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         int count = 0;
+        int rand = Random.Range(0,score.Count);
 
-        while (count < score.Length)
+        while (count < score[rand].Count)
         {
-            StartCoroutine(studySceneCanvasController.Xylophone_OnColor(score[count] - 1));
+            StartCoroutine(studySceneCanvasController.Xylophone_OnColor(score[rand][count] - 1));
             switch (mainStory)
             {
                 case 1:
-                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().CharacterJump_Cloud());
+                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().CharacterJump_Cloud());
                     break;
                 case 2:
-                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().RunningAnimation());
+                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().RunningAnimation());
                     break;
                 case 3:
-                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().EatFood());
+                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().EatFood());
                     break;
                 case 4:
-                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().PullRope(rope));
+                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().PullRope(rope));
                     break;
                 case 5:
-                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().ShootStartCandy());
+                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().ShootStartCandy());
                     break;
                 case 6:
-                    StartCoroutine(characters[score[count] - 1].GetComponent<CharacterMoveScript>().JumpCharacter_OnTrain());
+                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().JumpCharacter_OnTrain());
                     break;
                 default:
                     break;
             }
             count++;
 
-            yield return new WaitForSeconds(0.5f);
-
-            if (count == 7 || count == 14 || count == 15 || count == 16 || count == 17 || count == 18 || count == 27 || count == 28 || count == 29)
+            switch (rand)
             {
-                yield return new WaitForSeconds(0.5f);
+                case 0:
+                    yield return StartCoroutine(Frog_Song(count));
+                    break;
+                case 1:
+                    yield return StartCoroutine(Tulips_Song(count));
+                    break;
+                default:
+                    break;
             }
+            
         }
 
         animationStartFlag = true;
@@ -355,6 +371,37 @@ public class StudyControllerScript : MonoBehaviour {
 
         yield break;
     }
+
+    private IEnumerator Frog_Song(int num)
+    {
+        if (num == 7 || num == 14 || num == 15 || num == 16 || num == 17 || num == 18)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        else if (num == 19 || num == 20 || num == 21 || num == 22 || num == 23 || num == 24 || num == 25 || num == 26)
+        {
+            yield return new WaitForSeconds(0.25f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        yield break;
+    }
+
+    private IEnumerator Tulips_Song(int num)
+    {
+        if(num == 3 || num == 6 || num == 13 || num == 16 || num == 19 || num == 26 || num == 33)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        yield break;
+    }
+    #endregion
 
     #region getter and setter
     public bool AnimationStartFlag

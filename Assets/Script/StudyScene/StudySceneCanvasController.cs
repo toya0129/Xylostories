@@ -36,7 +36,8 @@ public class StudySceneCanvasController : MonoBehaviour {
     private GameObject backgroundArea;
     private float[] backgroundSize = { 1.61f, 3.1f ,1.61f,3.1f,1.61f, 3.1f};
 
-	[SerializeField]
+
+    [SerializeField]
     private GameObject character_area;
 
     [SerializeField]
@@ -50,7 +51,7 @@ public class StudySceneCanvasController : MonoBehaviour {
 
     private float[] start_posx = { -70f, -60f, -50f, -40f, 40f, 50f, 60f, 70f };
 
-    #region Find Friends (1)
+#region Find Friends (1)
     [SerializeField]
     private GameObject cloud_area;
     [SerializeField]
@@ -61,28 +62,28 @@ public class StudySceneCanvasController : MonoBehaviour {
     private GameObject friend;
     [SerializeField]
     private GameObject stream;
-    #endregion
+#endregion
 
-    #region Run on Track (2)
+#region Run on Track (2)
     [SerializeField]
     private GameObject tape;
     [SerializeField]
     private GameObject run_track_background;
     private float[] startPosX = { 2.5f, -5f, 5f, -3.5f };
     private float startPosY = 30f;
-    #endregion
+#endregion
 
-    #region eat food (3)
+#region eat food (3)
     [SerializeField]
     private GameObject food_prefub;
     [SerializeField]
     private Sprite[] food_sprite;
     private bool allow = true;
     private int food_end_flag = 50;
-    #endregion
+#endregion
 
 
-    #region Get Moon (4)
+#region Get Moon (4)
     private Color32 back_color_moon = new Color32(5, 5, 70, 255);
     [SerializeField]
     private GameObject moon;
@@ -92,9 +93,9 @@ public class StudySceneCanvasController : MonoBehaviour {
     private Sprite rope_sprite_middle;
     [SerializeField]
     private GameObject get_moon_background;
-	#endregion
+#endregion
 
-	#region Make Candy House (5) scale 2
+#region Make Candy House (5) scale 2
 	private float startPosY_candy = -22f;
     [SerializeField]
     private GameObject house;
@@ -106,9 +107,9 @@ public class StudySceneCanvasController : MonoBehaviour {
     private List<GameObject> candy = new List<GameObject>();
 
     private int max_candy = 20;
-    #endregion
+#endregion
 
-    #region Train (6)
+#region Train (6)
     [SerializeField]
     private GameObject trainField;
     [SerializeField]
@@ -119,7 +120,7 @@ public class StudySceneCanvasController : MonoBehaviour {
     private int mountainAnimationEnd = 2;
     private float[] train_characterX = { -17f, -10f, -4f, 2.3f, 8.7f, 15f, 21.5f, 28f };
     private float train_characterY = -6.5f;
-    #endregion
+#endregion
 
 
     void Awake(){
@@ -402,7 +403,7 @@ public class StudySceneCanvasController : MonoBehaviour {
         yield break;
     }
 
-    #region Find Friends (1)
+#region Find Friends (1)
     private IEnumerator FriendWalk_OnFlower()
     {
         friend_parts_area.SetActive(true);
@@ -463,12 +464,12 @@ public class StudySceneCanvasController : MonoBehaviour {
         }
         yield break;
     }
-    #endregion
+#endregion
 
-    #region Eat Food(3)
+#region Eat Food(3)
     public IEnumerator FallFood(GameObject parent_obj)
     {
-        int rand = UnityEngine.Random.Range(0, 3);
+        int rand = UnityEngine.Random.Range(0, food_sprite.Length);
         bool fall_trigger = true;
 
         GameObject obj = Instantiate(food_prefub);
@@ -508,9 +509,9 @@ public class StudySceneCanvasController : MonoBehaviour {
 
         yield break;
     }
-    #endregion
+#endregion
 
-    #region Get Moon(4)
+#region Get Moon(4)
     private IEnumerator ThrowRope()
     {
         yield return new WaitForSeconds(1f);
@@ -552,9 +553,9 @@ public class StudySceneCanvasController : MonoBehaviour {
         moon.transform.parent = rope.transform;
         yield break;
     }
-    #endregion
+#endregion
 
-    #region Create Candy (5)
+#region Create Candy (5)
     public void CreateCandy(int number)
     {
         //if (candy.Count > max_candy)
@@ -587,9 +588,9 @@ public class StudySceneCanvasController : MonoBehaviour {
 
         obj.GetComponent<SpriteRenderer>().color = xylophone_color[number];
     }
-    #endregion
+#endregion
 
-    #region train jump(6)
+#region train jump(6)
     private IEnumerator StartOfTrain()
     {
         GameObject train_all = trainField.transform.GetChild(0).gameObject;
@@ -621,5 +622,5 @@ public class StudySceneCanvasController : MonoBehaviour {
         studyControllerScript.AnimationEndFlag = true;
         yield break;
     }
-	#endregion
+#endregion
 }

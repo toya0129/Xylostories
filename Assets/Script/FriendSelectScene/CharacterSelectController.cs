@@ -11,7 +11,7 @@ public class CharacterSelectController : MonoBehaviour
     private GameObject gameController;
 
     private int character_num = 0;
-    private List<int> character = new List<int>();
+    public List<int> character = new List<int>();
 
     [SerializeField]
     private List<GameObject> characters = new List<GameObject>();
@@ -19,8 +19,6 @@ public class CharacterSelectController : MonoBehaviour
     private GameObject xylophone_area;
     [SerializeField]
     private GameObject button;
-
-    private bool fTrigger = false;
 
     private bool end_flag = true;
     private float[] end_pos = { -50f, 50f };
@@ -92,6 +90,7 @@ public class CharacterSelectController : MonoBehaviour
 
     public void CharacterSelect(int number)
     {
+        bool fTrigger = false;
         canvasScript.GetComponent<CharacterSelectCanvasScript>().SetCharacter(number);
 
         for (int i = 0; i < character.Count; i++)
@@ -127,6 +126,7 @@ public class CharacterSelectController : MonoBehaviour
 
     private IEnumerator NextAnimation()
     {
+        comment.SetActive(false);
         button.SetActive(false);
         xylophone_area.SetActive(false);
 

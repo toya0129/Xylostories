@@ -41,7 +41,7 @@ public class MenuController : MonoBehaviour {
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 now_story--;
-                if(now_story == 0)
+                if (now_story == 0)
                 {
                     now_story = 6;
                 }
