@@ -34,8 +34,8 @@ public class StudySceneCanvasController : MonoBehaviour {
 
     [SerializeField]
     private GameObject backgroundArea;
-    private float[] backgroundSize = { 1.61f, 3.1f ,1.61f,3.1f,1.61f, 3.1f};
-
+    private float[] backgroundSize_x = { 1.61f, 3.1f, 1.61f, 3.1f, 1.61f, 3.1f };
+    private float[] backgroundSize_y = { 1.61f, 3.1f, 1.61f, 3.1f, 1.61f, 3.1f };
 
     [SerializeField]
     private GameObject character_area;
@@ -197,7 +197,7 @@ public class StudySceneCanvasController : MonoBehaviour {
     private IEnumerator SetUI(int story)
     {
         backgroundArea.GetComponent<SpriteRenderer>().sprite = background[story - 1];
-        backgroundArea.transform.localScale = new Vector3(backgroundSize[story - 1], backgroundSize[story - 1], 1);
+        backgroundArea.transform.localScale = new Vector3(backgroundSize_x[story - 1], backgroundSize_y[story - 1], 1);
         switch (story)
         {
             case 1:

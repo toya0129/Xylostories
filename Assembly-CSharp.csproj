@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\CanvasSizeChange.cs" />
     <Compile Include="Assets\Script\FriendSelectScene\CharacterSelectCanvasScript.cs" />
     <Compile Include="Assets\Script\FriendSelectScene\CharacterSelectController.cs" />
     <Compile Include="Assets\Script\GameControllerScript.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\Script\StudyScene\MoveCandyScript.cs" />
     <Compile Include="Assets\Script\StudyScene\StudyControllerScript.cs" />
     <Compile Include="Assets\Script\StudyScene\StudySceneCanvasController.cs" />
+    <Compile Include="Assets\Script\TitleScene\TitleController.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/toya/Project/XyloStories/Xylostories/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
