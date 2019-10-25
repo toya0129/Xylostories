@@ -68,6 +68,7 @@
     <Compile Include="Assets\Script\MenuScene\MenuController.cs" />
     <Compile Include="Assets\Script\Socket_Server.cs" />
     <Compile Include="Assets\Script\StartScene\AnimationScript.cs" />
+    <Compile Include="Assets\Script\StartScene\CanvasController.cs" />
     <Compile Include="Assets\Script\StudyScene\CharacterMoveScript.cs" />
     <Compile Include="Assets\Script\StudyScene\MoveCandyScript.cs" />
     <Compile Include="Assets\Script\StudyScene\StudyControllerScript.cs" />

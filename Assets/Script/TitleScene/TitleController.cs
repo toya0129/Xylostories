@@ -26,8 +26,8 @@ public class TitleController : MonoBehaviour {
     private void SetUI()
     {
         gameController.GetComponent<CanvasSizeChange>().CanvasScalerSet(canvasScaler);
-        gameController.GetComponent<CanvasSizeChange>().BackgroundSizeDeltaSet(background_size);
-        gameController.GetComponent<CanvasSizeChange>().LogoScaleSet(logo_size);
+        gameController.GetComponent<CanvasSizeChange>().SizeDeltaSet(background_size);
+        gameController.GetComponent<CanvasSizeChange>().LogoSizeDeltaSet(logo_size);
     }
 
 }

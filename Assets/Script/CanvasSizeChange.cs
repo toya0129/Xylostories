@@ -11,14 +11,15 @@ public class CanvasSizeChange : MonoBehaviour
     {
         canvasScaler.referenceResolution = size_date;
     }
-    public void BackgroundSizeDeltaSet(RectTransform rectTransform)
+    public void SizeDeltaSet(RectTransform rectTransform)
     {
         rectTransform.sizeDelta = size_date;
     }
-    public void LogoScaleSet(RectTransform rectTransform)
+    public void LogoSizeDeltaSet(RectTransform rectTransform)
     {
         rectTransform.sizeDelta = new Vector2(size_date.x - 100, size_date.y / 2);
     }
+
 
     private void Awake()
 	{
