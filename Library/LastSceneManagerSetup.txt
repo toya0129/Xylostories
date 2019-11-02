@@ -6,20 +6,14 @@ sceneSetups:
   isLoaded: 0
   isActive: 0
 - path: Assets/Scenes/MenuScene.unity
-  isLoaded: 0
-  isActive: 0
+  isLoaded: 1
+  isActive: 1
 - path: Assets/Scenes/CharacterSelectScene.unity
   isLoaded: 0
   isActive: 0
 - path: Assets/Scenes/StudyScene.unity
   isLoaded: 0
   isActive: 0
-- path: Assets/Scenes/iOS/TitleScene_iOS.unity
-  isLoaded: 0
-  isActive: 0
-- path: Assets/Scenes/iOS/StartScene_iOS.unity
-  isLoaded: 1
-  isActive: 1
 - path: Assets/Scenes/iOS/MenuScene_iOS.unity
   isLoaded: 0
   isActive: 0
