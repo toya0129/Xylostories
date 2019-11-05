@@ -7,6 +7,9 @@ public class CanvasSizeChange : MonoBehaviour
 {
     private Vector2 size_date;
 
+    private Vector2 waku_size;
+    private Vector2 size;
+
     public void CanvasScalerSet(CanvasScaler canvasScaler)
     {
         canvasScaler.referenceResolution = size_date;
@@ -21,15 +24,29 @@ public class CanvasSizeChange : MonoBehaviour
     }
     public void TitleSizeDeltaSet(RectTransform rectTransform)
     {
+        int font = (int)size_date.x / 10 - 50;
+
+        if (font > 120)
+        {
+            font = 120;
+        }
+
         rectTransform.sizeDelta = new Vector2(size_date.x, 200);
-        rectTransform.gameObject.GetComponent<Text>().fontSize = (int)size_date.x / 10 - 50;
+        rectTransform.gameObject.GetComponent<Text>().fontSize = font;
+    }
+    public void FontSizeSet(GameObject obj)
+    {
+        int font = (int)(obj.GetComponent<RectTransform>().sizeDelta.x * 0.15f);
+        obj.GetComponent<Text>().fontSize = font;
+    }
+    public void ButtonSizeSet(RectTransform rtf)
+    {
+        rtf.sizeDelta = new Vector2(size_date.x / 5, size_date.y / 5);
     }
 
     // Menu Scene
     public void MenuAreaSet(GameObject obj)
     {
-        Vector2 waku_size = new Vector2(size_date.x / 3 - 30, size_date.y / 3);
-        Vector2 size = new Vector2(waku_size.x * 0.95f, waku_size.y - waku_size.x * 0.05f);
         obj.GetComponent<GridLayoutGroup>().cellSize = waku_size;
 
         for (int i = 0; i < obj.transform.childCount; i++)
@@ -51,7 +68,7 @@ public class CanvasSizeChange : MonoBehaviour
                 if (j == obj.transform.GetChild(i).childCount - 1)
                 {
                     int font = (int)(size.x * 0.15f);
-                    obj.transform.GetChild(i).GetChild(j).gameObject.GetComponent<Text>().fontSize = font;
+                    FontSizeSet(obj.transform.GetChild(i).GetChild(j).gameObject);
                     obj.transform.GetChild(i).GetChild(j).gameObject.GetComponent<Outline>().effectDistance = new Vector2(font * 0.05f, font * 0.05f);
                 }
 
@@ -93,6 +110,14 @@ public class CanvasSizeChange : MonoBehaviour
         }
     }
 
+    public void SelectClickAreaSet(GameObject obj)
+    {
+        for(int i = 0; i < obj.transform.childCount; i++)
+        {
+            obj.transform.GetChild(i).GetComponent<RectTransform>().sizeDelta = new Vector2(obj.transform.GetChild(i).GetComponent<RectTransform>().sizeDelta.x, size_date.y * 0.7f);
+        }
+    }
+
     private void Awake()
 	{
 		SetCanvasSize();
@@ -101,7 +126,10 @@ public class CanvasSizeChange : MonoBehaviour
     private void SetCanvasSize()
 	{
         size_date = new Vector2(Screen.width, Screen.height);
-	}
+
+        waku_size = new Vector2(size_date.x / 3 - 30, size_date.y / 3);
+        size = new Vector2(waku_size.x * 0.95f, waku_size.y - waku_size.x * 0.05f);
+    }
 
 	#region Setter and Getter
     public Vector2 Size_Data

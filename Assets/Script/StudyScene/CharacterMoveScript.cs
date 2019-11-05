@@ -20,6 +20,8 @@ public class CharacterMoveScript : MonoBehaviour {
     private int eat_end_flag = 10;
     #endregion
 
+    private IEnumerator animation = null;
+
     private void Start()
     {
         studySceneCanvasController = GameObject.Find("Canvas").GetComponent<StudySceneCanvasController>();
@@ -29,6 +31,42 @@ public class CharacterMoveScript : MonoBehaviour {
     {
         GameObject.Find("StudyController").GetComponent<StudyControllerScript>().AnimationEndFlag = true;
         this.gameObject.GetComponent<CharacterMoveScript>().enabled = false;
+    }
+
+    public void AnimationStart(int story)
+    {
+        if (animation != null)
+        {
+            StopCoroutine(animation);
+            animation = null;
+        }
+
+        switch (story)
+        {
+            case 1:
+                animation = CharacterJump_Cloud();
+                break;
+            case 2:
+                animation = RunningAnimation();
+                break;
+            case 3:
+                animation = EatFood();
+                break;
+            case 4:
+                animation = PullRope();
+                break;
+            case 5:
+                animation = ShootStartCandy();
+                break;
+            case 6:
+                animation = JumpCharacter_OnTrain();
+                break;
+            default:
+                animation = null;
+                break;
+        }
+
+        StartCoroutine(animation);
     }
 
     #region Find Friends (1)
@@ -122,8 +160,10 @@ public class CharacterMoveScript : MonoBehaviour {
     #endregion
 
     #region Get Moon (4)
-    public IEnumerator PullRope(GameObject rope)
+    public IEnumerator PullRope()
     {
+        GameObject rope = GameObject.Find("rope");
+
         Transform now_character_pos_moon = this.gameObject.transform;
         this.gameObject.transform.localPosition = new Vector3(now_character_pos_moon.localPosition.x, -3f, 0);
         yield return new WaitForSeconds(0.2f);
@@ -161,7 +201,7 @@ public class CharacterMoveScript : MonoBehaviour {
     public IEnumerator JumpCharacter_OnTrain()
     {
         this.gameObject.transform.parent.localPosition = new Vector3(0, 5f, 0);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         this.gameObject.transform.parent.localPosition = new Vector3(0, 0f, 0);
         yield break;
     }
