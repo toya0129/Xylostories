@@ -21,7 +21,7 @@ public class StudyControllerScript : MonoBehaviour {
     StudySceneCanvasController studySceneCanvasController;
 
     private int mainStory;
-    private int moveCharacter = 0;
+    public int moveCharacter = 0;
     [SerializeField]
     private GameObject[] characters;
 
@@ -89,7 +89,7 @@ public class StudyControllerScript : MonoBehaviour {
         if (animationStartFlag)
         {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-            InputData_Sensor();
+            //InputData_Sensor();
             InputData_Key();
 #endif
             if (hidden_trigger)
@@ -141,6 +141,10 @@ public class StudyControllerScript : MonoBehaviour {
                     break;
                 case "4":
                     moveCharacter = 4;
+                    if (hidden_trigger)
+                    {
+                        hidden_trigger = false;
+                    }
                     break;
                 case "5":
                     moveCharacter = 5;
@@ -184,6 +188,10 @@ public class StudyControllerScript : MonoBehaviour {
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 moveCharacter = 4;
+                if (hidden_trigger)
+                {
+                    hidden_trigger = false;
+                }
             }
             else if (Input.GetKeyDown(KeyCode.Alpha5))
             {
@@ -219,6 +227,12 @@ public class StudyControllerScript : MonoBehaviour {
             {
                 hidden_trigger = true;
             }
+        }else if(moveCharacter == 4)
+        {
+            if (hidden_trigger)
+            {
+                hidden_trigger = false;
+            }
         }
 
         if (hidden_trigger)
@@ -247,30 +261,8 @@ public class StudyControllerScript : MonoBehaviour {
         {
             if (gameControllerScript.Characters[moveCharacter - 1])
             {
+                characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().AnimationStart(mainStory);
                 StartCoroutine(studySceneCanvasController.Xylophone_OnColor(moveCharacter - 1));
-                switch (mainStory)
-                {
-                    case 1:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().CharacterJump_Cloud());
-                        break;
-                    case 2:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().RunningAnimation());
-                        break;
-                    case 3:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().EatFood());
-                        break;
-                    case 4:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().PullRope(rope));
-                        break;
-                    case 5:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().ShootStartCandy());
-                        break;
-                    case 6:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().JumpCharacter_OnTrain());
-                        break;
-                    default:
-                        break;
-                }
                 moveCharacter = 0;
             }
         }
@@ -326,30 +318,9 @@ public class StudyControllerScript : MonoBehaviour {
 
         while (count < score[rand].Count)
         {
-            StartCoroutine(studySceneCanvasController.Xylophone_OnColor(score[rand][count] - 1));
-            switch (mainStory)
-            {
-                case 1:
-                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().CharacterJump_Cloud());
-                    break;
-                case 2:
-                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().RunningAnimation());
-                    break;
-                case 3:
-                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().EatFood());
-                    break;
-                case 4:
-                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().PullRope(rope));
-                    break;
-                case 5:
-                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().ShootStartCandy());
-                    break;
-                case 6:
-                    StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().JumpCharacter_OnTrain());
-                    break;
-                default:
-                    break;
-            }
+            characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().AnimationStart(mainStory);
+            StartCoroutine(studySceneCanvasController.Xylophone_OnColor(moveCharacter - 1));
+
             count++;
 
             switch (rand)

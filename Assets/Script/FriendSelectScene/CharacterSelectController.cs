@@ -91,7 +91,7 @@ public class CharacterSelectController : MonoBehaviour
     public void CharacterSelect(int number)
     {
         bool fTrigger = false;
-        canvasScript.GetComponent<CharacterSelectCanvasScript>().SetCharacter(number);
+        canvasScript.GetComponent<FriendSelect.CanvasController>().SetCharacter(number);
 
         for (int i = 0; i < character.Count; i++)
         {

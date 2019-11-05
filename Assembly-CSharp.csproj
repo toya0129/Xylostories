@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\CanvasSizeChange.cs" />
-    <Compile Include="Assets\Script\FriendSelectScene\CharacterSelectCanvasScript.cs" />
+    <Compile Include="Assets\Script\FriendSelectScene\CanvasController.cs" />
     <Compile Include="Assets\Script\FriendSelectScene\CharacterSelectController.cs" />
     <Compile Include="Assets\Script\GameControllerScript.cs" />
     <Compile Include="Assets\Script\MenuScene\CanvasController.cs" />
