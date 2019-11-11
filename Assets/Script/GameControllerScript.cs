@@ -29,24 +29,24 @@ public class GameControllerScript : MonoBehaviour
     public bool server_Close = false;
 #endif
 
-    void Awake()
+    private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        //Initialized();
+        Initialized();
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
         Socket_Server.ServerStart_local();
 #endif
     }
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
         if (server_Close)
