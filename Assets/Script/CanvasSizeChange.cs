@@ -37,7 +37,7 @@ public class CanvasSizeChange : MonoBehaviour
     }
     public void ButtonSizeSet(RectTransform rtf)
     {
-        rtf.sizeDelta = new Vector2(size_date.x / 5, size_date.y / 5);
+        rtf.sizeDelta = new Vector2(size_date.x * 0.15f, size_date.y * 0.2f);
     }
 
     // Title Scene
