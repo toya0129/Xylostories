@@ -18,10 +18,6 @@ public class CanvasSizeChange : MonoBehaviour
     {
         rectTransform.sizeDelta = size_date;
     }
-    public void LogoSizeDeltaSet(RectTransform rectTransform)
-    {
-        rectTransform.sizeDelta = new Vector2(size_date.x - 100, size_date.y * 0.8f);
-    }
     public void TitleSizeDeltaSet(RectTransform rectTransform)
     {
         int font = (int)size_date.x / 10 - 50;
@@ -42,6 +38,18 @@ public class CanvasSizeChange : MonoBehaviour
     public void ButtonSizeSet(RectTransform rtf)
     {
         rtf.sizeDelta = new Vector2(size_date.x / 5, size_date.y / 5);
+    }
+
+    // Title Scene
+    public void LogoSizeDeltaSet(RectTransform rectTransform)
+    {
+        rectTransform.sizeDelta = new Vector2(size_date.x - 100, size_date.y * 0.8f);
+    }
+    public void StartButtonSize(RectTransform rectTransform)
+    {
+        rectTransform.sizeDelta = new Vector2(size_date.x * 0.25f, size_date.y * 0.1f);
+        int font = (int)(rectTransform.sizeDelta.x * 0.15f);
+        rectTransform.GetChild(0).GetComponent<Text>().fontSize = font;
     }
 
     // Menu Scene

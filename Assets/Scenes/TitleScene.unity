@@ -933,6 +933,7 @@ MonoBehaviour:
   canvasScaler: {fileID: 1820234005}
   background_size: {fileID: 868932260}
   logo_size: {fileID: 200314519}
+  start_button: {fileID: 1537685286}
 --- !u!1 &868932259
 GameObject:
   m_ObjectHideFlags: 0
