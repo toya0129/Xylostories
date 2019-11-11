@@ -20,7 +20,7 @@ public class CanvasSizeChange : MonoBehaviour
     }
     public void LogoSizeDeltaSet(RectTransform rectTransform)
     {
-        rectTransform.sizeDelta = new Vector2(size_date.x - 100, size_date.y / 2);
+        rectTransform.sizeDelta = new Vector2(size_date.x - 100, size_date.y * 0.8f);
     }
     public void TitleSizeDeltaSet(RectTransform rectTransform)
     {
