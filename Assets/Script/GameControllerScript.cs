@@ -13,7 +13,7 @@ public class GameControllerScript : MonoBehaviour
 {
     //mainStory 0:none 1:find friends 2:run 3:eat food 4: get moon 5:make candy house 6:train
     [SerializeField]
-    private int mainStory = 0;
+    private int main_story = 0;
     [SerializeField]
     private bool[] characters = new bool[8];
 
@@ -26,7 +26,7 @@ public class GameControllerScript : MonoBehaviour
     private GameObject comment;
 
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-    public bool server_Close = false;
+    public bool server_close = false;
 #endif
 
     void Awake()
@@ -49,9 +49,9 @@ public class GameControllerScript : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-        if (server_Close)
+        if (server_close)
         {
-            server_Close = false;
+            server_close = false;
             Socket_Server.ServerClose();
         }
 #endif
@@ -61,7 +61,7 @@ public class GameControllerScript : MonoBehaviour
     {
         comment.SetActive(false);
 
-        mainStory = 0;
+        main_story = 0;
 
         for (int i = 0; i < 8; i++)
         {
@@ -157,8 +157,8 @@ public class GameControllerScript : MonoBehaviour
     #region Getter and Setter
     public int MainStory
     {
-        get { return mainStory; }
-        set { mainStory = value; }
+        get { return main_story; }
+        set { main_story = value; }
     }
 
     public bool[] Characters
