@@ -48,9 +48,6 @@ namespace XyloStoriesSocket
             NetworkStream stream = client.GetStream();
             server_reader = new StreamReader(stream, Encoding.UTF8);
 
-            //GameObject obj = GameObject.Find("GameController");
-            //obj.GetComponent<GameControllerScript>().InfoStart(true);
-
             while (client.Connected)
             {
                 while (!server_reader.EndOfStream)
@@ -66,7 +63,6 @@ namespace XyloStoriesSocket
                     break;
                 }
             }
-            //obj.GetComponent<GameControllerScript>().InfoStart(false);
         }
 
         public static void ServerClose()
@@ -84,10 +80,7 @@ namespace XyloStoriesSocket
 
         protected virtual void OnApplicationQuit()
         {
-            if (tcp_listener == null)
-            {
-                return;
-            }
+            if (tcp_listener == null) return;
 
             if (clients.Count != 0)
             {
@@ -114,5 +107,4 @@ namespace XyloStoriesSocket
         #endregion
     }
 }
-
 #endif
