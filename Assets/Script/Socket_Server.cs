@@ -1,6 +1,5 @@
 ﻿#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Net.Sockets;
@@ -15,11 +14,11 @@ namespace XyloStoriesSocket
         private static string localhost_ip = "127.0.0.1";
         private static int local_port = 9999;
 
-        private static IPAddress ip_Adress = null;
-        private static TcpListener tcp_Listener = null;
+        private static IPAddress ip_adress = null;
+        private static TcpListener tcp_listener = null;
 
-        private static StreamReader server_Reader = null;
-        private static StreamWriter server_Writer = null;
+        private static StreamReader server_reader = null;
+        private static StreamWriter server_writer = null;
 
         private static readonly List<TcpClient> clients = new List<TcpClient>();
 
@@ -29,11 +28,11 @@ namespace XyloStoriesSocket
         public static void ServerStart_local()
         {
             Debug.Log("Server Start");
-            ip_Adress = IPAddress.Parse(localhost_ip);
-            tcp_Listener = new TcpListener(ip_Adress, local_port);
+            ip_adress = IPAddress.Parse(localhost_ip);
+            tcp_listener = new TcpListener(ip_adress, local_port);
 
-            tcp_Listener.Start();
-            tcp_Listener.BeginAcceptSocket(AcceptClient, tcp_Listener);
+            tcp_listener.Start();
+            tcp_listener.BeginAcceptSocket(AcceptClient, tcp_listener);
         }
 
         private static void AcceptClient(IAsyncResult ar)
@@ -47,16 +46,16 @@ namespace XyloStoriesSocket
             listener.BeginAcceptSocket(AcceptClient, listener);
 
             NetworkStream stream = client.GetStream();
-            server_Reader = new StreamReader(stream, Encoding.UTF8);
+            server_reader = new StreamReader(stream, Encoding.UTF8);
 
             //GameObject obj = GameObject.Find("GameController");
             //obj.GetComponent<GameControllerScript>().InfoStart(true);
 
             while (client.Connected)
             {
-                while (!server_Reader.EndOfStream)
+                while (!server_reader.EndOfStream)
                 {
-                    ProcessMessage(server_Reader);
+                    ProcessMessage(server_reader);
                 }
 
                 if (client.Client.Poll(1000, SelectMode.SelectRead) && (client.Client.Available == 0))
@@ -79,13 +78,13 @@ namespace XyloStoriesSocket
                     client.Close();
                 }
             }
-            tcp_Listener.Stop();
+            tcp_listener.Stop();
             Debug.Log("Server Close");
         }
 
         protected virtual void OnApplicationQuit()
         {
-            if (tcp_Listener == null)
+            if (tcp_listener == null)
             {
                 return;
             }
@@ -96,7 +95,7 @@ namespace XyloStoriesSocket
                 {
                     client.Close();
                 }
-                tcp_Listener.Stop();
+                tcp_listener.Stop();
             }
         }
 
