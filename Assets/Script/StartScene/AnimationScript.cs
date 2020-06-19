@@ -1,39 +1,33 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationScript : MonoBehaviour {
 
-    private GameControllerScript gameControllerScript;
+    private GameControllerScript game_controller_script;
 
     [SerializeField]
     private GameObject character;
     [SerializeField]
     private Sprite rabbit_back;
 
-    private bool trunFlagY = true;
-    private float roteY = 0.0f;
-    private float roteZ = 0.0f;
-    private int moveCount = 0;
+    private bool trun_flag_y = true;
+    private float rote_y = 0.0f;
+    private float rote_z = 0.0f;
+    private int move_count = 0;
 
-    private int rabbitMoveEnd = 270; // 50:-15移動
+    private int rabbit_move_end = 270; // 50:-15移動
 
     // Use this for initialization
-    void Start () {
-        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
+    private void Start () {
+        game_controller_script = GameObject.Find("GameController").GetComponent<GameControllerScript>();
         StartCoroutine(RabbitAnimation());
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    IEnumerator CharacterMove() // Move a Characters Left and Right
+    private IEnumerator CharacterMove() // Move a Characters Left and Right
     {
-        while (moveCount < rabbitMoveEnd)
+        while (move_count < rabbit_move_end)
         {
-            if (trunFlagY)
+            if (trun_flag_y)
             {
                 if (character.transform.localPosition.x > -20)
                 {
@@ -42,10 +36,10 @@ public class AnimationScript : MonoBehaviour {
                 else
                 {
                     yield return StartCoroutine(TrunCharactar());
-                    trunFlagY = false;
+                    trun_flag_y = false;
                 }
             }
-            else if (!trunFlagY)
+            else if (!trun_flag_y)
             {
                 if (character.transform.localPosition.x < 20)
                 {
@@ -54,39 +48,39 @@ public class AnimationScript : MonoBehaviour {
                 else
                 {
                     yield return StartCoroutine(TrunCharactar());
-                    trunFlagY = true;
+                    trun_flag_y = true;
                 }
             }
             yield return new WaitForSeconds(0.005f);
 
-            moveCount++;
+            move_count++;
 
         }
         yield break;
     }
 
-    IEnumerator TrunCharactar() // Trun a Characters (y)
+    private IEnumerator TrunCharactar() // Trun a Characters (y)
     {
         while (true)
         {
-            if (trunFlagY)
+            if (trun_flag_y)
             {
-                if (roteY < 180)
+                if (rote_y < 180)
                 {
-                    character.transform.localRotation = Quaternion.Euler(0, roteY, roteZ);
-                    roteY += 5.0f;
+                    character.transform.localRotation = Quaternion.Euler(0, rote_y, rote_z);
+                    rote_y += 5.0f;
                 }
                 else
                 {
                     break;
                 }
             }
-            else if (!trunFlagY)
+            else if (!trun_flag_y)
             {
-                if (roteY > 0)
+                if (rote_y > 0)
                 {
-                    character.transform.localRotation = Quaternion.Euler(0, roteY, roteZ);
-                    roteY -= 5.0f;
+                    character.transform.localRotation = Quaternion.Euler(0, rote_y, rote_z);
+                    rote_y -= 5.0f;
                 }
                 else
                 {
@@ -99,7 +93,7 @@ public class AnimationScript : MonoBehaviour {
     }
 
     #region RabbitAnimation (Go Back Home)
-    IEnumerator RabbitAnimation()
+    private IEnumerator RabbitAnimation()
     {
         yield return StartCoroutine(CharacterMove());
         yield return new WaitForSeconds(1.0f); // delay
@@ -113,7 +107,7 @@ public class AnimationScript : MonoBehaviour {
         yield break;
     }
 
-    IEnumerator GoBackHome()
+    private IEnumerator GoBackHome()
     {
         while (character.transform.localPosition.z < 50)
         {
@@ -129,6 +123,6 @@ public class AnimationScript : MonoBehaviour {
     public void LoadToMenuScene()
     {
         StopAllCoroutines();
-        gameControllerScript.OnLoadMenuScene();
+        game_controller_script.OnLoadMenuScene();
     }
 }
