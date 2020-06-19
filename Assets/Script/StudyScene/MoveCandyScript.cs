@@ -9,13 +9,13 @@ public class MoveCandyScript : MonoBehaviour {
     private float step;
 
     // Use this for initialization
-    void Start () {
+    private void Start () {
         goal_pos = new Vector3(Random.Range(-14, 15), Random.Range(-9, 15), 1);
         this.gameObject.transform.parent = GameObject.Find("candy_area").transform;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	private void Update () {
         step = speed * Time.deltaTime;
         this.gameObject.transform.localPosition = Vector3.MoveTowards(this.gameObject.transform.localPosition, goal_pos, 2f);
 
