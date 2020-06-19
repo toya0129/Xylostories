@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSelectCanvasScript : MonoBehaviour {
@@ -13,14 +12,9 @@ public class CharacterSelectCanvasScript : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    private void Start () {
         Initialized();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void Initialized()
     {
@@ -37,6 +31,7 @@ public class CharacterSelectCanvasScript : MonoBehaviour {
     public void SetCharacter(int number)
     {
         byte alpha = 0;
+
         if (xylophone[number - 1].GetComponent<SpriteRenderer>().color.a == 1)
         {
             alpha = 100;

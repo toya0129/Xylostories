@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour {
 
-    private GameControllerScript gameControllerScript;
+    private GameControllerScript game_controller_script;
 
     [SerializeField]
     private GameObject[] waku;
@@ -13,12 +13,12 @@ public class MenuController : MonoBehaviour {
     private int now_story = 0;
 
 	// Use this for initialization
-	void Start () {
-        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
+	private void Start () {
+        game_controller_script = GameObject.Find("GameController").GetComponent<GameControllerScript>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	private void Update () {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
         if (Input.anyKeyDown)
         {
@@ -26,25 +26,19 @@ public class MenuController : MonoBehaviour {
             {
                 if (now_story != 0)
                 {
-                    gameControllerScript.MainStory = now_story;
-                    gameControllerScript.OnLoadFriendSelect();
+                    game_controller_script.MainStory = now_story;
+                    game_controller_script.OnLoadFriendSelect();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 now_story++;
-                if (now_story == 7)
-                {
-                    now_story = 1;
-                }
+                if (now_story == 7) now_story = 1;
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 now_story--;
-                if (now_story == 0)
-                {
-                    now_story = 6;
-                }
+                if (now_story == 0) now_story = 6;
             }
             setWaku_UI();
         }
@@ -57,8 +51,8 @@ public class MenuController : MonoBehaviour {
         {
             if (now_story != 0)
             {
-                gameControllerScript.MainStory = now_story;
-                gameControllerScript.OnLoadFriendSelect();
+                game_controller_script.MainStory = now_story;
+                game_controller_script.OnLoadFriendSelect();
                 return;
             }
         }
