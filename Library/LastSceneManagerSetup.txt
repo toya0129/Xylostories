@@ -14,3 +14,6 @@ sceneSetups:
 - path: Assets/Scenes/StudyScene.unity
   isLoaded: 0
   isActive: 0
+- path: Assets/Scenes/iOS/StudyScene_iOS.unity
+  isLoaded: 0
+  isActive: 0
