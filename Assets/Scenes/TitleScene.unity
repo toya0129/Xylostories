@@ -1472,7 +1472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8a63f9b5e8148569b8c1325180f0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainStory: 2
+  main_story: 0
   characters: 0000000000000000
   xylophone_sound:
   - {fileID: 8300000, guid: ecc15e16e85b1479ebc3f60a2f0b6229, type: 3}
@@ -1486,7 +1486,7 @@ MonoBehaviour:
   audio_play_prefab: {fileID: 1392113120436056, guid: 9a29956df80cb4237966dde01ec0bf41,
     type: 2}
   comment: {fileID: 297849563}
-  server_Close: 0
+  server_close: 0
 --- !u!4 &1245479471
 Transform:
   m_ObjectHideFlags: 0

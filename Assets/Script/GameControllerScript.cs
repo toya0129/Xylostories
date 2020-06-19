@@ -39,14 +39,14 @@ public class GameControllerScript : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
         if (server_close)
@@ -94,14 +94,7 @@ public class GameControllerScript : MonoBehaviour
 
     private IEnumerator SensorConnectInfo(bool state)
     {
-        if (state)
-        {
-            comment.GetComponent<Text>().text = "Sensor Connected";
-        }
-        else
-        {
-            comment.GetComponent<Text>().text = "Sensor Disconnected";
-        }
+        comment.GetComponent<Text>().text = state ? "Sensor Connected" : "Sensor Disconnected";
 
         comment.SetActive(true);
         yield return new WaitForSeconds(1f);
