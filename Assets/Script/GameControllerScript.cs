@@ -34,7 +34,7 @@ public class GameControllerScript : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         Initialized();
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-        Socket_Server.ServerStart_local();
+        SocketServer.ServerStart_local();
 #endif
     }
 
@@ -52,7 +52,7 @@ public class GameControllerScript : MonoBehaviour
         if (server_close)
         {
             server_close = false;
-            Socket_Server.ServerClose();
+            SocketServer.ServerClose();
         }
 #endif
     }
@@ -109,7 +109,7 @@ public class GameControllerScript : MonoBehaviour
         Debug.Log("Go Title");
         SceneManager.LoadScene("TitleScene");
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-        Socket_Server.ServerClose();
+        SocketServer.ServerClose();
 #endif
         Destroy(this.gameObject);
     }

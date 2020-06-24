@@ -9,7 +9,7 @@ using System.Text;
 
 namespace XyloStoriesSocket
 {
-    class Socket_Server
+    class SocketServer
     {
         private static string localhost_ip = "127.0.0.1";
         private static int local_port = 9999;
@@ -99,12 +99,12 @@ namespace XyloStoriesSocket
             Debug.Log("Read Data = " + read_data);
         }
 
-        #region Getter and Setter
+#region Getter and Setter
         public static string Read_Data
         {
             get { return read_data; }
         }
-        #endregion
+#endregion
     }
 }
 #endif
