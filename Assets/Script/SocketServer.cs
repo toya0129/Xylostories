@@ -25,7 +25,7 @@ namespace XyloStoriesSocket
         private static string read_data = null;
 
         // local socket
-        public static void ServerStart_local()
+        public static void ServerStartLocal()
         {
             Debug.Log("Server Start");
             ip_adress = IPAddress.Parse(localhost_ip);
@@ -100,7 +100,7 @@ namespace XyloStoriesSocket
         }
 
 #region Getter and Setter
-        public static string Read_Data
+        public static string ReadData
         {
             get { return read_data; }
         }

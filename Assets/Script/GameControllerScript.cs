@@ -34,7 +34,7 @@ public class GameControllerScript : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         Initialized();
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-        SocketServer.ServerStart_local();
+        SocketServer.ServerStartLocal();
 #endif
     }
 

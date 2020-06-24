@@ -109,7 +109,7 @@ public class StudyControllerScript : MonoBehaviour {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
     private void InputData_Sensor()
     {
-        read_data = SocketServer.Read_Data;
+        read_data = SocketServer.ReadData;
         if (read_data != "")
         {
             switch (read_data)
