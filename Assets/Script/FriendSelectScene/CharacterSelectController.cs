@@ -7,7 +7,7 @@ public class CharacterSelectController : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject canvas_script;
+    private GameObject canvas;
     private GameObject game_controller;
 
     private int character_num = 0;
@@ -91,7 +91,7 @@ public class CharacterSelectController : MonoBehaviour
     public void CharacterSelect(int number)
     {
         bool f_trigger = false;
-        canvas_script.GetComponent<CharacterSelectCanvasScript>().SetCharacter(number);
+        canvas.GetComponent<CharacterSelectCanvasScript>().SetCharacter(number);
 
         for (int i = 0; i < character.Count; i++)
         {

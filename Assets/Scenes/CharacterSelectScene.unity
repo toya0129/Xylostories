@@ -3376,7 +3376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b807a8c6469c24f1396c471bfdfa1c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasScript: {fileID: 494708382}
+  canvas: {fileID: 494708382}
   character: 
   characters:
   - {fileID: 2018141577}

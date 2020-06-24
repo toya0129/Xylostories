@@ -1289,12 +1289,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8de18e92f8f48e2983c092155ae22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameControllerScript: {fileID: 0}
-  studyControllerScript: {fileID: 721387584}
+  game_controller_script: {fileID: 0}
+  study_controller_script: {fileID: 721387584}
   main_camera: {fileID: 1961496163}
   xylophone_area: {fileID: 879345896}
   canvas_front: {fileID: 1597709095}
-  backgroundArea: {fileID: 597283203}
+  background_area: {fileID: 597283203}
   character_area: {fileID: 1100242125}
   characters:
   - {fileID: 1008061391}
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 034b417ed8d514818b07099e51f73b71, type: 3}
   - {fileID: 21300000, guid: 1d9de3b47397f40bb95d1cbbc9b4fac1, type: 3}
   candy: []
-  trainField: {fileID: 390080594}
+  train_field: {fileID: 390080594}
   train:
   - {fileID: 398353385}
   - {fileID: 15153936}
@@ -3313,7 +3313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4632f1be22549349641d98ee0bfa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  studySceneCanvasController: {fileID: 143249972}
+  study_scene_canvas_controller: {fileID: 143249972}
   characters:
   - {fileID: 1008061391}
   - {fileID: 3509558}
@@ -3326,7 +3326,7 @@ MonoBehaviour:
   hidden_command: 01000000010000000200000003000000080000000700000006000000050000000100000001000000
   blank_panel: {fileID: 1906086142}
   go_menu: {fileID: 1222685329}
-  endflag: {fileID: 1651157066}
+  run_end_flag: {fileID: 0}
   rope: {fileID: 2123859763}
 --- !u!4 &721387585
 Transform:
@@ -5536,7 +5536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd8a63f9b5e8148569b8c1325180f0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainStory: 6
+  main_story: 0
   characters: 0101010101010101
   xylophone_sound:
   - {fileID: 8300000, guid: ecc15e16e85b1479ebc3f60a2f0b6229, type: 3}
@@ -5550,7 +5550,7 @@ MonoBehaviour:
   audio_play_prefab: {fileID: 1392113120436056, guid: 9a29956df80cb4237966dde01ec0bf41,
     type: 2}
   comment: {fileID: 1989210371}
-  server_Close: 0
+  server_close: 0
 --- !u!4 &1411029351
 Transform:
   m_ObjectHideFlags: 0
