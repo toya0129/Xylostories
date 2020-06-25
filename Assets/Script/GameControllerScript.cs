@@ -41,6 +41,8 @@ public class GameControllerScript : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        // 画面サイズ指定
+        Screen.SetResolution(1920, 1080, false, 60);
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
     }
