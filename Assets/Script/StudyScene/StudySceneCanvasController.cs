@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class StudySceneCanvasController : MonoBehaviour {
 
 	[SerializeField]
-    private GameControllerScript gameControllerScript;
+    private GameControllerScript game_controller_script;
 
     [SerializeField]
-    private StudyControllerScript studyControllerScript;
+    private StudyControllerScript study_controller_script;
 
     [SerializeField]
     private GameObject main_camera;
@@ -33,8 +33,8 @@ public class StudySceneCanvasController : MonoBehaviour {
     private GameObject canvas_front;
 
     [SerializeField]
-    private GameObject backgroundArea;
-    private float[] backgroundSize = { 1.61f, 3.1f ,1.61f,3.1f,1.61f, 3.1f};
+    private GameObject background_area;
+    private float[] background_size = { 1.61f, 3.1f ,1.61f,3.1f,1.61f, 3.1f};
 
 
     [SerializeField]
@@ -69,8 +69,8 @@ public class StudySceneCanvasController : MonoBehaviour {
     private GameObject tape;
     [SerializeField]
     private GameObject run_track_background;
-    private float[] startPosX = { 2.5f, -5f, 5f, -3.5f };
-    private float startPosY = 30f;
+    private float[] start_pos_x = { 2.5f, -5f, 5f, -3.5f };
+    private float start_pos_y = 30f;
 #endregion
 
 #region eat food (3)
@@ -96,7 +96,7 @@ public class StudySceneCanvasController : MonoBehaviour {
 #endregion
 
 #region Make Candy House (5) scale 2
-	private float startPosY_candy = -22f;
+	private float start_pos_y_candy = -22f;
     [SerializeField]
     private GameObject house;
     [SerializeField]
@@ -111,37 +111,32 @@ public class StudySceneCanvasController : MonoBehaviour {
 
 #region Train (6)
     [SerializeField]
-    private GameObject trainField;
+    private GameObject train_field;
     [SerializeField]
     private List<GameObject> train;
     [SerializeField]
     private GameObject mountains;
 
-    private int mountainAnimationEnd = 2;
-    private float[] train_characterX = { -17f, -10f, -4f, 2.3f, 8.7f, 15f, 21.5f, 28f };
-    private float train_characterY = -6.5f;
+    private int mountain_animation_end = 2;
+    private float[] train_character_x = { -17f, -10f, -4f, 2.3f, 8.7f, 15f, 21.5f, 28f };
+    private float train_character_y = -6.5f;
 #endregion
 
 
-    void Awake(){
+    private void Awake(){
         InitObject();
 	}
 		
 	// Use this for initialization
-	void Start () {
-        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
+	private void Start () {
+        game_controller_script = GameObject.Find("GameController").GetComponent<GameControllerScript>();
         setCharacter();
-        StartCoroutine(SetUI(gameControllerScript.MainStory));
+        StartCoroutine(SetUI(game_controller_script.MainStory));
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public IEnumerator Xylophone_OnColor(int num)
     {
-        StartCoroutine(gameControllerScript.SoundPlay(num));
+        StartCoroutine(game_controller_script.SoundPlay(num));
         GameObject now = xylophone_area.transform.GetChild(num).gameObject;
         now.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         yield return new WaitForSeconds(0.5f);
@@ -153,7 +148,7 @@ public class StudySceneCanvasController : MonoBehaviour {
     {
         for (int i = 0; i < 8; i++)
         {
-            if (gameControllerScript.Characters[i])
+            if (game_controller_script.Characters[i])
             {
                 characters[i].SetActive(true);
                 xylophone_area.transform.GetChild(i).gameObject.SetActive(true);
@@ -191,13 +186,13 @@ public class StudySceneCanvasController : MonoBehaviour {
         house.SetActive(false);
 
         mountains.SetActive(false);
-        trainField.SetActive(false);
+        train_field.SetActive(false);
     }
 
     private IEnumerator SetUI(int story)
     {
-        backgroundArea.GetComponent<SpriteRenderer>().sprite = background[story - 1];
-        backgroundArea.transform.localScale = new Vector3(backgroundSize[story - 1], backgroundSize[story - 1], 1);
+        background_area.GetComponent<SpriteRenderer>().sprite = background[story - 1];
+        background_area.transform.localScale = new Vector3(background_size[story - 1], background_size[story - 1], 1);
         switch (story)
         {
             case 1:
@@ -226,10 +221,10 @@ public class StudySceneCanvasController : MonoBehaviour {
                 yield return StartCoroutine(MainCameraSet());
                 for (int i = 0; i < 8; i++)
                 {
-                    if (gameControllerScript.Characters[i])
+                    if (game_controller_script.Characters[i])
                     {
                         int num = j % 4;
-                        characters[i].transform.localPosition = new Vector3(startPosX[num], startPosY, 0.0f);
+                        characters[i].transform.localPosition = new Vector3(start_pos_x[num], start_pos_y, 0.0f);
                         characters[i].GetComponent<SpriteRenderer>().sortingOrder = 5;
                         characters[i].GetComponent<CharacterMoveScript>().Track = num;
                         j++;
@@ -243,7 +238,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                 character_area.GetComponent<HorizontalLayoutGroup>().enabled = true;
                 for (int i = 0; i < 8; i++)
                 {
-                    if (gameControllerScript.Characters[i])
+                    if (game_controller_script.Characters[i])
                     {
                         if (i == 7)
                         {
@@ -262,7 +257,7 @@ public class StudySceneCanvasController : MonoBehaviour {
             case 4:
                 moon.SetActive(true);
                 get_moon_background.SetActive(true);
-                backgroundArea.GetComponent<SpriteRenderer>().color = back_color_moon;
+                background_area.GetComponent<SpriteRenderer>().color = back_color_moon;
                 character_area.transform.localPosition = new Vector3(17f, -18f, 0f);
                 for (int i = 0; i < characters.Length; i++)
                 {
@@ -270,7 +265,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                 }
                 for (int i = 0; i < characters.Length; i++)
                 {
-                    if (gameControllerScript.Characters[i])
+                    if (game_controller_script.Characters[i])
                     {
                         characters[i].SetActive(true);
                         characters[i].transform.localPosition = new Vector3(0f, 0f, 0f);
@@ -281,7 +276,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                 yield return StartCoroutine(ThrowRope());
                 for (int i = 0; i < characters.Length; i++)
                 {
-                    if (gameControllerScript.Characters[i])
+                    if (game_controller_script.Characters[i])
                     {
                         characters[i].SetActive(true);
                     }
@@ -296,7 +291,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                 yield return StartCoroutine(SetStartPos());
                 for (int i = 0; i < 8; i++)
                 {
-                    if (gameControllerScript.Characters[i])
+                    if (game_controller_script.Characters[i])
                     {
                         if (i == 7)
                         {
@@ -314,11 +309,11 @@ public class StudySceneCanvasController : MonoBehaviour {
                 character_area.transform.localPosition = new Vector3(0f, -5f, 0f);
                 break;
             case 6:
-                trainField.SetActive(true);
+                train_field.SetActive(true);
                 mountains.SetActive(true);
                 for (int i = 0; i < 8; i++)
                 {
-                    if (gameControllerScript.Characters[i])
+                    if (game_controller_script.Characters[i])
                     {
                         if (i == 7)
                         {
@@ -328,7 +323,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                         {
                             characters[i].transform.localScale = new Vector3(2f, 2f, 2f);
                         }
-                        characters[i].transform.localPosition = new Vector3(train_characterX[i], train_characterY, 0);
+                        characters[i].transform.localPosition = new Vector3(train_character_x[i], train_character_y, 0);
                         characters[i].transform.parent = train[i].transform;
                     }
                 }
@@ -340,7 +335,7 @@ public class StudySceneCanvasController : MonoBehaviour {
                 break;
         }
 
-        studyControllerScript.AnimationStartFlag = true;
+        study_controller_script.AnimationStartFlag = true;
         xylophone_area.SetActive(true);
         go_title.SetActive(true);
         yield break;
@@ -504,7 +499,7 @@ public class StudySceneCanvasController : MonoBehaviour {
  //       food_end_flag--;
         if(food_end_flag < 0)
         {
-            studyControllerScript.AnimationEndFlag = true;
+            study_controller_script.AnimationEndFlag = true;
         }
 
         yield break;
@@ -558,6 +553,7 @@ public class StudySceneCanvasController : MonoBehaviour {
 #region Create Candy (5)
     public void CreateCandy(int number)
     {
+        // Cnadyの最大値を設定する場合使用する
         //if (candy.Count > max_candy)
         //{
         //    studyControllerScript.AnimationEndFlag = true;
@@ -593,7 +589,7 @@ public class StudySceneCanvasController : MonoBehaviour {
 #region train jump(6)
     private IEnumerator StartOfTrain()
     {
-        GameObject train_all = trainField.transform.GetChild(0).gameObject;
+        GameObject train_all = train_field.transform.GetChild(0).gameObject;
         train_all.transform.localPosition = new Vector3(70f, 0, 0);
         while(Math.Abs(train_all.transform.localPosition.x) > 0)
         {
@@ -606,12 +602,12 @@ public class StudySceneCanvasController : MonoBehaviour {
 
     private IEnumerator MoveMountains()
     {
-        while (mountainAnimationEnd != 0)
+        while (mountain_animation_end != 0)
         {
             if (mountains.transform.localPosition.x > 150)
             {
                 mountains.transform.localPosition = new Vector3(-120, 0, 0);
-                //mountainAnimationEnd--;
+                //mountain_animation_end--;
             }
             else
             {
@@ -619,7 +615,7 @@ public class StudySceneCanvasController : MonoBehaviour {
             }
             yield return new WaitForSeconds(0.1f);
         }
-        studyControllerScript.AnimationEndFlag = true;
+        study_controller_script.AnimationEndFlag = true;
         yield break;
     }
 #endregion

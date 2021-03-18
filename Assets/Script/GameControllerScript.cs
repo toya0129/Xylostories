@@ -13,7 +13,7 @@ public class GameControllerScript : MonoBehaviour
 {
     //mainStory 0:none 1:find friends 2:run 3:eat food 4: get moon 5:make candy house 6:train
     [SerializeField]
-    private int mainStory = 0;
+    private int main_story = 0;
     [SerializeField]
     private bool[] characters = new bool[8];
 
@@ -26,42 +26,62 @@ public class GameControllerScript : MonoBehaviour
     private GameObject comment;
 
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-    public bool server_Close = false;
+    [SerializeField]
+    private bool server_close = false;
+    [SerializeField]
+    private bool server_open = false;
+    private bool server_state = false;
 #endif
 
-    void Awake()
+
+    private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
         Initialized();
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-        Socket_Server.ServerStart_local();
+        SocketServer.ServerStartLocal();
+        server_state = true;
 #endif
     }
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
+        // 画面サイズ指定
+        Screen.SetResolution(1920, 1080, false, 60);
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-        if (server_Close)
+        if (server_close)
         {
-            server_Close = false;
-            Socket_Server.ServerClose();
+            server_close = false;
+            SocketServer.ServerClose();
+            server_state = false;
+        }
+        if (!server_state && server_open)
+        {
+            server_open = false;
+            SocketServer.ServerStartLocal();
+            server_state = true;
         }
 #endif
+    }
+
+    private void OnDestroy()
+    {
+        SocketServer.ServerClose();
     }
 
     private void Initialized()
     {
         comment.SetActive(false);
 
-        mainStory = 0;
+        main_story = 0;
 
         for (int i = 0; i < 8; i++)
         {
@@ -94,14 +114,7 @@ public class GameControllerScript : MonoBehaviour
 
     private IEnumerator SensorConnectInfo(bool state)
     {
-        if (state)
-        {
-            comment.GetComponent<Text>().text = "Sensor Connected";
-        }
-        else
-        {
-            comment.GetComponent<Text>().text = "Sensor Disconnected";
-        }
+        comment.GetComponent<Text>().text = state ? "Sensor Connected" : "Sensor Disconnected";
 
         comment.SetActive(true);
         yield return new WaitForSeconds(1f);
@@ -115,9 +128,6 @@ public class GameControllerScript : MonoBehaviour
     {
         Debug.Log("Go Title");
         SceneManager.LoadScene("TitleScene");
-#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-        Socket_Server.ServerClose();
-#endif
         Destroy(this.gameObject);
     }
 
@@ -157,8 +167,8 @@ public class GameControllerScript : MonoBehaviour
     #region Getter and Setter
     public int MainStory
     {
-        get { return mainStory; }
-        set { mainStory = value; }
+        get { return main_story; }
+        set { main_story = value; }
     }
 
     public bool[] Characters

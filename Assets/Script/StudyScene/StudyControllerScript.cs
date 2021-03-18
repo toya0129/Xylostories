@@ -16,17 +16,17 @@ using XyloStoriesSocket;
 
 public class StudyControllerScript : MonoBehaviour {
 
-    private GameControllerScript gameControllerScript;
+    private GameControllerScript game_controller_script;
     [SerializeField]
-    StudySceneCanvasController studySceneCanvasController;
+    StudySceneCanvasController study_scene_canvas_controller;
 
-    private int mainStory;
-    private int moveCharacter = 0;
+    private int main_story;
+    private int move_character = 0;
     [SerializeField]
     private GameObject[] characters;
 
-    private bool animationStartFlag = false;
-	private bool animationEndFlag = false;
+    private bool animation_start_flag = false;
+	private bool animation_end_flag = false;
 
     private string read_data = "";
 
@@ -55,11 +55,7 @@ public class StudyControllerScript : MonoBehaviour {
 
 	#region Run (2) many character
     [SerializeField]
-    private GameObject endflag;
-    #endregion
-
-    #region eat food (3) many character
-
+    private GameObject run_end_flag;
     #endregion
 
     #region get moon (4) one character
@@ -67,26 +63,18 @@ public class StudyControllerScript : MonoBehaviour {
     private GameObject rope;
     #endregion
 
-    #region make candy house (5)
-    
-    #endregion
-
-    #region jump train (6)
-
-    #endregion
-
     // Use this for initialization
-    void Start () {
+    private void Start () {
         blank_panel.SetActive(false);
         go_menu.SetActive(false);
-        gameControllerScript = GameObject.Find("GameController").GetComponent<GameControllerScript>();
-        mainStory = gameControllerScript.MainStory;       
+        game_controller_script = GameObject.Find("GameController").GetComponent<GameControllerScript>();
+        main_story = game_controller_script.MainStory;       
     }
 
 	// Update is called once per frame
-	void Update()
+	private void Update()
 	{
-        if (animationStartFlag)
+        if (animation_start_flag)
         {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
             InputData_Sensor();
@@ -94,9 +82,9 @@ public class StudyControllerScript : MonoBehaviour {
 #endif
             if (hidden_trigger)
             {
-                if(moveCharacter != 0)
+                if(move_character != 0)
                 {
-                    input_hidden_command.Add(moveCharacter);
+                    input_hidden_command.Add(move_character);
                 }
             }
 
@@ -112,7 +100,7 @@ public class StudyControllerScript : MonoBehaviour {
             AnimationStart();
         }
 
-		if (animationEndFlag)
+		if (animation_end_flag)
 		{
             StartCoroutine(AnimationFinish());
 		}
@@ -121,41 +109,41 @@ public class StudyControllerScript : MonoBehaviour {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
     private void InputData_Sensor()
     {
-        read_data = Socket_Server.Read_Data;
+        read_data = SocketServer.ReadData;
         if (read_data != "")
         {
             switch (read_data)
             {
                 case "1":
-                    moveCharacter = 1;
+                    move_character = 1;
                     if (!hidden_trigger)
                     {
                         hidden_trigger = true;
                     }
                     break;
                 case "2":
-                    moveCharacter = 2;
+                    move_character = 2;
                     break;
                 case "3":
-                    moveCharacter = 3;
+                    move_character = 3;
                     break;
                 case "4":
-                    moveCharacter = 4;
+                    move_character = 4;
                     break;
                 case "5":
-                    moveCharacter = 5;
+                    move_character = 5;
                     break;
                 case "6":
-                    moveCharacter = 6;
+                    move_character = 6;
                     break;
                 case "7":
-                    moveCharacter = 7;
+                    move_character = 7;
                     break;
                 case "8":
-                    moveCharacter = 8;
+                    move_character = 8;
                     break;
                 default:
-                    moveCharacter = 0;
+                    move_character = 0;
                     break;
             }
         }
@@ -167,7 +155,7 @@ public class StudyControllerScript : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                moveCharacter = 1;
+                move_character = 1;
                 if (!hidden_trigger)
                 {
                     hidden_trigger = true;
@@ -175,35 +163,35 @@ public class StudyControllerScript : MonoBehaviour {
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                moveCharacter = 2;
+                move_character = 2;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                moveCharacter = 3;
+                move_character = 3;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                moveCharacter = 4;
+                move_character = 4;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                moveCharacter = 5;
+                move_character = 5;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha6))
             {
-                moveCharacter = 6;
+                move_character = 6;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha7))
             {
-                moveCharacter = 7;
+                move_character = 7;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha8))
             {
-                moveCharacter = 8;
+                move_character = 8;
             }
             else
             {
-                moveCharacter = 0;
+                move_character = 0;
             }
         }
     }
@@ -211,9 +199,9 @@ public class StudyControllerScript : MonoBehaviour {
 
     public void InputData_Toutch(int num)
     {
-        moveCharacter = num;
+        move_character = num;
 
-        if(moveCharacter == 1)
+        if(move_character == 1)
         {
             if (!hidden_trigger)
             {
@@ -223,9 +211,9 @@ public class StudyControllerScript : MonoBehaviour {
 
         if (hidden_trigger)
         {
-            if (moveCharacter != 0)
+            if (move_character != 0)
             {
-                input_hidden_command.Add(moveCharacter);
+                input_hidden_command.Add(move_character);
             }
         }
 
@@ -243,35 +231,35 @@ public class StudyControllerScript : MonoBehaviour {
 
     private void AnimationStart()
     {
-        if (moveCharacter != 0)
+        if (move_character != 0)
         {
-            if (gameControllerScript.Characters[moveCharacter - 1])
+            if (game_controller_script.Characters[move_character - 1])
             {
-                StartCoroutine(studySceneCanvasController.Xylophone_OnColor(moveCharacter - 1));
-                switch (mainStory)
+                StartCoroutine(study_scene_canvas_controller.Xylophone_OnColor(move_character - 1));
+                switch (main_story)
                 {
                     case 1:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().CharacterJump_Cloud());
+                        StartCoroutine(characters[move_character - 1].GetComponent<CharacterMoveScript>().CharacterJump_Cloud());
                         break;
                     case 2:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().RunningAnimation());
+                        StartCoroutine(characters[move_character - 1].GetComponent<CharacterMoveScript>().RunningAnimation());
                         break;
                     case 3:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().EatFood());
+                        StartCoroutine(characters[move_character - 1].GetComponent<CharacterMoveScript>().EatFood());
                         break;
                     case 4:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().PullRope(rope));
+                        StartCoroutine(characters[move_character - 1].GetComponent<CharacterMoveScript>().PullRope(rope));
                         break;
                     case 5:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().ShootStartCandy());
+                        StartCoroutine(characters[move_character - 1].GetComponent<CharacterMoveScript>().ShootStartCandy());
                         break;
                     case 6:
-                        StartCoroutine(characters[moveCharacter - 1].GetComponent<CharacterMoveScript>().JumpCharacter_OnTrain());
+                        StartCoroutine(characters[move_character - 1].GetComponent<CharacterMoveScript>().JumpCharacter_OnTrain());
                         break;
                     default:
                         break;
                 }
-                moveCharacter = 0;
+                move_character = 0;
             }
         }
     }
@@ -279,23 +267,23 @@ public class StudyControllerScript : MonoBehaviour {
     #region Animation End
     private IEnumerator AnimationFinish()
     {
-        animationStartFlag = false;
-        animationEndFlag = false;
-        endflag.SetActive(true);
+        animation_start_flag = false;
+        animation_end_flag = false;
+        run_end_flag.SetActive(true);
         go_menu.SetActive(true);
 
-        //yield return new WaitForSeconds(3f);
-        //LoadTitle();
+        yield return new WaitForSeconds(3f);
+        LoadTitle();
         yield break;
     }
 
     public void LoadMenu()
     {
-        gameControllerScript.OnLoadMenuScene();
+        game_controller_script.OnLoadMenuScene();
     }
     public void LoadTitle()
     {
-        gameControllerScript.OnLoadTitle();
+        game_controller_script.OnLoadTitle();
     }
     #endregion
 
@@ -303,13 +291,13 @@ public class StudyControllerScript : MonoBehaviour {
     private bool CheckCommand()
     {
         hidden_trigger = false;
-        animationStartFlag = false;
+        animation_start_flag = false;
 
         for(int i = 0; i < input_hidden_command.Count; i++)
         {
             if(hidden_command[i] != input_hidden_command[i])
             {
-                animationStartFlag = true;
+                animation_start_flag = true;
                 return false;
             }
         }
@@ -326,8 +314,8 @@ public class StudyControllerScript : MonoBehaviour {
 
         while (count < score[rand].Count)
         {
-            StartCoroutine(studySceneCanvasController.Xylophone_OnColor(score[rand][count] - 1));
-            switch (mainStory)
+            StartCoroutine(study_scene_canvas_controller.Xylophone_OnColor(score[rand][count] - 1));
+            switch (main_story)
             {
                 case 1:
                     StartCoroutine(characters[score[rand][count] - 1].GetComponent<CharacterMoveScript>().CharacterJump_Cloud());
@@ -366,7 +354,7 @@ public class StudyControllerScript : MonoBehaviour {
             
         }
 
-        animationStartFlag = true;
+        animation_start_flag = true;
         blank_panel.SetActive(false);
 
         yield break;
@@ -406,12 +394,12 @@ public class StudyControllerScript : MonoBehaviour {
     #region getter and setter
     public bool AnimationStartFlag
     {
-        set { animationStartFlag = value; }
+        set { animation_start_flag = value; }
     }
 
     public bool AnimationEndFlag
     {
-        set { animationEndFlag = value; }
+        set { animation_end_flag = value; }
     }
     #endregion
 }

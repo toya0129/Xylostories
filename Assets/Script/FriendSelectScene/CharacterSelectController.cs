@@ -7,8 +7,8 @@ public class CharacterSelectController : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject canvasScript;
-    private GameObject gameController;
+    private GameObject canvas;
+    private GameObject game_controller;
 
     private int character_num = 0;
     public List<int> character = new List<int>();
@@ -27,14 +27,14 @@ public class CharacterSelectController : MonoBehaviour
     private GameObject comment;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
-        gameController = GameObject.Find("GameController");
+        game_controller = GameObject.Find("GameController");
         comment.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
         if (Input.GetKeyDown(KeyCode.Return))
@@ -90,22 +90,20 @@ public class CharacterSelectController : MonoBehaviour
 
     public void CharacterSelect(int number)
     {
-        bool fTrigger = false;
-        canvasScript.GetComponent<CharacterSelectCanvasScript>().SetCharacter(number);
+        bool f_trigger = false;
+        canvas.GetComponent<CharacterSelectCanvasScript>().SetCharacter(number);
 
         for (int i = 0; i < character.Count; i++)
         {
             if (character[i] == number)
             {
                 character.RemoveAt(i);
-                fTrigger = true;
+                f_trigger = true;
             }
         }
 
-        if (fTrigger != true)
-        {
-            character.Add(number);
-        }
+        if (f_trigger != true) character.Add(number);
+
     }
 
     public void NextSceneButton()
@@ -114,7 +112,7 @@ public class CharacterSelectController : MonoBehaviour
         {
             for (int j = 0; j < character.Count; j++)
             {
-                gameController.GetComponent<GameControllerScript>().Characters[character[j] - 1] = true;
+                game_controller.GetComponent<GameControllerScript>().Characters[character[j] - 1] = true;
             }
             StartCoroutine(NextAnimation());
         }
@@ -161,7 +159,7 @@ public class CharacterSelectController : MonoBehaviour
             }
             yield return new WaitForSeconds(0.05f);
         }
-        gameController.GetComponent<GameControllerScript>().OnLoadStudy();
+        game_controller.GetComponent<GameControllerScript>().OnLoadStudy();
         yield break;
     }
 }

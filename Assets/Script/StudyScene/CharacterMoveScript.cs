@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterMoveScript : MonoBehaviour {
 
-    private StudySceneCanvasController studySceneCanvasController;
+    private StudySceneCanvasController study_scene_canvas_controller;
 
     // bear=0, rabbit=1, tiger=2, fox=3, pig=4, girafte=5, monkey=6, small_bear=7
     [SerializeField]
@@ -12,7 +12,7 @@ public class CharacterMoveScript : MonoBehaviour {
 
     #region Run (2) many character
     private int track = 0;
-    private int runAnimationEnd = 10;
+    private int run_animation_end = 10;
     #endregion
 
     #region eat food (3) many character
@@ -22,7 +22,7 @@ public class CharacterMoveScript : MonoBehaviour {
 
     private void Start()
     {
-        studySceneCanvasController = GameObject.Find("Canvas").GetComponent<StudySceneCanvasController>();
+        study_scene_canvas_controller = GameObject.Find("Canvas").GetComponent<StudySceneCanvasController>();
     }
 
     private void AnimationFinish()
@@ -53,7 +53,7 @@ public class CharacterMoveScript : MonoBehaviour {
     #region Animation Run (2)
     public IEnumerator RunningAnimation()
     {
-        int animationCount = runAnimationEnd;
+        int animationCount = run_animation_end;
         while (animationCount != 0)
         {
             if (this.gameObject.transform.localPosition.y > -25.0f)
@@ -115,7 +115,7 @@ public class CharacterMoveScript : MonoBehaviour {
             this.gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.5f);
             Destroy(this.gameObject.transform.GetChild(0).gameObject);
-            StartCoroutine(studySceneCanvasController.FallFood(this.gameObject));
+            StartCoroutine(study_scene_canvas_controller.FallFood(this.gameObject));
         }
         yield break;
     }
@@ -152,7 +152,7 @@ public class CharacterMoveScript : MonoBehaviour {
         this.gameObject.transform.localPosition = new Vector3(now_character_pos_candy.localPosition.x, -8f, 0);
         yield return new WaitForSeconds(0.2f);
         this.gameObject.transform.GetChild(0).GetComponent<MoveCandyScript>().enabled = true;
-        studySceneCanvasController.CreateCandy(this_character_number);
+        study_scene_canvas_controller.CreateCandy(this_character_number);
         yield break;
     }
     #endregion
