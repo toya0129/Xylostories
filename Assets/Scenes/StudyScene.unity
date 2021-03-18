@@ -3326,7 +3326,7 @@ MonoBehaviour:
   hidden_command: 01000000010000000200000003000000080000000700000006000000050000000100000001000000
   blank_panel: {fileID: 1906086142}
   go_menu: {fileID: 1222685329}
-  run_end_flag: {fileID: 0}
+  run_end_flag: {fileID: 1651157066}
   rope: {fileID: 2123859763}
 --- !u!4 &721387585
 Transform:

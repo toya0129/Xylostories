@@ -26,15 +26,21 @@ public class GameControllerScript : MonoBehaviour
     private GameObject comment;
 
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-    public bool server_close = false;
+    [SerializeField]
+    private bool server_close = false;
+    [SerializeField]
+    private bool server_open = false;
+    private bool server_state = false;
 #endif
 
-    void Awake()
+
+    private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
         Initialized();
 #if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
         SocketServer.ServerStartLocal();
+        server_state = true;
 #endif
     }
 
@@ -55,8 +61,20 @@ public class GameControllerScript : MonoBehaviour
         {
             server_close = false;
             SocketServer.ServerClose();
+            server_state = false;
+        }
+        if (!server_state && server_open)
+        {
+            server_open = false;
+            SocketServer.ServerStartLocal();
+            server_state = true;
         }
 #endif
+    }
+
+    private void OnDestroy()
+    {
+        SocketServer.ServerClose();
     }
 
     private void Initialized()
@@ -110,9 +128,6 @@ public class GameControllerScript : MonoBehaviour
     {
         Debug.Log("Go Title");
         SceneManager.LoadScene("TitleScene");
-#if UNITY_EDITOR || UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
-        SocketServer.ServerClose();
-#endif
         Destroy(this.gameObject);
     }
 
